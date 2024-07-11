@@ -7,8 +7,9 @@ import {
   setAccessToken,
   setRefreshToken,
 } from '@src/utils/token.util';
-import {IBaseHttpResponse} from '../common/base-http-response.model';
-import {ILoginPayload, ILoginResponse, IUser} from './auth.model';
+
+import { IBaseHttpResponse } from '../common/base-http-response.model';
+import { ILoginPayload, ILoginResponse, IUser } from './auth.model';
 
 class AuthService {
   async login(loginPayload: ILoginPayload) {

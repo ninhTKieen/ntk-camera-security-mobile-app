@@ -1,12 +1,12 @@
 import authService from '@src/features/auth/auth.service';
-import {useAuthStore} from '@src/features/auth/auth.store';
-import {useAppStore} from '@src/features/common/app.store';
-import {useQuery} from '@tanstack/react-query';
-import {useCallback} from 'react';
+import { useAuthStore } from '@src/features/auth/auth.store';
+import { useAppStore } from '@src/features/common/app.store';
+import { useQuery } from '@tanstack/react-query';
+import { useCallback } from 'react';
 
 export const useAuth = () => {
-  const {isAuth, currentUser, login, logout} = useAuthStore();
-  const {setLoading} = useAppStore();
+  const { isAuth, currentUser, login, logout } = useAuthStore();
+  const { setLoading } = useAppStore();
 
   const getUserInfo = useCallback(async () => {
     try {
@@ -28,5 +28,5 @@ export const useAuth = () => {
     queryFn: () => getUserInfo(),
   });
 
-  return {authQuery, isAuth, currentUser};
+  return { authQuery, isAuth, currentUser };
 };

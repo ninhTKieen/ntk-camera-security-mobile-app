@@ -1,7 +1,7 @@
-import {storage} from '@src/configs/mmkv.storage';
-import {create} from 'zustand';
+import { storage } from '@src/configs/mmkv.storage';
+import { create } from 'zustand';
 
-import {IUser} from './auth.model';
+import { IUser } from './auth.model';
 
 type TAuthStore = {
   currentUser?: IUser;
@@ -10,12 +10,13 @@ type TAuthStore = {
   logout: () => void;
 };
 
-export const useAuthStore = create<TAuthStore>()(set => ({
+export const useAuthStore = create<TAuthStore>()((set) => ({
   currentUser: undefined,
   isAuth: false,
-  login: user => set(state => ({...state, currentUser: user, isAuth: true})),
+  login: (user) =>
+    set((state) => ({ ...state, currentUser: user, isAuth: true })),
   logout: () => {
-    set(state => ({...state, currentUser: undefined, isAuth: false}));
+    set((state) => ({ ...state, currentUser: undefined, isAuth: false }));
     storage.clearAll();
   },
 }));

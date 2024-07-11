@@ -1,4 +1,4 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 
 type TAppStore = {
   language?: string;
@@ -8,10 +8,10 @@ type TAppStore = {
   setLoading: (isLoading: boolean) => void;
 };
 
-export const useAppStore = create<TAppStore>(set => ({
+export const useAppStore = create<TAppStore>((set) => ({
   isDarkMode: false,
   toggleDarkMode: () =>
-    set(state => ({...state, isDarkMode: !state.isDarkMode})),
+    set((state) => ({ ...state, isDarkMode: !state.isDarkMode })),
   isLoading: false,
-  setLoading: isLoading => set(state => ({...state, isLoading})),
+  setLoading: (isLoading) => set((state) => ({ ...state, isLoading })),
 }));

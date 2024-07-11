@@ -1,4 +1,4 @@
-import {storage} from '@src/configs/mmkv.storage';
+import { storage } from '@src/configs/mmkv.storage';
 
 export const ACCESS_TOKEN_KEY = 'accessToken';
 export const REFRESH_TOKEN_KEY = 'refreshToken';

@@ -1,3 +1,4 @@
+import { API_ENDPOINT } from '@env';
 import authService from '@src/features/auth/auth.service';
 import axios, {
   AxiosError,
@@ -6,9 +7,8 @@ import axios, {
   AxiosResponse,
   Method,
 } from 'axios';
-import {API_ENDPOINT} from '@env';
 
-import {getAccessToken} from './token.util';
+import { getAccessToken } from './token.util';
 
 interface IHttpRequest {
   url: string;
@@ -34,7 +34,7 @@ class HttpUtil {
     });
 
     this.http.interceptors.request.use(
-      config => {
+      (config) => {
         const headers: any = config.headers;
         const accessToken = getAccessToken();
 
@@ -42,9 +42,9 @@ class HttpUtil {
           headers.Authorization = `Bearer ${accessToken}`;
         }
 
-        return {...config, headers: config.headers};
+        return { ...config, headers: config.headers };
       },
-      error => {
+      (error) => {
         return Promise.reject(error);
       },
     );
@@ -98,10 +98,10 @@ class HttpUtil {
     return response.data as T;
   }
 
-  async uploadListImage({files}: {files: any[]}): Promise<any> {
+  async uploadListImage({ files }: { files: any[] }): Promise<any> {
     const formData = new FormData();
 
-    files.forEach(file => {
+    files.forEach((file) => {
       formData.append('image', file);
     });
 

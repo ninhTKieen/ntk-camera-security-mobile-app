@@ -1,6 +1,6 @@
-import {Text} from '@rneui/themed';
+import { Text } from '@rneui/themed';
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 const LoginScreen = () => {
   return (
