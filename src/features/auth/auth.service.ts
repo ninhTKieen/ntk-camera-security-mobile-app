@@ -14,7 +14,7 @@ import { ILoginPayload, ILoginResponse, IUser } from './auth.model';
 class AuthService {
   async login(loginPayload: ILoginPayload) {
     const response = await httpUtil.request<IBaseHttpResponse<ILoginResponse>>({
-      url: '/api/auth/token-auth',
+      url: '/api/auth/login',
       method: 'POST',
       data: loginPayload,
     });
