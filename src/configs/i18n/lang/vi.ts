@@ -61,6 +61,14 @@ export const vi = {
     vietnamese: 'Tiếng Việt',
   },
 
+  validation: {
+    required: 'Trường này là bắt buộc',
+    invalidEmail: 'Email không hợp lệ',
+    invalidPhoneNumber: 'Số điện thoại không hợp lệ',
+    minPassword: 'Mật khẩu phải có ít nhất 6 ký tự',
+    match: 'Mật khẩu không khớp',
+  },
+
   dayOfWeek: {
     everyDay: 'Mỗi ngày',
     short: {

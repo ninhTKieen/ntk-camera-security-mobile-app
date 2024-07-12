@@ -61,6 +61,14 @@ export const en = {
     vietnamese: 'Vietnamese',
   },
 
+  validation: {
+    required: 'This field is required',
+    invalidEmail: 'Invalid email address',
+    invalidPhoneNumber: 'Invalid phone number',
+    minPassword: 'Password must be at least 6 characters',
+    match: 'Password does not match',
+  },
+
   dayOfWeek: {
     everyDay: 'Every Day',
     short: {

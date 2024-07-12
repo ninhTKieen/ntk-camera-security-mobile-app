@@ -22,7 +22,7 @@ class AuthService {
     setAccessToken(response.data.accessToken);
     setRefreshToken(response.data.refreshToken);
 
-    return this.getUserInfo();
+    return response.data.user;
   }
 
   async getUserInfo() {

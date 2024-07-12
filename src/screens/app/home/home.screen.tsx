@@ -1,11 +1,11 @@
-import { Text } from '@rneui/themed';
+import { Text } from 'native-base';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Text h1>Home Screen</Text>
+      <Text>Home Screen</Text>
     </View>
   );
 };
