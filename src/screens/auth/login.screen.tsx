@@ -10,22 +10,28 @@ import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
+import { useToast } from 'react-native-toast-notifications';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 
 const LoginScreen = () => {
   const { t } = useTranslation();
   const [show, isShow] = useState(false);
-
   const { login, logout } = useAuthStore();
+  const toast = useToast();
 
   const loginMutation = useMutation({
     mutationFn: (data: ILoginPayload) => authService.login(data),
     onSuccess: (res) => {
       login(res);
     },
-    onError: () => {
+    onError: (error) => {
+      console.log('error', error);
       logout();
+      toast.show(t(i18nKeys.auth.loginFail), {
+        type: 'danger',
+        placement: 'top',
+      });
     },
   });
 
