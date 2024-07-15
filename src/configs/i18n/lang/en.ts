@@ -1,4 +1,9 @@
 export const en = {
+  bottomTab: {
+    home: 'Home',
+    setting: 'Setting',
+  },
+
   auth: {
     welcomeBack: 'Welcome back!',
     loginTitle: 'Login to your account',

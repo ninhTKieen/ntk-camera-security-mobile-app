@@ -1,4 +1,9 @@
 export const vi = {
+  bottomTab: {
+    home: 'Trang chủ',
+    setting: 'Cài đặt',
+  },
+
   auth: {
     welcomeBack: 'Chào mừng trở lại!',
     loginTitle: 'Đăng nhập vào tài khoản của bạn',

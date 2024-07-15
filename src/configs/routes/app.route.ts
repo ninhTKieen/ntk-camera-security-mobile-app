@@ -5,4 +5,5 @@ export type TRootStackParamList = {
 
 export type TAppStackParamList = {
   Home: undefined;
+  Settings: undefined;
 };
