@@ -1,4 +1,5 @@
 import IconGeneral from '@src/components/icon-general';
+import MainLayout from '@src/components/main-layout';
 import { i18nKeys } from '@src/configs/i18n';
 import authService from '@src/features/auth/auth.service';
 import { useAuthStore } from '@src/features/auth/auth.store';
@@ -25,63 +26,65 @@ const MainSettingsScreen = () => {
   });
 
   return (
-    <Box bg="white" style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Pressable>
-          {({ isPressed }) => (
-            <Box
-              bg="white"
-              shadow="3"
-              flexDir="row"
-              p={3}
-              m={3}
-              borderRadius={10}
-              style={{
-                transform: [{ scale: isPressed ? 0.95 : 1 }],
-              }}
-            >
-              <Avatar
-                source={{
-                  uri: authQuery.data?.imageUrl,
+    <MainLayout title={t(i18nKeys.bottomTab.setting)}>
+      <Box bg="white" style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Pressable>
+            {({ isPressed }) => (
+              <Box
+                bg="white"
+                shadow="3"
+                flexDir="row"
+                p={3}
+                m={3}
+                borderRadius={10}
+                style={{
+                  transform: [{ scale: isPressed ? 0.95 : 1 }],
                 }}
-                size="lg"
               >
-                {authQuery.data?.name?.[0]?.toUpperCase()}
-              </Avatar>
+                <Avatar
+                  source={{
+                    uri: authQuery.data?.imageUrl,
+                  }}
+                  size="lg"
+                >
+                  {authQuery.data?.name?.[0]?.toUpperCase()}
+                </Avatar>
 
-              <Box mx={2} style={{ flex: 1 }}>
-                <Text fontSize="2xl" fontWeight="medium">
-                  {authQuery.data?.name}
-                </Text>
+                <Box mx={2} style={{ flex: 1 }}>
+                  <Text fontSize="2xl" fontWeight="medium">
+                    {authQuery.data?.name}
+                  </Text>
 
-                <Text fontSize="sm" fontWeight="light">
-                  @{authQuery.data?.username}
-                </Text>
+                  <Text fontSize="sm" fontWeight="light">
+                    @{authQuery.data?.username}
+                  </Text>
+                </Box>
+
+                <Box justifyContent="center" alignItems="center">
+                  <IconGeneral type="FontAwesome" name="edit" size={25} />
+                </Box>
               </Box>
+            )}
+          </Pressable>
+        </ScrollView>
 
-              <Box justifyContent="center" alignItems="center">
-                <IconGeneral type="FontAwesome" name="edit" size={25} />
-              </Box>
-            </Box>
-          )}
-        </Pressable>
-      </ScrollView>
-
-      <Box
-        style={{
-          justifyContent: 'flex-end',
-        }}
-      >
-        <Button
-          m={2}
-          onPress={() => {
-            logoutMutation.mutate();
+        <Box
+          style={{
+            justifyContent: 'flex-end',
           }}
         >
-          {t(i18nKeys.auth.logout)}
-        </Button>
+          <Button
+            m={2}
+            onPress={() => {
+              logoutMutation.mutate();
+            }}
+          >
+            {t(i18nKeys.auth.logout)}
+          </Button>
+        </Box>
       </Box>
-    </Box>
+    </MainLayout>
   );
 };
 
