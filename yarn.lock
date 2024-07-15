@@ -3197,6 +3197,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-firebase/messaging@npm:^20.1.0":
+  version: 20.1.0
+  resolution: "@react-native-firebase/messaging@npm:20.1.0"
+  peerDependencies:
+    "@react-native-firebase/app": 20.1.0
+    expo: ">=47.0.0"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+  checksum: 69b114453f093142c39461d05f2637d9dd31e28854f511689192a3a6e069c8aa3739f3eb550ab7600e4d277956fc01361621bde931bd83b7fa86141d20bcb823
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.74.85":
   version: 0.74.85
   resolution: "@react-native/assets-registry@npm:0.74.85"
@@ -10545,6 +10558,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-permissions@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "react-native-permissions@npm:4.1.5"
+  peerDependencies:
+    react: ">=18.1.0"
+    react-native: ">=0.70.0"
+    react-native-windows: ">=0.70.0"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: dc4b366a0f561a47f032c027eb703a2be45e801788b915ed583e38f617eea23656eb63a77b17fb3a663fe3199b2ec25788f799e751421634e35a64f5258feed9
+  languageName: node
+  linkType: hard
+
 "react-native-safe-area-context@npm:3.3.2":
   version: 3.3.2
   resolution: "react-native-safe-area-context@npm:3.3.2"
@@ -11017,6 +11044,7 @@ __metadata:
     "@hookform/resolvers": ^3.9.0
     "@react-native-community/eslint-config": ^3.2.0
     "@react-native-firebase/app": ^20.1.0
+    "@react-native-firebase/messaging": ^20.1.0
     "@react-native/babel-preset": 0.74.85
     "@react-native/eslint-config": 0.74.85
     "@react-native/metro-config": 0.74.85
@@ -11046,6 +11074,7 @@ __metadata:
     react-native-dotenv: ^3.4.11
     react-native-gesture-handler: ^2.17.1
     react-native-mmkv: ^2.12.2
+    react-native-permissions: ^4.1.5
     react-native-safe-area-context: 3.3.2
     react-native-screens: ^3.32.0
     react-native-svg: 12.1.1
