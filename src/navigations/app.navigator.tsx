@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 
 const Tab = createBottomTabNavigator<TAppStackParamList>();
 
-const AuthNavigator = (): JSX.Element => {
+const AppNavigator = (): JSX.Element => {
   const { t } = useTranslation();
   const theme = useTheme();
   const color = theme.colors.primary[500];
@@ -90,4 +90,4 @@ const AuthNavigator = (): JSX.Element => {
   );
 };
 
-export default AuthNavigator;
+export default AppNavigator;
