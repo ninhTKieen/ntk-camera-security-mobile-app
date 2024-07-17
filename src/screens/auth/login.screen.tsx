@@ -10,7 +10,7 @@ import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
-import { useToast } from 'react-native-toast-notifications';
+import Toast from 'react-native-toast-message';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 
@@ -18,7 +18,6 @@ const LoginScreen = () => {
   const { t } = useTranslation();
   const [show, isShow] = useState(false);
   const { login, logout } = useAuthStore();
-  const toast = useToast();
 
   const loginMutation = useMutation({
     mutationFn: (data: ILoginPayload) => authService.login(data),
@@ -28,9 +27,14 @@ const LoginScreen = () => {
     onError: (error) => {
       console.log('error', error);
       logout();
-      toast.show(t(i18nKeys.auth.loginFail), {
-        type: 'danger',
-        placement: 'top',
+      // toast.show(t(i18nKeys.auth.loginFail), {
+      //   type: 'danger',
+      //   placement: 'top',
+      // });
+      Toast.show({
+        text1: t(i18nKeys.auth.loginFail),
+        type: 'error',
+        position: 'bottom',
       });
     },
   });
