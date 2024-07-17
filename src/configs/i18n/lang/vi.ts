@@ -74,6 +74,11 @@ export const vi = {
     match: 'Mật khẩu không khớp',
   },
 
+  notification: {
+    disabled: 'Thông báo đã bị tắt',
+    disabledMessage: 'Vui lòng bật thông báo để nhận thông báo từ chúng tôi',
+  },
+
   dayOfWeek: {
     everyDay: 'Mỗi ngày',
     short: {
