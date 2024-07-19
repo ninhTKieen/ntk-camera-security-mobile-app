@@ -1,10 +1,13 @@
 import messaging from '@react-native-firebase/messaging';
+import httpUtil from '@src/utils/http.util';
 import { Platform } from 'react-native';
 import {
   PERMISSIONS,
   checkNotifications,
   request,
 } from 'react-native-permissions';
+
+import { TSendTokenData } from './notification.model';
 
 class NotificationServices {
   async requestPermission() {
@@ -36,6 +39,16 @@ class NotificationServices {
     const result = await checkNotifications();
 
     return result.status === 'granted';
+  }
+
+  async sendFcmTokenToServer(data: TSendTokenData) {
+    const response = await httpUtil.request({
+      url: '/api/fcm/send-token',
+      method: 'POST',
+      data,
+    });
+
+    return response;
   }
 }
 
