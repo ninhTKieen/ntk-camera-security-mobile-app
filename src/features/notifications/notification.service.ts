@@ -50,6 +50,18 @@ class NotificationServices {
 
     return response;
   }
+
+  async deleteFcmToken(userId: number, deviceId: string) {
+    const response = await httpUtil.request({
+      url: `/api/fcm/delete-token/${userId}`,
+      method: 'DELETE',
+      data: {
+        deviceId,
+      },
+    });
+
+    return response;
+  }
 }
 
 const notificationServices = new NotificationServices();

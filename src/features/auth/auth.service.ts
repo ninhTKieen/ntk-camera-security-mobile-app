@@ -66,7 +66,7 @@ class AuthService {
     }
   }
 
-  async logout() {
+  logout() {
     removeAccessToken();
     removeRefreshToken();
   }

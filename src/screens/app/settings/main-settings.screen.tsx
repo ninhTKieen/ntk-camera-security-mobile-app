@@ -3,24 +3,40 @@ import MainLayout from '@src/components/main-layout';
 import { i18nKeys } from '@src/configs/i18n';
 import authService from '@src/features/auth/auth.service';
 import { useAuthStore } from '@src/features/auth/auth.store';
+import notificationServices from '@src/features/notifications/notification.service';
 import { useAuth } from '@src/hooks/use-auth.hook';
 import { useMutation } from '@tanstack/react-query';
 import { Avatar, Box, Button, Pressable, ScrollView, Text } from 'native-base';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 
 const MainSettingsScreen = () => {
   const { t } = useTranslation();
   const { authQuery } = useAuth();
   const { logout } = useAuthStore();
 
+  const deleteFcmToken = async () => {
+    try {
+      const deviceId = await DeviceInfo.getUniqueId();
+      await notificationServices.deleteFcmToken(
+        authQuery.data?.id as number,
+        deviceId,
+      );
+    } catch (error) {
+      console.log('Error Set Up Data', error);
+    }
+  };
+
   const logoutMutation = useMutation({
-    mutationFn: () => authService.logout(),
+    mutationFn: () => deleteFcmToken(),
     onSuccess: () => {
+      authService.logout();
       logout();
     },
     onError: () => {
+      authService.logout();
       logout();
     },
   });
