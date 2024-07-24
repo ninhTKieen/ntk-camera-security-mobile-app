@@ -8,8 +8,10 @@ import messaging, {
 } from '@react-native-firebase/messaging';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import LoadingModal from '@src/components/loading-modal';
 import { i18nKeys } from '@src/configs/i18n';
 import { TRootStackParamList } from '@src/configs/routes/app.route';
+import { useAppStore } from '@src/features/common/app.store';
 import notificationServices from '@src/features/notifications/notification.service';
 import { useAuth } from '@src/hooks/use-auth.hook';
 import { useQueryClient } from '@tanstack/react-query';
@@ -27,6 +29,7 @@ const RootNavigator = (): JSX.Element => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { isAuth, currentUser } = useAuth();
+  const { isLoading } = useAppStore();
 
   const onStateChange = () => {
     (!isAuth || !!currentUser) &&
@@ -113,6 +116,7 @@ const RootNavigator = (): JSX.Element => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <LoadingModal isVisible={isLoading} />
       <NavigationContainer onStateChange={onStateChange}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {isAuth ? (

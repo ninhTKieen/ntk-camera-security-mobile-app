@@ -5,13 +5,14 @@ import { i18nKeys } from '@src/configs/i18n';
 import { ILoginPayload } from '@src/features/auth/auth.model';
 import authService from '@src/features/auth/auth.service';
 import { useAuthStore } from '@src/features/auth/auth.store';
+import { useAppStore } from '@src/features/common/app.store';
 import {
   EWebAppType,
   TSendTokenData,
 } from '@src/features/notifications/notification.model';
 import notificationServices from '@src/features/notifications/notification.service';
 import { useMutation } from '@tanstack/react-query';
-import { Box, Button, Input, Pressable, Text } from 'native-base';
+import { Box, Button, Checkbox, Input, Pressable, Text } from 'native-base';
 import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -25,6 +26,7 @@ const LoginScreen = () => {
   const { t } = useTranslation();
   const [show, isShow] = useState(false);
   const { login, logout } = useAuthStore();
+  const { setLoading } = useAppStore();
 
   const setUpData = async () => {
     try {
@@ -54,18 +56,23 @@ const LoginScreen = () => {
   });
 
   const loginMutation = useMutation({
-    mutationFn: (data: ILoginPayload) => authService.login(data),
+    mutationFn: (data: ILoginPayload) => {
+      setLoading(true);
+      return authService.login(data);
+    },
     onSuccess: (res) => {
       login(res);
+      setLoading(false);
       sendFcmToken.mutate();
     },
     onError: (error) => {
       console.log('error', error);
+      setLoading(false);
       logout();
       Toast.show({
         text1: t(i18nKeys.auth.loginFail),
         type: 'error',
-        position: 'bottom',
+        position: 'top',
       });
     },
   });
@@ -170,6 +177,23 @@ const LoginScreen = () => {
             {errors.password.message}
           </Text>
         )}
+
+        <Pressable
+          flexDir="row"
+          alignItems="center"
+          mt={4}
+          onPress={() => {
+            setValue('isRemember', !watch('isRemember'));
+          }}
+        >
+          <Checkbox
+            value={String(watch('isRemember'))}
+            isChecked={watch('isRemember')}
+            onChange={(value) => setValue('isRemember', value)}
+          />
+
+          <Text ml="1.5">{t(i18nKeys.auth.rememberMe)}</Text>
+        </Pressable>
 
         <Button
           style={{ marginTop: 20 }}
