@@ -79,6 +79,12 @@ export const vi = {
     disabledMessage: 'Vui lòng bật thông báo để nhận thông báo từ chúng tôi',
   },
 
+  settings: {
+    title: 'Cài đặt',
+    editProfile: 'Chỉnh sửa hồ sơ',
+    changePassword: 'Đổi mật khẩu',
+  },
+
   dayOfWeek: {
     everyDay: 'Mỗi ngày',
     short: {

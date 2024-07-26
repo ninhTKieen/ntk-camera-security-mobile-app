@@ -80,6 +80,12 @@ export const en = {
       'Please enable notification to receive notification from us',
   },
 
+  settings: {
+    title: 'Settings',
+    editProfile: 'Edit Profile',
+    changePassword: 'Change Password',
+  },
+
   dayOfWeek: {
     everyDay: 'Every Day',
     short: {
