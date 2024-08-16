@@ -1,6 +1,9 @@
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import IconGeneral from '@src/components/icon-general';
 import MainLayout from '@src/components/main-layout';
 import { i18nKeys } from '@src/configs/i18n';
+import { TSettingStackParamList } from '@src/configs/routes/setting.route';
 import authService from '@src/features/auth/auth.service';
 import { useAuthStore } from '@src/features/auth/auth.store';
 import notificationServices from '@src/features/notifications/notification.service';
@@ -16,6 +19,10 @@ const MainSettingsScreen = () => {
   const { t } = useTranslation();
   const { authQuery } = useAuth();
   const { logout } = useAuthStore();
+  const navigation =
+    useNavigation<
+      StackNavigationProp<TSettingStackParamList, 'MainSettings'>
+    >();
 
   const deleteFcmToken = async () => {
     try {
@@ -45,7 +52,7 @@ const MainSettingsScreen = () => {
     <MainLayout title={t(i18nKeys.bottomTab.setting)}>
       <Box bg="white" style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Pressable>
+          <Pressable onPress={() => navigation.navigate('EditProfile')}>
             {({ isPressed }) => (
               <Box
                 bg="white"

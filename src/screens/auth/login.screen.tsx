@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import messaging from '@react-native-firebase/messaging';
-import ReactNativeLogo from '@src/assets/react-native.svg';
 import { i18nKeys } from '@src/configs/i18n';
 import { ILoginPayload } from '@src/features/auth/auth.model';
 import authService from '@src/features/auth/auth.service';
@@ -12,7 +11,15 @@ import {
 } from '@src/features/notifications/notification.model';
 import notificationServices from '@src/features/notifications/notification.service';
 import { useMutation } from '@tanstack/react-query';
-import { Box, Button, Checkbox, Input, Pressable, Text } from 'native-base';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Image,
+  Input,
+  Pressable,
+  Text,
+} from 'native-base';
 import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -128,7 +135,9 @@ const LoginScreen = () => {
         </Text>
       </Box>
 
-      <ReactNativeLogo
+      <Image
+        source={require('@src/assets/logo.jpeg')}
+        alt="Logo"
         width={90}
         height={90}
         style={{ alignSelf: 'center', marginTop: 20 }}
@@ -187,6 +196,7 @@ const LoginScreen = () => {
           }}
         >
           <Checkbox
+            aria-label="Remember me"
             value={String(watch('isRemember'))}
             isChecked={watch('isRemember')}
             onChange={(value) => setValue('isRemember', value)}
