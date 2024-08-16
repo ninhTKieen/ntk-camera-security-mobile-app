@@ -129,8 +129,7 @@ const EditProfileScreen = () => {
                   placeholder={input.placeholder}
                   value={input.value}
                   onChangeText={(text) => {
-                    // input.onChangeText && input.onChangeText(text);
-                    setValue('name', text);
+                    input.onChangeText && input.onChangeText(text);
                   }}
                 />
               </Box>
