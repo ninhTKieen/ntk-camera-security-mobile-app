@@ -8,8 +8,13 @@ import {
   setRefreshToken,
 } from '@src/utils/token.util';
 
-import { IBaseHttpResponse } from '../common/base-http-response.model';
-import { ILoginPayload, ILoginResponse, IUser } from './auth.model';
+import { IBaseHttpResponse } from '../common/common.model';
+import {
+  ILoginPayload,
+  ILoginResponse,
+  IUpdateUser,
+  IUser,
+} from './auth.model';
 
 class AuthService {
   async login(loginPayload: ILoginPayload) {
@@ -66,9 +71,19 @@ class AuthService {
     }
   }
 
-  async logout() {
+  logout() {
     removeAccessToken();
     removeRefreshToken();
+  }
+
+  async updateUser(id: number, data: IUpdateUser) {
+    const response = await httpUtil.request<IBaseHttpResponse<IUser>>({
+      url: `/api/users/${id}`,
+      method: 'PATCH',
+      data,
+    });
+
+    return response.data;
   }
 }
 

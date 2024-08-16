@@ -4,7 +4,7 @@ import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ToastProvider } from 'react-native-toast-notifications';
+import Toast from 'react-native-toast-message';
 
 const queryClient = new QueryClient();
 
@@ -14,9 +14,8 @@ const App = () => {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaProvider>
           <NativeBaseProvider>
-            <ToastProvider>
-              <RootNavigator />
-            </ToastProvider>
+            <RootNavigator />
+            <Toast />
           </NativeBaseProvider>
         </SafeAreaProvider>
       </GestureHandlerRootView>

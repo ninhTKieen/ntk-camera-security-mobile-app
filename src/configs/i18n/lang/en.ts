@@ -74,6 +74,18 @@ export const en = {
     match: 'Password does not match',
   },
 
+  notification: {
+    disabled: 'Notification is disabled',
+    disabledMessage:
+      'Please enable notification to receive notification from us',
+  },
+
+  settings: {
+    title: 'Settings',
+    editProfile: 'Edit Profile',
+    changePassword: 'Change Password',
+  },
+
   dayOfWeek: {
     everyDay: 'Every Day',
     short: {

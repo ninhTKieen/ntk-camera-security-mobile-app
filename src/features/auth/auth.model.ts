@@ -32,6 +32,15 @@ export interface IUser {
   role: ERole;
 }
 
+export interface IUpdateUser {
+  name?: string;
+  phoneNumber?: string;
+  imageUrl?: any;
+  imageUrlId?: number;
+  gender?: EGender;
+  dateOfBirth?: Date;
+}
+
 export interface ILoginResponse {
   user: IUser;
   accessToken: string;

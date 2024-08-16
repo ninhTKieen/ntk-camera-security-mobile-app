@@ -18,8 +18,7 @@ export const useAuth = () => {
     } catch (error) {
       logout();
       setLoading(false);
-
-      return null;
+      throw Promise.reject(error);
     }
   }, [login, logout, setLoading]);
 
