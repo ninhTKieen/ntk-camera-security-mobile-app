@@ -12,6 +12,7 @@ import { IBaseHttpResponse } from '../common/common.model';
 import {
   ILoginPayload,
   ILoginResponse,
+  IRegisterPayload,
   IUpdateUser,
   IUser,
 } from './auth.model';
@@ -22,6 +23,19 @@ class AuthService {
       url: '/api/auth/login',
       method: 'POST',
       data: loginPayload,
+    });
+
+    setAccessToken(response.data.accessToken);
+    setRefreshToken(response.data.refreshToken);
+
+    return response.data.user;
+  }
+
+  async register(registerPayload: IRegisterPayload) {
+    const response = await httpUtil.request<IBaseHttpResponse<ILoginResponse>>({
+      url: '/api/auth/register',
+      method: 'POST',
+      data: registerPayload,
     });
 
     setAccessToken(response.data.accessToken);

@@ -3,6 +3,7 @@ import { TAuthStackParamList } from '@src/configs/routes/auth.route';
 import { useAppStore } from '@src/features/common/app.store';
 import { useAuth } from '@src/hooks/use-auth.hook';
 import LoginScreen from '@src/screens/auth/login.screen';
+import RegisterScreen from '@src/screens/auth/register.screen';
 import React, { useEffect } from 'react';
 
 const Stack = createStackNavigator<TAuthStackParamList>();
@@ -20,6 +21,7 @@ const AuthNavigator = (): JSX.Element => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Register" component={RegisterScreen} />
     </Stack.Navigator>
   );
 };

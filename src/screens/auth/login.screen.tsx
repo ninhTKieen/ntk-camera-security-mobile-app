@@ -1,6 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import messaging from '@react-native-firebase/messaging';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { i18nKeys } from '@src/configs/i18n';
+import { TAuthStackParamList } from '@src/configs/routes/auth.route';
 import { ILoginPayload } from '@src/features/auth/auth.model';
 import authService from '@src/features/auth/auth.service';
 import { useAuthStore } from '@src/features/auth/auth.store';
@@ -15,9 +18,11 @@ import {
   Box,
   Button,
   Checkbox,
+  Divider,
   Image,
   Input,
   Pressable,
+  Stack,
   Text,
 } from 'native-base';
 import React, { useMemo, useState } from 'react';
@@ -30,6 +35,8 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 
 const LoginScreen = () => {
+  const navigation =
+    useNavigation<StackNavigationProp<TAuthStackParamList, 'Login'>>();
   const { t } = useTranslation();
   const [show, isShow] = useState(false);
   const { login, logout } = useAuthStore();
@@ -113,12 +120,6 @@ const LoginScreen = () => {
     loginMutation.mutate(data);
   };
 
-  React.useEffect(() => {
-    DeviceInfo.getUniqueId().then((deviceId) => {
-      console.log('Device ID', deviceId);
-    });
-  }, []);
-
   return (
     <Box style={styles.container}>
       <Box style={{ alignItems: 'center', marginTop: 60 }}>
@@ -131,7 +132,7 @@ const LoginScreen = () => {
           {t(i18nKeys.auth.welcomeBack)}
         </Text>
         <Text style={{ fontSize: 16, marginTop: 5 }}>
-          {t(i18nKeys.auth.loginTitle)}
+          {t(i18nKeys.auth.login)}
         </Text>
       </Box>
 
@@ -187,23 +188,37 @@ const LoginScreen = () => {
           </Text>
         )}
 
-        <Pressable
-          flexDir="row"
-          alignItems="center"
+        <Stack
           mt={4}
-          onPress={() => {
-            setValue('isRemember', !watch('isRemember'));
+          direction={{
+            base: 'row',
+            md: 'row',
           }}
+          justifyContent="space-between"
         >
-          <Checkbox
-            aria-label="Remember me"
-            value={String(watch('isRemember'))}
-            isChecked={watch('isRemember')}
-            onChange={(value) => setValue('isRemember', value)}
-          />
+          <Pressable
+            flexDir="row"
+            alignItems="center"
+            onPress={() => {
+              setValue('isRemember', !watch('isRemember'));
+            }}
+          >
+            <Checkbox
+              aria-label="Remember me"
+              value={String(watch('isRemember'))}
+              isChecked={watch('isRemember')}
+              onChange={(value) => setValue('isRemember', value)}
+            />
 
-          <Text ml="1.5">{t(i18nKeys.auth.rememberMe)}</Text>
-        </Pressable>
+            <Text ml="1.5">{t(i18nKeys.auth.rememberMe)}</Text>
+          </Pressable>
+
+          <Pressable>
+            <Text color="primary.500" fontWeight="medium">
+              {t(i18nKeys.auth.forgotPassword)}
+            </Text>
+          </Pressable>
+        </Stack>
 
         <Button
           style={{ marginTop: 20 }}
@@ -212,6 +227,21 @@ const LoginScreen = () => {
           colorScheme="primary"
         >
           {t(i18nKeys.auth.login)}
+        </Button>
+
+        <Stack direction="row" my={6} alignItems="center">
+          <Divider flex={1} />
+          <Text mx={2}>{t(i18nKeys.common.or)}</Text>
+          <Divider flex={1} />
+        </Stack>
+
+        <Button
+          size="lg"
+          onPress={() => navigation.navigate('Register')}
+          colorScheme="primary"
+          variant="outline"
+        >
+          {t(i18nKeys.auth.register)}
         </Button>
       </Box>
     </Box>

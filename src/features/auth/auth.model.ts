@@ -41,6 +41,18 @@ export interface IUpdateUser {
   dateOfBirth?: Date;
 }
 
+export interface IRegisterPayload {
+  email: string;
+  password: string;
+  name: string;
+  username: string;
+  phoneNumber?: string;
+  imageUrl?: any;
+  imageUrlId?: number;
+  gender?: EGender;
+  dateOfBirth?: Date;
+}
+
 export interface ILoginResponse {
   user: IUser;
   accessToken: string;
