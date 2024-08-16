@@ -27,3 +27,12 @@ export type TLocalImgProps = {
   size: number;
   name: string;
 };
+
+export type TUploadImageResult = {
+  imagePublicId: string;
+  imagePublicUrl: string;
+  imageSecureUrl: string;
+  width: number;
+  height: number;
+  format: string;
+};

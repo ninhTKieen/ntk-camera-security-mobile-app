@@ -1,13 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
 import IconGeneral from '@src/components/icon-general';
+import PhotoModal from '@src/components/photo-modal';
 import SubLayout from '@src/components/sub-layout';
 import { i18nKeys } from '@src/configs/i18n';
 import { EGender, IUpdateUser } from '@src/features/auth/auth.model';
 import authService from '@src/features/auth/auth.service';
+import { useAppStore } from '@src/features/common/app.store';
+import { TLocalImgProps } from '@src/features/common/common.model';
 import { useAuth } from '@src/hooks/use-auth.hook';
 import { useMutation } from '@tanstack/react-query';
 import { Avatar, Box, Button, Input, Radio, Stack, Text } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
@@ -15,7 +17,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Toast from 'react-native-toast-message';
 
 const EditProfileScreen = () => {
-  const navigation = useNavigation();
   const { t } = useTranslation();
   const { authQuery } = useAuth();
   const { watch, setValue, handleSubmit } = useForm<IUpdateUser>({
@@ -29,6 +30,8 @@ const EditProfileScreen = () => {
     },
     mode: 'onBlur',
   });
+  const [openPhotoModal, setOpenPhotoModal] = useState(false);
+  const { setLoading } = useAppStore();
 
   const textInputs = [
     {
@@ -55,16 +58,18 @@ const EditProfileScreen = () => {
   ];
 
   const updateUserMutation = useMutation({
-    mutationFn: (data: IUpdateUser) =>
-      authService.updateUser(authQuery.data?.id as number, data),
+    mutationFn: (data: IUpdateUser) => {
+      setLoading(true);
+      return authService.updateUser(authQuery.data?.id as number, data);
+    },
     onSuccess: () => {
-      navigation.goBack();
       authQuery.refetch();
       Toast.show({
         text1: t(i18nKeys.common.success),
         type: 'success',
         position: 'top',
       });
+      setLoading(false);
     },
     onError: (error) => {
       console.log('[UPDATE USER] Error', error);
@@ -73,6 +78,7 @@ const EditProfileScreen = () => {
         type: 'error',
         position: 'top',
       });
+      setLoading(false);
     },
   });
 
@@ -80,7 +86,6 @@ const EditProfileScreen = () => {
     updateUserMutation.mutate(data);
   };
 
-  console.log('authQuery.data', authQuery.data);
   return (
     <SubLayout title={t(i18nKeys.settings.editProfile)}>
       <Box bg="white" flex={1}>
@@ -91,10 +96,15 @@ const EditProfileScreen = () => {
               alignSelf: 'center',
               margin: 16,
             }}
+            onPress={() => setOpenPhotoModal(true)}
           >
             <Avatar
               source={{
-                uri: authQuery.data?.imageUrl,
+                uri: watch('imageUrl')
+                  ? typeof watch('imageUrl') === 'string'
+                    ? watch('imageUrl')
+                    : watch('imageUrl').uri
+                  : authQuery.data?.imageUrl,
               }}
               size="2xl"
               borderWidth={5}
@@ -178,6 +188,14 @@ const EditProfileScreen = () => {
           </Box>
         </KeyboardAwareScrollView>
       </Box>
+
+      <PhotoModal
+        isOpen={openPhotoModal}
+        onClose={() => setOpenPhotoModal(false)}
+        setValues={(values: TLocalImgProps) => {
+          setValue('imageUrl', values);
+        }}
+      />
     </SubLayout>
   );
 };

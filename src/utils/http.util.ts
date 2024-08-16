@@ -1,5 +1,9 @@
 import { API_ENDPOINT } from '@env';
 import authService from '@src/features/auth/auth.service';
+import {
+  IBaseHttpResponse,
+  TUploadImageResult,
+} from '@src/features/common/common.model';
 import axios, {
   AxiosError,
   AxiosInstance,
@@ -96,6 +100,24 @@ class HttpUtil {
     const response = await this.http.request(config);
 
     return response.data as T;
+  }
+
+  async uploadImage({ file }: { file: File }) {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    const config: AxiosRequestConfig = {
+      url: '/api/image/upload',
+      method: 'POST',
+      data: formData,
+      baseURL: API_ENDPOINT,
+    };
+
+    const response = await this.http.request<
+      IBaseHttpResponse<TUploadImageResult>
+    >(config);
+
+    return response.data;
   }
 
   async uploadListImage({ files }: { files: any[] }): Promise<any> {

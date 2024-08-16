@@ -60,6 +60,13 @@ export const vi = {
     backToHome: 'Quay lại trang chủ',
   },
 
+  photo: {
+    chooseFromLibrary: 'Chọn từ thư viện',
+    take: 'Chụp ảnh',
+    seePic: 'Xem ảnh',
+    seePicProfile: 'Xem ảnh đại diện',
+  },
+
   language: {
     title: 'Ngôn ngữ',
     english: 'Tiếng Anh',

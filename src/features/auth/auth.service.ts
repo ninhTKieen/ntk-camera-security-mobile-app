@@ -91,6 +91,19 @@ class AuthService {
   }
 
   async updateUser(id: number, data: IUpdateUser) {
+    if (data?.imageUrl) {
+      if (typeof data.imageUrl === 'object') {
+        const response = await httpUtil.uploadImage({
+          file: data.imageUrl,
+        });
+
+        data = {
+          ...data,
+          imageUrl: response.data.imagePublicUrl,
+          imageUrlId: response.data.imagePublicId,
+        };
+      }
+    }
     const response = await httpUtil.request<IBaseHttpResponse<IUser>>({
       url: `/api/users/${id}`,
       method: 'PATCH',

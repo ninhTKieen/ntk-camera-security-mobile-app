@@ -60,6 +60,13 @@ export const en = {
     backToHome: 'Back to Home',
   },
 
+  photo: {
+    chooseFromLibrary: 'Choose from Library',
+    take: 'Take a photo',
+    seePic: 'See Picture',
+    seePicProfile: 'See Profile Picture',
+  },
+
   language: {
     title: 'Language',
     english: 'English',

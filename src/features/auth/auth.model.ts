@@ -26,7 +26,7 @@ export interface IUser {
   username: string;
   phoneNumber?: string;
   imageUrl?: string;
-  imageUrlId?: number;
+  imageUrlId?: string;
   gender?: EGender;
   dateOfBirth: Date;
   role: ERole;
@@ -36,7 +36,7 @@ export interface IUpdateUser {
   name?: string;
   phoneNumber?: string;
   imageUrl?: any;
-  imageUrlId?: number;
+  imageUrlId?: string;
   gender?: EGender;
   dateOfBirth?: Date;
 }
@@ -48,7 +48,7 @@ export interface IRegisterPayload {
   username: string;
   phoneNumber?: string;
   imageUrl?: any;
-  imageUrlId?: number;
+  imageUrlId?: string;
   gender?: EGender;
   dateOfBirth?: Date;
 }
