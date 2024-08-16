@@ -10,6 +10,7 @@ import { Avatar, Box, Button, Input, Radio, Stack, Text } from 'native-base';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Toast from 'react-native-toast-message';
 
@@ -79,11 +80,18 @@ const EditProfileScreen = () => {
     updateUserMutation.mutate(data);
   };
 
+  console.log('authQuery.data', authQuery.data);
   return (
     <SubLayout title={t(i18nKeys.settings.editProfile)}>
       <Box bg="white" flex={1}>
         <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-          <Box position="relative" alignSelf="center" m={4}>
+          <TouchableOpacity
+            style={{
+              position: 'relative',
+              alignSelf: 'center',
+              margin: 16,
+            }}
+          >
             <Avatar
               source={{
                 uri: authQuery.data?.imageUrl,
@@ -106,7 +114,7 @@ const EditProfileScreen = () => {
             >
               <IconGeneral type="FontAwesome5" name="camera-retro" size={20} />
             </Box>
-          </Box>
+          </TouchableOpacity>
 
           <Box p={4}>
             {textInputs.map((input, index) => (
