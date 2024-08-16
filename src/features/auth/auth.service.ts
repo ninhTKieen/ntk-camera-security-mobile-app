@@ -8,7 +8,7 @@ import {
   setRefreshToken,
 } from '@src/utils/token.util';
 
-import { IBaseHttpResponse } from '../common/base-http-response.model';
+import { IBaseHttpResponse } from '../common/common.model';
 import {
   ILoginPayload,
   ILoginResponse,

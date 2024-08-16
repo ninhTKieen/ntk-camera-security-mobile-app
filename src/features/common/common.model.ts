@@ -18,3 +18,12 @@ export interface IBaseHttpResponseList<T> {
   message: string;
   code: number;
 }
+
+export type TLocalImgProps = {
+  uri: string;
+  width: number;
+  height: number;
+  type: string;
+  size: number;
+  name: string;
+};
