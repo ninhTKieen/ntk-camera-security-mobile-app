@@ -13,6 +13,7 @@ import {
   TSendTokenData,
 } from '@src/features/notifications/notification.model';
 import notificationServices from '@src/features/notifications/notification.service';
+import { useApp } from '@src/hooks/use-app.hook';
 import { useMutation } from '@tanstack/react-query';
 import {
   Box,
@@ -30,7 +31,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import Toast from 'react-native-toast-message';
+// import Toast from 'react-native-toast-message';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 
@@ -41,6 +42,7 @@ const LoginScreen = () => {
   const [show, isShow] = useState(false);
   const { login, logout } = useAuthStore();
   const { setLoading } = useAppStore();
+  const { toastMessage } = useApp();
 
   const setUpData = async () => {
     try {
@@ -78,15 +80,20 @@ const LoginScreen = () => {
       login(res);
       setLoading(false);
       sendFcmToken.mutate();
+      toastMessage({
+        type: 'success',
+        title: t(i18nKeys.auth.login),
+        description: t(i18nKeys.auth.loginSuccess),
+      });
     },
     onError: (error) => {
       console.log('error', error);
-      setLoading(false);
       logout();
-      Toast.show({
-        text1: t(i18nKeys.auth.loginFail),
+      setLoading(false);
+      toastMessage({
         type: 'error',
-        position: 'top',
+        title: t(i18nKeys.auth.loginFail),
+        description: t(i18nKeys.auth.loginFailDesc),
       });
     },
   });

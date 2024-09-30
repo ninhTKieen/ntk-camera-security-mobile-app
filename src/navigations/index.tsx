@@ -9,7 +9,7 @@ import messaging, {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoadingModal from '@src/components/loading-modal';
-import { i18nKeys } from '@src/configs/i18n';
+// import { i18nKeys } from '@src/configs/i18n';
 import { TRootStackParamList } from '@src/configs/routes/app.route';
 import { useAppStore } from '@src/features/common/app.store';
 import notificationServices from '@src/features/notifications/notification.service';
@@ -18,8 +18,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import React, { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, SafeAreaView } from 'react-native';
-import Toast from 'react-native-toast-message';
 
+// import Toast from 'react-native-toast-message';
 import AppNavigator from './app.navigator';
 import AuthNavigator from './auth.navigator';
 
@@ -95,12 +95,12 @@ const RootNavigator = (): JSX.Element => {
       .requestPermission()
       .then((result) => {
         if (!result) {
-          Toast.show({
-            type: 'info',
-            text1: t(i18nKeys.notification.disabled),
-            text2: t(i18nKeys.notification.disabledMessage),
-            position: 'top',
-          });
+          // Toast.show({
+          //   type: 'info',
+          //   text1: t(i18nKeys.notification.disabled),
+          //   text2: t(i18nKeys.notification.disabledMessage),
+          //   position: 'top',
+          // });
         }
       })
       .catch((error) => {

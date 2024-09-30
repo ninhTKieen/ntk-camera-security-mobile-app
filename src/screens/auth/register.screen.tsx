@@ -21,7 +21,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Toast from 'react-native-toast-message';
+// import Toast from 'react-native-toast-message';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 
@@ -74,11 +74,11 @@ const RegisterScreen = () => {
       console.log('error', error);
       setLoading(false);
       logout();
-      Toast.show({
-        text1: t(i18nKeys.auth.loginFail),
-        type: 'error',
-        position: 'top',
-      });
+      // Toast.show({
+      //   text1: t(i18nKeys.auth.loginFail),
+      //   type: 'error',
+      //   position: 'top',
+      // });
     },
   });
 

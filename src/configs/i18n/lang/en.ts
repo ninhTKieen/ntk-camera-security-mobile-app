@@ -20,6 +20,7 @@ export const en = {
     haveNoAccount: 'Have no account yet?',
     loginSuccess: 'Login successfully!',
     loginFail: 'Login failed!',
+    loginFailDesc: 'Account does not exist. Please contact Administrator!',
     register: 'Register',
     registerSuccess: 'Register successfully!',
     registerFail: 'Register failed!',

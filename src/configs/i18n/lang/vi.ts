@@ -20,6 +20,8 @@ export const vi = {
     haveNoAccount: 'Chưa có tài khoản?',
     loginSuccess: 'Đăng nhập thành công!',
     loginFail: 'Đăng nhập thất bại!',
+    loginFailDesc:
+      'Tài khoản không tồn tại. Vui lòng liên hệ với Quản trị viên!',
     register: 'Đăng ký',
     registerSuccess: 'Đăng ký thành công!',
     registerFail: 'Đăng ký thất bại!',

@@ -14,7 +14,8 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Toast from 'react-native-toast-message';
+
+// import Toast from 'react-native-toast-message';
 
 const EditProfileScreen = () => {
   const { t } = useTranslation();
@@ -64,20 +65,20 @@ const EditProfileScreen = () => {
     },
     onSuccess: () => {
       authQuery.refetch();
-      Toast.show({
-        text1: t(i18nKeys.common.success),
-        type: 'success',
-        position: 'top',
-      });
+      // Toast.show({
+      //   text1: t(i18nKeys.common.success),
+      //   type: 'success',
+      //   position: 'top',
+      // });
       setLoading(false);
     },
     onError: (error) => {
       console.log('[UPDATE USER] Error', error);
-      Toast.show({
-        text1: t(i18nKeys.common.error),
-        type: 'error',
-        position: 'top',
-      });
+      // Toast.show({
+      //   text1: t(i18nKeys.common.error),
+      //   type: 'error',
+      //   position: 'top',
+      // });
       setLoading(false);
     },
   });
