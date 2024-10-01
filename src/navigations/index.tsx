@@ -19,7 +19,6 @@ import React, { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, SafeAreaView } from 'react-native';
 
-// import Toast from 'react-native-toast-message';
 import AppNavigator from './app.navigator';
 import AuthNavigator from './auth.navigator';
 

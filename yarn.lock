@@ -7676,7 +7676,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.3.0":
+"hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -10692,7 +10692,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^17.0.1":
+"react-is@npm:^17.0.1, react-is@npm:^17.0.2":
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 9d6d111d8990dc98bc5402c1266a808b0459b5d54830bbea24c12d908b536df7883f268a7868cfaedde3dd9d4e0d574db456f84d2e6df9c4526f99bb4b5344d8
@@ -10796,6 +10796,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-modalfy@npm:^3.5.4":
+  version: 3.5.4
+  resolution: "react-native-modalfy@npm:3.5.4"
+  dependencies:
+    hoist-non-react-statics: ^3.3.2
+    react-is: ^17.0.2
+    use-memo-one: ^1.1.2
+  peerDependencies:
+    react: ">=16.8.3"
+    react-native: ">=0.59.0"
+    react-native-gesture-handler: ">=1.9.0"
+  checksum: a1a487ca84a6a5b8b903eba24f94f34f1c38b80e7d819454ec609af2dc56a0c17be29dcfe3c8b8026e65de4deb9551a59d3616d5c6692d7e01cda729ae7b4462
+  languageName: node
+  linkType: hard
+
 "react-native-notificated@npm:^0.1.6":
   version: 0.1.6
   resolution: "react-native-notificated@npm:0.1.6"
@@ -10805,6 +10820,16 @@ __metadata:
     react-native-gesture-handler: ^2.9.0
     react-native-reanimated: ^2.14.4 || ^3.0.0
   checksum: 3dc2556e062576a8b3d75e846f126747940a8ce48c69969d8398c76a6734088c146c6d7960d91587f1074b0087ccff130ebbc1b962497bc8e620d884cb446b3a
+  languageName: node
+  linkType: hard
+
+"react-native-otp-textinput@npm:^1.1.6":
+  version: 1.1.6
+  resolution: "react-native-otp-textinput@npm:1.1.6"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 8527954918677d196485562ca59e4e031f5bb3da6b91f397b8f045ce40f55e81d7840c35b63de79d930e3e0a48beef045ae1c00ac565d8fba34371516e4d374b
   languageName: node
   linkType: hard
 
@@ -10893,16 +10918,6 @@ __metadata:
     react: "*"
     react-native: ">=0.50.0"
   checksum: 20a9b2987bf5836821e51a0497fc2b598a859032fe168f80c6dcab3727bf26dc34bcb3197059e1e5775dfc91b6b20633502292d8c82e9aeb3e76807d03e0189d
-  languageName: node
-  linkType: hard
-
-"react-native-toast-message@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "react-native-toast-message@npm:2.2.0"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: b286b8d5ca0f21737c2e0a8e9c2d6dab2c06a3895335aa541c69eeb42d526cc6f3951069e59d8d346d3e6cafb8feaa450c35b0efe7c3d51ff81351d1477e71eb
   languageName: node
   linkType: hard
 
@@ -11352,14 +11367,15 @@ __metadata:
     react-native-keyboard-aware-scroll-view: ^0.9.5
     react-native-mmkv: ^2.12.2
     react-native-modal: ^13.0.1
+    react-native-modalfy: ^3.5.4
     react-native-notificated: ^0.1.6
+    react-native-otp-textinput: ^1.1.6
     react-native-permissions: ^4.1.5
     react-native-reanimated: ^3.15.3
     react-native-safe-area-context: 3.3.2
     react-native-screens: ^3.32.0
     react-native-svg: 12.1.1
     react-native-svg-transformer: ^1.5.0
-    react-native-toast-message: ^2.2.0
     react-native-vector-icons: ^10.1.0
     react-test-renderer: 18.2.0
     typescript: 5.0.4
@@ -12467,6 +12483,15 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: cc6df404a4ed3a39d0eb014a815c2e568a6abbe8c5ff09f9205a08bf68e86201826ed633865a6056ca0fd9581e0e7e70f18ca26c592a9eaccea5d244cf283b1f
+  languageName: node
+  linkType: hard
+
+"use-memo-one@npm:^1.1.2":
+  version: 1.1.3
+  resolution: "use-memo-one@npm:1.1.3"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 8f08eba26d69406b61bb4b8dacdd5a92bd6aef5b53d346dfe87954f7330ee10ecabc937cc7854635155d46053828e85c10b5a5aff7a04720e6a97b9f42999bac
   languageName: node
   linkType: hard
 

@@ -21,7 +21,6 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-// import Toast from 'react-native-toast-message';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import * as yup from 'yup';
 

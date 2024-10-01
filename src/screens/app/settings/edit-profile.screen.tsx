@@ -15,8 +15,6 @@ import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-// import Toast from 'react-native-toast-message';
-
 const EditProfileScreen = () => {
   const { t } = useTranslation();
   const { authQuery } = useAuth();
