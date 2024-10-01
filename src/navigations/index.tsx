@@ -18,6 +18,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import React, { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, SafeAreaView } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import AppNavigator from './app.navigator';
 import AuthNavigator from './auth.navigator';
@@ -114,18 +115,20 @@ const RootNavigator = (): JSX.Element => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <LoadingModal isVisible={isLoading} />
-      <NavigationContainer onStateChange={onStateChange}>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {isAuth ? (
-            <Stack.Screen name="App" component={AppNavigator} />
-          ) : (
-            <Stack.Screen name="Auth" component={AuthNavigator} />
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaView>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <LoadingModal isVisible={isLoading} />
+        <NavigationContainer onStateChange={onStateChange}>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            {isAuth ? (
+              <Stack.Screen name="App" component={AppNavigator} />
+            ) : (
+              <Stack.Screen name="Auth" component={AuthNavigator} />
+            )}
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 };
 

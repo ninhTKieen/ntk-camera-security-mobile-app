@@ -1,8 +1,10 @@
+import { modalStack } from '@src/configs/modal/modal.config';
 import RootNavigator from '@src/navigations';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { ModalProvider } from 'react-native-modalfy';
 import {
   ZoomInDownZoomOutUp,
   createNotifications,
@@ -41,9 +43,11 @@ const App = () => {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaProvider>
           <NativeBaseProvider>
-            <NotificationsProvider>
-              <RootNavigator />
-            </NotificationsProvider>
+            <ModalProvider stack={modalStack}>
+              <NotificationsProvider>
+                <RootNavigator />
+              </NotificationsProvider>
+            </ModalProvider>
           </NativeBaseProvider>
         </SafeAreaProvider>
       </GestureHandlerRootView>
