@@ -91,10 +91,26 @@ export const en = {
       'Please enable notification to receive notification from us',
   },
 
-  settings: {
-    title: 'Settings',
+  account: {
+    title: 'Account',
     editProfile: 'Edit Profile',
-    changePassword: 'Change Password',
+    logout: 'Logout',
+    homeManagement: {
+      title: 'Home Management',
+      create: 'Create Home',
+      update: 'Update Home',
+    },
+    settings: {
+      title: 'Settings',
+      changeLanguage: 'Change Language',
+      changeTheme: 'Change Theme',
+      changePassword: 'Change Password',
+    },
+    faqAndSupport: {
+      title: 'FAQ & Support',
+      faq: 'FAQ',
+      support: 'Support',
+    },
   },
 
   dayOfWeek: {

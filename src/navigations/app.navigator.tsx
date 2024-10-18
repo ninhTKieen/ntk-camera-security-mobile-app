@@ -90,7 +90,7 @@ const AppNavigator = (): JSX.Element => {
             />
           ),
           tabBarActiveTintColor: color,
-          tabBarLabel: t(i18nKeys.bottomTab.setting),
+          tabBarLabel: t(i18nKeys.account.title),
         }}
         component={AccountNavigator}
       />

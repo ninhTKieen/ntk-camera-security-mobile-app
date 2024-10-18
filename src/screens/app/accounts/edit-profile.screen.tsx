@@ -66,7 +66,7 @@ const EditProfileScreen = () => {
     onSuccess: () => {
       authQuery.refetch();
       toastMessage({
-        type: 'error',
+        type: 'success',
         title: t(i18nKeys.common.success),
       });
       setLoading(false);
@@ -86,7 +86,7 @@ const EditProfileScreen = () => {
   };
 
   return (
-    <SubLayout title={t(i18nKeys.settings.editProfile)}>
+    <SubLayout title={t(i18nKeys.account.editProfile)}>
       <Box bg="white" flex={1}>
         <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
           <TouchableOpacity

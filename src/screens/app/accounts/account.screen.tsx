@@ -10,7 +10,7 @@ import notificationServices from '@src/features/notifications/notification.servi
 import { useAuth } from '@src/hooks/use-auth.hook';
 import { useMutation } from '@tanstack/react-query';
 import { Avatar, Box, Button, Pressable, ScrollView, Text } from 'native-base';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
@@ -45,6 +45,33 @@ const AccountScreen = () => {
       logout();
     },
   });
+
+  const UTILIES_LIST = useMemo(
+    () => [
+      {
+        id: 1,
+        name: t(i18nKeys.account.homeManagement.title),
+        onPress: () => {
+          navigation.navigate('HomeManagement');
+        },
+      },
+      {
+        id: 2,
+        name: t(i18nKeys.account.settings.title),
+        onPress: () => {
+          navigation.navigate('Settings');
+        },
+      },
+      {
+        id: 3,
+        name: t(i18nKeys.account.faqAndSupport.title),
+        onPress: () => {
+          navigation.navigate('FaQAndSupport');
+        },
+      },
+    ],
+    [navigation, t],
+  );
 
   return (
     <MainLayout title={t(i18nKeys.bottomTab.setting)}>
@@ -88,6 +115,37 @@ const AccountScreen = () => {
               </Box>
             )}
           </Pressable>
+
+          <Box bg="white" shadow="3" p={3} m={3} mt={4} borderRadius={10}>
+            {UTILIES_LIST.map((item) => (
+              <Pressable
+                onPress={() => {
+                  item.onPress();
+                }}
+              >
+                {({ isPressed }) => (
+                  <Box
+                    p={2}
+                    bg={isPressed ? 'primary.600' : 'white'}
+                    borderRadius={15}
+                    flexDir="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Text fontSize="xl" color="gray.700" fontWeight="medium">
+                      {item.name}
+                    </Text>
+
+                    <IconGeneral
+                      type="MaterialCommunityIcons"
+                      name="chevron-right"
+                      size={25}
+                    />
+                  </Box>
+                )}
+              </Pressable>
+            ))}
+          </Box>
         </ScrollView>
 
         <Box

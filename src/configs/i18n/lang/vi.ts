@@ -91,10 +91,26 @@ export const vi = {
     disabledMessage: 'Vui lòng bật thông báo để nhận thông báo từ chúng tôi',
   },
 
-  settings: {
-    title: 'Cài đặt',
+  account: {
+    title: 'Tài khoản',
     editProfile: 'Chỉnh sửa hồ sơ',
-    changePassword: 'Đổi mật khẩu',
+    logout: 'Đăng xuất',
+    homeManagement: {
+      title: 'Quản lý nhà',
+      create: 'Tạo nhà',
+      update: 'Cập nhật nhà',
+    },
+    settings: {
+      title: 'Cài đặt',
+      changeLanguage: 'Thay đổi ngôn ngữ',
+      changeTheme: 'Thay đổi chủ đề',
+      changePassword: 'Thay đổi mật khẩu',
+    },
+    faqAndSupport: {
+      title: 'FAQ và Hỗ trợ',
+      faq: 'FAQ',
+      support: 'Hỗ trợ',
+    },
   },
 
   dayOfWeek: {
