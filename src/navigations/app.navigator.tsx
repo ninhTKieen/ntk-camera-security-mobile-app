@@ -2,8 +2,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconGeneral from '@src/components/icon-general';
 import { i18nKeys } from '@src/configs/i18n';
 import { TAppStackParamList } from '@src/configs/routes/app.route';
+import AccountNavigator from '@src/screens/app/accounts';
 import HomeScreen from '@src/screens/app/home/home.screen';
-import SettingNavigator from '@src/screens/app/settings';
 import { useTheme } from 'native-base';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -21,55 +21,44 @@ const AppNavigator = (): JSX.Element => {
         headerShown: false,
         tabBarActiveTintColor: color,
         headerTintColor: color,
+        tabBarStyle: {
+          paddingBottom: 10,
+          paddingTop: 10,
+          height: 70,
+        },
       }}
     >
       <Tab.Screen
         name="Home"
         options={{
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <IconGeneral
-                color={color}
-                type="Ionicons"
-                size={28}
-                name="home"
-              />
-            ) : (
-              <IconGeneral
-                color={color}
-                type="Ionicons"
-                size={28}
-                name="home-outline"
-              />
-            ),
+          tabBarIcon: ({ focused }) => (
+            <IconGeneral
+              color={color}
+              type="MaterialCommunityIcons"
+              size={28}
+              name={focused ? 'home' : 'home-outline'}
+            />
+          ),
           tabBarActiveTintColor: color,
           tabBarLabel: t(i18nKeys.bottomTab.home),
         }}
         component={HomeScreen}
       />
       <Tab.Screen
-        name="Settings"
+        name="AccountNavigator"
         options={{
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <IconGeneral
-                color={color}
-                type="Ionicons"
-                size={28}
-                name="settings"
-              />
-            ) : (
-              <IconGeneral
-                color={color}
-                type="Ionicons"
-                size={28}
-                name="settings-outline"
-              />
-            ),
+          tabBarIcon: ({ focused }) => (
+            <IconGeneral
+              color={color}
+              type="MaterialCommunityIcons"
+              size={28}
+              name={focused ? 'account-circle' : 'account-circle-outline'}
+            />
+          ),
           tabBarActiveTintColor: color,
           tabBarLabel: t(i18nKeys.bottomTab.setting),
         }}
-        component={SettingNavigator}
+        component={AccountNavigator}
       />
     </Tab.Navigator>
   );

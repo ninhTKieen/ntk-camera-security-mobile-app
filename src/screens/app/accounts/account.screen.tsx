@@ -3,7 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import IconGeneral from '@src/components/icon-general';
 import MainLayout from '@src/components/main-layout';
 import { i18nKeys } from '@src/configs/i18n';
-import { TSettingStackParamList } from '@src/configs/routes/setting.route';
+import { TAccountStackParamList } from '@src/configs/routes/setting.route';
 import authService from '@src/features/auth/auth.service';
 import { useAuthStore } from '@src/features/auth/auth.store';
 import notificationServices from '@src/features/notifications/notification.service';
@@ -15,14 +15,12 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
-const MainSettingsScreen = () => {
+const AccountScreen = () => {
   const { t } = useTranslation();
   const { authQuery } = useAuth();
   const { logout } = useAuthStore();
   const navigation =
-    useNavigation<
-      StackNavigationProp<TSettingStackParamList, 'MainSettings'>
-    >();
+    useNavigation<StackNavigationProp<TAccountStackParamList, 'Accounts'>>();
 
   const deleteFcmToken = async () => {
     try {
@@ -117,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainSettingsScreen;
+export default AccountScreen;

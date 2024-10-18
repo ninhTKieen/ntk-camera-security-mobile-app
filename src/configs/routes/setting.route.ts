@@ -1,4 +1,4 @@
-export type TSettingStackParamList = {
-  MainSettings: undefined;
+export type TAccountStackParamList = {
+  Accounts: undefined;
   EditProfile: undefined;
 };

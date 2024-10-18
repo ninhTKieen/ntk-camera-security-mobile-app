@@ -20,6 +20,7 @@ export const useApp = () => {
       params: {
         title,
         description,
+        hideCloseButton: true,
         ...params,
       },
     });

@@ -6,6 +6,7 @@ import { EGender, IUpdateUser } from '@src/features/auth/auth.model';
 import authService from '@src/features/auth/auth.service';
 import { useAppStore } from '@src/features/common/app.store';
 import { TLocalImgProps } from '@src/features/common/common.model';
+import { useApp } from '@src/hooks/use-app.hook';
 import { useAuth } from '@src/hooks/use-auth.hook';
 import { useMutation } from '@tanstack/react-query';
 import { Avatar, Box, Button, Input, Radio, Stack, Text } from 'native-base';
@@ -18,6 +19,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 const EditProfileScreen = () => {
   const { t } = useTranslation();
   const { authQuery } = useAuth();
+  const { toastMessage } = useApp();
   const { watch, setValue, handleSubmit } = useForm<IUpdateUser>({
     defaultValues: {
       name: authQuery.data?.name,
@@ -63,20 +65,18 @@ const EditProfileScreen = () => {
     },
     onSuccess: () => {
       authQuery.refetch();
-      // Toast.show({
-      //   text1: t(i18nKeys.common.success),
-      //   type: 'success',
-      //   position: 'top',
-      // });
+      toastMessage({
+        type: 'error',
+        title: t(i18nKeys.common.success),
+      });
       setLoading(false);
     },
     onError: (error) => {
       console.log('[UPDATE USER] Error', error);
-      // Toast.show({
-      //   text1: t(i18nKeys.common.error),
-      //   type: 'error',
-      //   position: 'top',
-      // });
+      toastMessage({
+        type: 'error',
+        title: t(i18nKeys.common.error),
+      });
       setLoading(false);
     },
   });
