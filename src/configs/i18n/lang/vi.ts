@@ -2,6 +2,9 @@ export const vi = {
   bottomTab: {
     home: 'Trang chủ',
     setting: 'Cài đặt',
+    event: 'Sự kiện',
+    notifications: 'Thông báo',
+    dashboard: 'Dashboard',
   },
 
   auth: {

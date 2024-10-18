@@ -3,7 +3,9 @@ import IconGeneral from '@src/components/icon-general';
 import { i18nKeys } from '@src/configs/i18n';
 import { TAppStackParamList } from '@src/configs/routes/app.route';
 import AccountNavigator from '@src/screens/app/accounts';
+import EventScreen from '@src/screens/app/events/event.screen';
 import HomeScreen from '@src/screens/app/home/home.screen';
+import DashboardScreen from '@src/screens/dashboard/dashboard.screen';
 import { useTheme } from 'native-base';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -43,6 +45,38 @@ const AppNavigator = (): JSX.Element => {
           tabBarLabel: t(i18nKeys.bottomTab.home),
         }}
         component={HomeScreen}
+      />
+      <Tab.Screen
+        name="Dashboard"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <IconGeneral
+              color={color}
+              type="MaterialCommunityIcons"
+              size={28}
+              name={focused ? 'view-dashboard' : 'view-dashboard-outline'}
+            />
+          ),
+          tabBarActiveTintColor: color,
+          tabBarLabel: t(i18nKeys.bottomTab.dashboard),
+        }}
+        component={DashboardScreen}
+      />
+      <Tab.Screen
+        name="EventNavigator"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <IconGeneral
+              color={color}
+              type="MaterialCommunityIcons"
+              size={28}
+              name={focused ? 'clipboard-alert' : 'clipboard-alert-outline'}
+            />
+          ),
+          tabBarActiveTintColor: color,
+          tabBarLabel: t(i18nKeys.bottomTab.event),
+        }}
+        component={EventScreen}
       />
       <Tab.Screen
         name="AccountNavigator"

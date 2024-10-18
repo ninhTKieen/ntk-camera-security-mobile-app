@@ -5,5 +5,8 @@ export type TRootStackParamList = {
 
 export type TAppStackParamList = {
   Home: undefined;
+  Dashboard: undefined;
   AccountNavigator: undefined;
+  EventNavigator: undefined;
+  NotificationNavigator: undefined;
 };

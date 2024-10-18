@@ -2,6 +2,9 @@ export const en = {
   bottomTab: {
     home: 'Home',
     setting: 'Setting',
+    event: 'Event(s)',
+    notifications: 'Notifications',
+    dashboard: 'Dashboard',
   },
 
   auth: {
