@@ -125,4 +125,10 @@ export const en = {
       6: 'Sat',
     },
   },
+
+  estates: {
+    owner: 'Owner',
+    admin: 'Admin',
+    normalUser: 'User',
+  },
 };

@@ -3,7 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import IconGeneral from '@src/components/icon-general';
 import MainLayout from '@src/components/main-layout';
 import { i18nKeys } from '@src/configs/i18n';
-import { TAccountStackParamList } from '@src/configs/routes/setting.route';
+import { TAccountStackParamList } from '@src/configs/routes/account.route';
 import authService from '@src/features/auth/auth.service';
 import { useAuthStore } from '@src/features/auth/auth.store';
 import notificationServices from '@src/features/notifications/notification.service';
@@ -52,7 +52,7 @@ const AccountScreen = () => {
         id: 1,
         name: t(i18nKeys.account.homeManagement.title),
         onPress: () => {
-          navigation.navigate('HomeManagement');
+          navigation.navigate('HomeManagementNavigator');
         },
       },
       {

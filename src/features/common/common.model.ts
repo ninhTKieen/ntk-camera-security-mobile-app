@@ -36,3 +36,20 @@ export type TUploadImageResult = {
   height: number;
   format: string;
 };
+
+export type TFullAudited = {
+  createdAt: string;
+  createById?: number;
+  updatedAt?: string;
+  updatedById?: number;
+  deletedAt?: string;
+  deletedById?: number;
+};
+
+export type TParamsGetList = {
+  page?: number;
+  limit?: number;
+  filter?: string;
+  sort?: string;
+  order?: 'ASC' | 'DESC';
+};

@@ -125,4 +125,10 @@ export const vi = {
       6: 'T7',
     },
   },
+
+  estates: {
+    owner: 'Chủ nhà',
+    admin: 'Quản trị viên',
+    normalUser: 'Người dùng',
+  },
 };

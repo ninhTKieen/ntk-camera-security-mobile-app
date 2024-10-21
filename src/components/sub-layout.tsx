@@ -34,6 +34,12 @@ const SubLayout = (props: TSubLayoutProps) => {
             name="chevron-back"
             size={25}
             onPress={() => navigation.goBack()}
+            style={{
+              position: 'absolute',
+              left: 10,
+              zIndex: 999,
+              padding: 5,
+            }}
           />
         ) : (
           <Box />
