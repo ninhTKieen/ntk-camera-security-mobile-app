@@ -11,7 +11,13 @@ import {
 } from 'react-native-notificated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 60 * 24,
+    },
+  },
+});
 
 const { NotificationsProvider } = createNotifications({
   animationConfig: ZoomInDownZoomOutUp,
