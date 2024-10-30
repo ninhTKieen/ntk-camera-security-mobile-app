@@ -122,6 +122,7 @@ const AccountScreen = () => {
                 onPress={() => {
                   item.onPress();
                 }}
+                key={item.id}
               >
                 {({ isPressed }) => (
                   <Box

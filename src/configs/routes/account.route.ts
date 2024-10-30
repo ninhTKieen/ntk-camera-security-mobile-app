@@ -10,4 +10,8 @@ export type THomeManagementStackParamList = {
   HomeList: undefined;
   CreateHome: undefined;
   UpdateHome: { homeId: string };
+  HomeDetail: {
+    homeId: number;
+    homeName: string;
+  };
 };
