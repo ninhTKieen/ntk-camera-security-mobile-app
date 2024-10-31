@@ -1,23 +1,31 @@
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import IconGeneral from '@src/components/icon-general';
 import SubLayout from '@src/components/sub-layout';
 import { i18nKeys } from '@src/configs/i18n';
+import { THomeManagementStackParamList } from '@src/configs/routes/account.route';
 import {
   EEstateRole,
   TGetEstateListResponse,
 } from '@src/features/estates/estate.model';
 import estateService from '@src/features/estates/estate.service';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { Box, Pressable, Text } from 'native-base';
+import { Box, Pressable, Text, useTheme } from 'native-base';
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList } from 'react-native';
 
 const HomeListScreen = () => {
+  const navigation =
+    useNavigation<
+      StackNavigationProp<THomeManagementStackParamList, 'HomeList'>
+    >();
   const { t } = useTranslation();
+  const { colors } = useTheme();
 
   const estatesListQuery = useInfiniteQuery({
     queryKey: ['estates/getEstates'],
-    queryFn: ({ pageParam = 1 }) =>
+    queryFn: ({ pageParam }) =>
       estateService.getList({
         page: pageParam,
         limit: 10,
@@ -60,7 +68,14 @@ const HomeListScreen = () => {
 
   const renderItem = ({ item }: { item: TGetEstateListResponse }) => {
     return (
-      <Pressable>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('HomeDetail', {
+            homeId: item.id,
+            homeName: item.name,
+          });
+        }}
+      >
         <Box
           p={4}
           m={2}
@@ -98,6 +113,31 @@ const HomeListScreen = () => {
           keyExtractor={(item) => item.name + item.id}
           renderItem={renderItem}
         />
+
+        <Pressable
+          position="absolute"
+          right={5}
+          bottom={5}
+          bgColor={colors.primary[500]}
+          borderRadius="full"
+          w={'12'}
+          h={'12'}
+          alignItems="center"
+          justifyContent="center"
+          onPress={() => {
+            navigation.navigate('CreateHome');
+          }}
+        >
+          <IconGeneral
+            type="MaterialCommunityIcons"
+            name="plus"
+            size={20}
+            color={colors.white}
+            onPress={() => {
+              navigation.navigate('CreateHome');
+            }}
+          />
+        </Pressable>
       </Box>
     </SubLayout>
   );

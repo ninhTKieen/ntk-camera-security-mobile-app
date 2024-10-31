@@ -28,12 +28,12 @@ class HttpUtil {
 
   constructor() {
     this.http = axios.create({
-      baseURL: API_ENDPOINT,
+      baseURL: 'http://192.168.6.227:4001',
       timeout: 30000,
     });
 
     this.httpUploadImg = axios.create({
-      baseURL: API_ENDPOINT,
+      baseURL: 'http://192.168.6.227:4001',
       timeout: 30000,
     });
 

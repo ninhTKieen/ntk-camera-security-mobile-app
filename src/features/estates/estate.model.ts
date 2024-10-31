@@ -30,20 +30,22 @@ export type TGetEstateListResponse = {
   role: EEstateRole;
 } & TFullAudited;
 
-export type TGetDetailEstate = TGetEstateListResponse & {
-  members: {
+export type TEstateMember = {
+  id: number;
+  role: EEstateRole;
+  nickname?: string;
+  user: {
     id: number;
-    role: string;
-    nickname?: string;
-    user: {
-      id: number;
-      name: string;
-      email: string;
-      imageUrl?: string;
-      gender?: EGender;
-      dateOfBirth?: string;
-    };
-  }[];
+    name: string;
+    email: string;
+    imageUrl?: string;
+    gender?: EGender;
+    dateOfBirth?: string;
+  };
+};
+
+export type TGetDetailEstate = TGetEstateListResponse & {
+  members: TEstateMember[];
   areas: (TFullAudited & {
     id: number;
     name: string;
@@ -60,4 +62,15 @@ export type TGetDetailEstate = TGetEstateListResponse & {
     brand?: string;
     mac?: string;
   })[];
+};
+
+export type TCreateEstate = {
+  name: string;
+  description?: string;
+  type: EEstateType;
+  address?: string;
+  long?: number;
+  lat?: number;
+  imageUrls?: string[];
+  imageUrlIds?: string[];
 };
