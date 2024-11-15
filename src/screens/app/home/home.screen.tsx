@@ -1,28 +1,95 @@
-import MainLayout from '@src/components/main-layout';
+import IconGeneral from '@src/components/icon-general';
+import { HOME_ID_KEY } from '@src/configs/constant';
 import { i18nKeys } from '@src/configs/i18n';
-import { Box, Text } from 'native-base';
-import React from 'react';
+import { storage } from '@src/configs/mmkv.storage';
+import { TGetEstateListResponse } from '@src/features/estates/estate.model';
+import estateService from '@src/features/estates/estate.service';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { Box, Pressable, Text, useDisclose } from 'native-base';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
+import FastImage from 'react-native-fast-image';
+
+import ChooseHomeModal from './components/choose-home-modal';
 
 const HomeScreen = () => {
   const { t } = useTranslation();
+  const { isOpen, onOpen, onClose } = useDisclose();
+
+  const homeId = Number(storage.getString(HOME_ID_KEY));
+
+  const estatesListQuery = useInfiniteQuery({
+    queryKey: ['estates/getEstates'],
+    queryFn: ({ pageParam }) =>
+      estateService.getList({
+        page: pageParam,
+        limit: 10,
+      }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.items.length < 10) {
+        return undefined;
+      }
+      return allPages.length * 10;
+    },
+  });
+
+  const paginatedData = useMemo(() => {
+    const data: TGetEstateListResponse[] = [];
+    estatesListQuery.data?.pages.forEach((page) => {
+      data.push(...page.items);
+    });
+    return data;
+  }, [estatesListQuery.data?.pages]);
+
+  const homeDetailQuery = useQuery({
+    queryKey: ['estates/getEstate', { estateId: homeId }],
+    queryFn: () => estateService.getDetail(homeId),
+    enabled: !!homeId,
+  });
 
   return (
-    <MainLayout title={t(i18nKeys.bottomTab.home)}>
-      <Box style={styles.container}>
-        <Text>{t(i18nKeys.bottomTab.home)}</Text>
+    <Box h="full" flex={1}>
+      <Box
+        flexDir="row"
+        p={2}
+        bgColor="white"
+        h="16"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Pressable flexDir="row" alignItems="center" onPress={onOpen}>
+          <Text fontSize="2xl" fontWeight="bold" mr={2}>
+            {homeDetailQuery.data?.name || t(i18nKeys.bottomTab.home)}
+          </Text>
+          <IconGeneral
+            type="MaterialCommunityIcons"
+            name="chevron-down"
+            size={24}
+          />
+        </Pressable>
       </Box>
-    </MainLayout>
+
+      {homeDetailQuery.data && (
+        <Box>
+          <FastImage
+            source={{
+              uri: homeDetailQuery.data?.imageUrls?.[0],
+            }}
+            style={{ width: '100%', height: 200 }}
+            defaultSource={require('@src/assets/images/not-found.png')}
+            resizeMode={FastImage.resizeMode.stretch}
+          />
+        </Box>
+      )}
+
+      <ChooseHomeModal
+        isOpen={isOpen}
+        onClose={onClose}
+        paginatedData={paginatedData}
+      />
+    </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default HomeScreen;

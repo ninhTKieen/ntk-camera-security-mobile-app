@@ -9,3 +9,5 @@ export const ESTATE_MAP = new Map([
   [EEstateType.HOSPITAL, 'estates.type.hospital'],
   [EEstateType.OTHER, 'estates.type.other'],
 ]);
+
+export const HOME_ID_KEY = 'HOME_ID';
