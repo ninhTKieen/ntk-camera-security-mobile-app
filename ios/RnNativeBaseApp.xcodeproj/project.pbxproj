@@ -35,6 +35,7 @@
 		9AF07EC42C3E7DB400FD40B1 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF07EB02C3E7DB400FD40B1 /* Octicons.ttf */; };
 		9AF07EC52C3E7DB400FD40B1 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF07EB12C3E7DB400FD40B1 /* SimpleLineIcons.ttf */; };
 		9AF07EC62C3E7DB400FD40B1 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF07EB22C3E7DB400FD40B1 /* Zocial.ttf */; };
+		9AF649CB2CE7204200680806 /* RTSPVideoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF649CA2CE7204200680806 /* RTSPVideoModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,8 @@
 		9AF07EB02C3E7DB400FD40B1 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		9AF07EB12C3E7DB400FD40B1 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		9AF07EB22C3E7DB400FD40B1 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		9AF649C72CE71AFC00680806 /* RTSPVideoModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTSPVideoModule.h; sourceTree = "<group>"; };
+		9AF649CA2CE7204200680806 /* RTSPVideoModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTSPVideoModule.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F97303229B3BB843F7786DDA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = RnNativeBaseApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +144,8 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 				F97303229B3BB843F7786DDA /* PrivacyInfo.xcprivacy */,
+				9AF649C72CE71AFC00680806 /* RTSPVideoModule.h */,
+				9AF649CA2CE7204200680806 /* RTSPVideoModule.m */,
 			);
 			name = RnNativeBaseApp;
 			sourceTree = "<group>";
@@ -283,7 +288,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1600;
 					};
 				};
 			};
@@ -505,6 +510,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				9AF649CB2CE7204200680806 /* RTSPVideoModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +600,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rnnativebase;
 				PRODUCT_NAME = RnNativeBaseApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "RnNativeBaseApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -623,6 +630,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rnnativebase;
 				PRODUCT_NAME = RnNativeBaseApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "RnNativeBaseApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -701,7 +709,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -773,7 +784,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
