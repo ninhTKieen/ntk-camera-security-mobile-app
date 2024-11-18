@@ -16,6 +16,8 @@
 		7699B88040F8A987B510C191 /* libPods-RnNativeBaseApp-RnNativeBaseAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-RnNativeBaseApp-RnNativeBaseAppTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9A70FB4A2C4508B600155729 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A70FB492C4508B600155729 /* GoogleService-Info.plist */; };
+		9A9A0B782CE84C6F00D440D8 /* RCTVLCPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A0B772CE84C6F00D440D8 /* RCTVLCPlayer.m */; };
+		9A9A0B7B2CE859B300D440D8 /* RCTVLCPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9A0B7A2CE859B300D440D8 /* RCTVLCPlayerManager.m */; };
 		9AF07EB42C3E7DB400FD40B1 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF07EA02C3E7DB400FD40B1 /* AntDesign.ttf */; };
 		9AF07EB52C3E7DB400FD40B1 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF07EA12C3E7DB400FD40B1 /* Entypo.ttf */; };
 		9AF07EB62C3E7DB400FD40B1 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF07EA22C3E7DB400FD40B1 /* EvilIcons.ttf */; };
@@ -35,6 +37,7 @@
 		9AF07EC42C3E7DB400FD40B1 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF07EB02C3E7DB400FD40B1 /* Octicons.ttf */; };
 		9AF07EC52C3E7DB400FD40B1 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF07EB12C3E7DB400FD40B1 /* SimpleLineIcons.ttf */; };
 		9AF07EC62C3E7DB400FD40B1 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF07EB22C3E7DB400FD40B1 /* Zocial.ttf */; };
+		9AF649CB2CE7204200680806 /* RTSPVideoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AF649CA2CE7204200680806 /* RTSPVideoModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,10 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-RnNativeBaseApp-RnNativeBaseAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnNativeBaseApp-RnNativeBaseAppTests.release.xcconfig"; path = "Target Support Files/Pods-RnNativeBaseApp-RnNativeBaseAppTests/Pods-RnNativeBaseApp-RnNativeBaseAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		9A70FB492C4508B600155729 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A70FB4B2C45173700155729 /* RnNativeBaseApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RnNativeBaseApp.entitlements; path = RnNativeBaseApp/RnNativeBaseApp.entitlements; sourceTree = "<group>"; };
+		9A9A0B762CE84BCC00D440D8 /* RCTVLCPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTVLCPlayer.h; sourceTree = "<group>"; };
+		9A9A0B772CE84C6F00D440D8 /* RCTVLCPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTVLCPlayer.m; sourceTree = "<group>"; };
+		9A9A0B792CE8599100D440D8 /* RCTVLCPlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTVLCPlayerManager.h; sourceTree = "<group>"; };
+		9A9A0B7A2CE859B300D440D8 /* RCTVLCPlayerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTVLCPlayerManager.m; sourceTree = "<group>"; };
 		9AF07EA02C3E7DB400FD40B1 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
 		9AF07EA12C3E7DB400FD40B1 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		9AF07EA22C3E7DB400FD40B1 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
@@ -86,6 +93,8 @@
 		9AF07EB02C3E7DB400FD40B1 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		9AF07EB12C3E7DB400FD40B1 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
 		9AF07EB22C3E7DB400FD40B1 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		9AF649C72CE71AFC00680806 /* RTSPVideoModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTSPVideoModule.h; sourceTree = "<group>"; };
+		9AF649CA2CE7204200680806 /* RTSPVideoModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTSPVideoModule.m; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F97303229B3BB843F7786DDA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = RnNativeBaseApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +150,12 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
 				F97303229B3BB843F7786DDA /* PrivacyInfo.xcprivacy */,
+				9AF649C72CE71AFC00680806 /* RTSPVideoModule.h */,
+				9AF649CA2CE7204200680806 /* RTSPVideoModule.m */,
+				9A9A0B762CE84BCC00D440D8 /* RCTVLCPlayer.h */,
+				9A9A0B772CE84C6F00D440D8 /* RCTVLCPlayer.m */,
+				9A9A0B792CE8599100D440D8 /* RCTVLCPlayerManager.h */,
+				9A9A0B7A2CE859B300D440D8 /* RCTVLCPlayerManager.m */,
 			);
 			name = RnNativeBaseApp;
 			sourceTree = "<group>";
@@ -283,7 +298,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1600;
 					};
 				};
 			};
@@ -503,8 +518,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A9A0B782CE84C6F00D440D8 /* RCTVLCPlayer.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				9A9A0B7B2CE859B300D440D8 /* RCTVLCPlayerManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				9AF649CB2CE7204200680806 /* RTSPVideoModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +612,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rnnativebase;
 				PRODUCT_NAME = RnNativeBaseApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "RnNativeBaseApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -623,6 +642,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rnnativebase;
 				PRODUCT_NAME = RnNativeBaseApp;
+				SWIFT_OBJC_BRIDGING_HEADER = "RnNativeBaseApp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
