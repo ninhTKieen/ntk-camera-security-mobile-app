@@ -148,5 +148,9 @@ export const en = {
       other: 'Other',
     },
     members: 'Members',
+    uploadImage: 'Upload Image',
+    createHomeSuccess: 'Create home successfully!',
+    createHomeError: 'Create home failed!',
+    empty: 'No home yet',
   },
 };

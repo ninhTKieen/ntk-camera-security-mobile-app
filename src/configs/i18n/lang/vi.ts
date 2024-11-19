@@ -148,5 +148,9 @@ export const vi = {
       other: 'Khác',
     },
     members: 'Thành viên',
+    uploadImage: 'Tải lên ảnh',
+    createHomeSuccess: 'Tạo nhà thành công!',
+    createHomeError: 'Tạo nhà thất bại!',
+    empty: 'Chưa có nhà',
   },
 };
