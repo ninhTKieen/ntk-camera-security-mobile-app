@@ -71,6 +71,6 @@ export type TCreateEstate = {
   address?: string;
   long?: number;
   lat?: number;
-  imageUrls?: string[];
+  imageUrls?: any[];
   imageUrlIds?: string[];
 };
