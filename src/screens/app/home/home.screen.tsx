@@ -2,7 +2,10 @@ import IconGeneral from '@src/components/icon-general';
 import { HOME_ID_KEY } from '@src/configs/constant';
 import { i18nKeys } from '@src/configs/i18n';
 import { storage } from '@src/configs/mmkv.storage';
-import { TGetEstateListResponse } from '@src/features/estates/estate.model';
+import {
+  EEstateRole,
+  TGetEstateListResponse,
+} from '@src/features/estates/estate.model';
 import estateService from '@src/features/estates/estate.service';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { Box, Pressable, Text, useDisclose } from 'native-base';
@@ -34,6 +37,12 @@ const HomeScreen = () => {
     },
   });
 
+  const homeDetailQuery = useQuery({
+    queryKey: ['estates/getEstate', { estateId: homeId }],
+    queryFn: () => estateService.getDetail(homeId),
+    enabled: !!homeId,
+  });
+
   const paginatedData = useMemo(() => {
     const data: TGetEstateListResponse[] = [];
     estatesListQuery.data?.pages.forEach((page) => {
@@ -42,11 +51,9 @@ const HomeScreen = () => {
     return data;
   }, [estatesListQuery.data?.pages]);
 
-  const homeDetailQuery = useQuery({
-    queryKey: ['estates/getEstate', { estateId: homeId }],
-    queryFn: () => estateService.getDetail(homeId),
-    enabled: !!homeId,
-  });
+  const canAddDevice = useMemo(() => {
+    return homeId && homeDetailQuery.data?.role !== EEstateRole.NORMAL_USER;
+  }, [homeId, homeDetailQuery.data]);
 
   return (
     <Box h="full" flex={1}>
@@ -68,6 +75,15 @@ const HomeScreen = () => {
             size={24}
           />
         </Pressable>
+
+        {canAddDevice ? (
+          <IconGeneral
+            type="MaterialCommunityIcons"
+            name="camera-plus"
+            size={24}
+            onPress={() => {}}
+          />
+        ) : null}
       </Box>
 
       {homeDetailQuery.data && (
