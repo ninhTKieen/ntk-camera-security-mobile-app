@@ -8,7 +8,7 @@ import authService from '@src/features/auth/auth.service';
 import { useAuthStore } from '@src/features/auth/auth.store';
 import notificationServices from '@src/features/notifications/notification.service';
 import { useAuth } from '@src/hooks/use-auth.hook';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Avatar, Box, Button, Pressable, ScrollView, Text } from 'native-base';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +16,7 @@ import { StyleSheet } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
 const AccountScreen = () => {
+  const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { authQuery } = useAuth();
   const { logout } = useAuthStore();
@@ -39,10 +40,12 @@ const AccountScreen = () => {
     onSuccess: () => {
       authService.logout();
       logout();
+      queryClient.resetQueries();
     },
     onError: () => {
       authService.logout();
       logout();
+      queryClient.resetQueries();
     },
   });
 
