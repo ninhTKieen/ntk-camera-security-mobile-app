@@ -1,4 +1,5 @@
 import IconGeneral from '@src/components/icon-general';
+import { SvgIcon } from '@src/components/svg-icons';
 import { HOME_ID_KEY } from '@src/configs/constant';
 import { i18nKeys } from '@src/configs/i18n';
 import { storage } from '@src/configs/mmkv.storage';
@@ -6,7 +7,7 @@ import {
   EEstateRole,
   TGetEstateListResponse,
 } from '@src/features/estates/estate.model';
-import { Actionsheet, Box, Text } from 'native-base';
+import { Actionsheet, Box, Text, useTheme } from 'native-base';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, ListRenderItem } from 'react-native';
@@ -15,6 +16,23 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   paginatedData: TGetEstateListResponse[];
+};
+
+const ListEmptyComponent = () => {
+  const { t } = useTranslation();
+  const { colors } = useTheme();
+
+  return (
+    <Box flex={1} alignItems="center" justifyContent="center">
+      <SvgIcon
+        name="house"
+        width={60}
+        height={60}
+        color={colors.primary[500]}
+      />
+      <Text mt={2}>{t(i18nKeys.estates.empty)}</Text>
+    </Box>
+  );
 };
 
 const ChooseHomeModal = ({ isOpen, onClose, paginatedData }: Props) => {
@@ -89,14 +107,15 @@ const ChooseHomeModal = ({ isOpen, onClose, paginatedData }: Props) => {
     <Actionsheet isOpen={isOpen} onClose={onClose}>
       <Actionsheet.Content>
         <Box w="full" h={60} px={4}>
-          <Text fontSize="16" fontWeight="bold" textAlign="center" py={4}>
-            {t(i18nKeys.account.homeManagement.title)}
+          <Text fontSize="16" fontWeight="bold" textAlign="center" py={2}>
+            {t(i18nKeys.estates.choose)}
           </Text>
         </Box>
         <FlatList
           data={paginatedData}
           keyExtractor={(item) => item.id.toString()}
           renderItem={renderItem}
+          ListEmptyComponent={<ListEmptyComponent />}
         />
       </Actionsheet.Content>
     </Actionsheet>

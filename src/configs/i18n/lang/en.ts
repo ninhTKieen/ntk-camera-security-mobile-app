@@ -152,5 +152,6 @@ export const en = {
     createHomeSuccess: 'Create home successfully!',
     createHomeError: 'Create home failed!',
     empty: 'No home yet',
+    choose: 'Choose Home',
   },
 };

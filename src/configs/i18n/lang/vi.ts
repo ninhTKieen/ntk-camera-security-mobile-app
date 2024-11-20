@@ -151,6 +151,7 @@ export const vi = {
     uploadImage: 'Tải lên ảnh',
     createHomeSuccess: 'Tạo nhà thành công!',
     createHomeError: 'Tạo nhà thất bại!',
-    empty: 'Chưa có nhà',
+    empty: 'Chưa có nhà nào',
+    choose: 'Chọn nhà',
   },
 };
