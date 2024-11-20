@@ -9,7 +9,7 @@ import { useCallback } from 'react';
 export const useAuth = () => {
   const { isAuth, currentUser, login, logout } = useAuthStore();
   const { setLoading } = useAppStore();
-  const isHasAccessToken = storage.getString(ACCESS_TOKEN_KEY);
+  const isHasAccessToken = Boolean(storage.getString(ACCESS_TOKEN_KEY));
 
   const getUserInfo = useCallback(async () => {
     try {
@@ -32,5 +32,5 @@ export const useAuth = () => {
     enabled: !!isHasAccessToken,
   });
 
-  return { authQuery, isAuth, currentUser };
+  return { authQuery, isAuth, currentUser, isHasAccessToken };
 };
