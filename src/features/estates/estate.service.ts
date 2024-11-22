@@ -9,6 +9,7 @@ import {
   TCreateEstate,
   TGetDetailEstate,
   TGetEstateListResponse,
+  TInviteMember,
 } from './estate.model';
 
 class EstateService {
@@ -54,6 +55,16 @@ class EstateService {
     const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
       method: 'POST',
       url: '/api/estates/create',
+      data,
+    });
+
+    return response.data;
+  }
+
+  async inviteMember(data: TInviteMember, id: number) {
+    const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
+      method: 'POST',
+      url: `/api/estates/${id}/invite-member`,
       data,
     });
 

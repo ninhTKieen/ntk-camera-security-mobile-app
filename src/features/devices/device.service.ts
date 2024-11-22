@@ -1,7 +1,7 @@
 import httpUtil from '@src/utils/http.util';
 
 import { IBaseHttpResponse } from '../common/common.model';
-import { TCreateDevice } from './device.model';
+import { TCreateDevice, TGetDetailEstateDevice } from './device.model';
 
 class DeviceService {
   async create(data: TCreateDevice) {
@@ -9,6 +9,17 @@ class DeviceService {
       method: 'POST',
       url: '/api/devices/create',
       data,
+    });
+
+    return response.data;
+  }
+
+  async getDetail(deviceId: number) {
+    const response = await httpUtil.request<
+      IBaseHttpResponse<TGetDetailEstateDevice>
+    >({
+      method: 'GET',
+      url: `/api/devices/${deviceId}`,
     });
 
     return response.data;
