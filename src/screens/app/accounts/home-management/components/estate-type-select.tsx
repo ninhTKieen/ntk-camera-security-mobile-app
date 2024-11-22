@@ -1,5 +1,6 @@
 import IconGeneral from '@src/components/icon-general';
 import { ESTATE_MAP } from '@src/configs/constant';
+import { i18nKeys } from '@src/configs/i18n';
 import { EEstateType } from '@src/features/estates/estate.model';
 import { Box, Select, Text } from 'native-base';
 import React from 'react';
@@ -28,8 +29,8 @@ export const EstateTypeSelect = ({
       <Select
         selectedValue={value}
         minWidth="200"
-        accessibilityLabel="Choose Service"
-        placeholder="Choose Service"
+        accessibilityLabel={t(i18nKeys.estates.type.placeholder)}
+        placeholder={t(i18nKeys.estates.type.placeholder)}
         _item={{
           borderRadius: 'xl',
         }}

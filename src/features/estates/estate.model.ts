@@ -17,6 +17,11 @@ export enum EEstateRole {
   NORMAL_USER = 'NORMAL_USER',
 }
 
+export enum EEstateMemberStatus {
+  JOINED = 'JOINED',
+  PENDING = 'PENDING',
+}
+
 export type TGetEstateListResponse = {
   id: number;
   name: string;
@@ -42,7 +47,20 @@ export type TEstateMember = {
     gender?: EGender;
     dateOfBirth?: string;
   };
+  status: EEstateMemberStatus;
 };
+
+export type TGetDetailEstateDevice = {
+  id: number;
+  name: string;
+  description?: string;
+  streamLink: string;
+  rtsp?: null;
+  model?: string;
+  serial?: string;
+  brand?: string;
+  mac?: string;
+} & TFullAudited;
 
 export type TGetDetailEstate = TGetEstateListResponse & {
   members: TEstateMember[];
@@ -51,17 +69,7 @@ export type TGetDetailEstate = TGetEstateListResponse & {
     name: string;
     description?: string;
   })[];
-  devices: (TFullAudited & {
-    id: number;
-    name: string;
-    description?: string;
-    ipCamera: string;
-    rtsp?: null;
-    model?: string;
-    serial?: string;
-    brand?: string;
-    mac?: string;
-  })[];
+  devices: TGetDetailEstateDevice[];
 };
 
 export type TCreateEstate = {
@@ -71,6 +79,12 @@ export type TCreateEstate = {
   address?: string;
   long?: number;
   lat?: number;
-  imageUrls?: string[];
+  imageUrls?: any[];
   imageUrlIds?: string[];
+};
+
+export type TInviteMember = {
+  username: string;
+  role: EEstateRole;
+  nickname?: string;
 };

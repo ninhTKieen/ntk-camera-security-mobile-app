@@ -4,7 +4,7 @@ export type TRootStackParamList = {
 };
 
 export type TAppStackParamList = {
-  Home: undefined;
+  HomeStack: undefined;
   Dashboard: undefined;
   AccountNavigator: undefined;
   EventNavigator: undefined;

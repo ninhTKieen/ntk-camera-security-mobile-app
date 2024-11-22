@@ -9,6 +9,7 @@ import {
   TCreateEstate,
   TGetDetailEstate,
   TGetEstateListResponse,
+  TInviteMember,
 } from './estate.model';
 
 class EstateService {
@@ -40,9 +41,30 @@ class EstateService {
   }
 
   async create(data: TCreateEstate) {
+    if (data?.imageUrls) {
+      const response = await httpUtil.uploadImage({
+        file: data.imageUrls[0],
+      });
+
+      data = {
+        ...data,
+        imageUrls: [response.data.imagePublicUrl],
+        imageUrlIds: [response.data.imagePublicId],
+      };
+    }
     const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
       method: 'POST',
       url: '/api/estates/create',
+      data,
+    });
+
+    return response.data;
+  }
+
+  async inviteMember(data: TInviteMember, id: number) {
+    const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
+      method: 'POST',
+      url: `/api/estates/${id}/invite-member`,
       data,
     });
 

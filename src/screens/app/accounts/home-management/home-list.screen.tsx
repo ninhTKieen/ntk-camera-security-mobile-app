@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import IconGeneral from '@src/components/icon-general';
 import SubLayout from '@src/components/sub-layout';
+import { SvgIcon } from '@src/components/svg-icons';
 import { i18nKeys } from '@src/configs/i18n';
 import { THomeManagementStackParamList } from '@src/configs/routes/account.route';
 import {
@@ -14,6 +15,23 @@ import { Box, Pressable, Text, useTheme } from 'native-base';
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList } from 'react-native';
+
+const ListEmptyComponent = () => {
+  const { t } = useTranslation();
+  const { colors } = useTheme();
+
+  return (
+    <Box flex={1} alignItems="center" justifyContent="center">
+      <SvgIcon
+        name="house"
+        width={60}
+        height={60}
+        color={colors.primary[500]}
+      />
+      <Text mt={2}>{t(i18nKeys.estates.empty)}</Text>
+    </Box>
+  );
+};
 
 const HomeListScreen = () => {
   const navigation =
@@ -112,6 +130,8 @@ const HomeListScreen = () => {
           data={paginatedData}
           keyExtractor={(item) => item.name + item.id}
           renderItem={renderItem}
+          ListEmptyComponent={ListEmptyComponent}
+          contentContainerStyle={{ flex: 1 }}
         />
 
         <Pressable
