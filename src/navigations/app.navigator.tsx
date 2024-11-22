@@ -5,7 +5,7 @@ import { TAppStackParamList } from '@src/configs/routes/app.route';
 import AccountNavigator from '@src/screens/app/accounts';
 import DashboardScreen from '@src/screens/app/dashboard/dashboard.screen';
 import EventScreen from '@src/screens/app/events/event.screen';
-import HomeScreen from '@src/screens/app/home/home.screen';
+import HomeStack from '@src/screens/app/home';
 import { useTheme } from 'native-base';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -31,7 +31,7 @@ const AppNavigator = (): JSX.Element => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="HomeStack"
         options={{
           tabBarIcon: ({ focused }) => (
             <IconGeneral
@@ -44,7 +44,7 @@ const AppNavigator = (): JSX.Element => {
           tabBarActiveTintColor: color,
           tabBarLabel: t(i18nKeys.bottomTab.home),
         }}
-        component={HomeScreen}
+        component={HomeStack}
       />
       <Tab.Screen
         name="Dashboard"

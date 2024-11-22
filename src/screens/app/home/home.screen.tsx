@@ -9,15 +9,17 @@ import {
 import estateService from '@src/features/estates/estate.service';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { Box, Pressable, Text, useDisclose } from 'native-base';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FastImage from 'react-native-fast-image';
 
 import ChooseHomeModal from './components/choose-home-modal';
+import CreateDeviceModal from './components/create-device-modal';
 
 const HomeScreen = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclose();
+  const [isCreateDeviceModalOpen, setIsCreateDeviceModalOpen] = useState(false);
 
   const homeId = Number(storage.getString(HOME_ID_KEY));
 
@@ -81,7 +83,9 @@ const HomeScreen = () => {
             type="MaterialCommunityIcons"
             name="camera-plus"
             size={24}
-            onPress={() => {}}
+            onPress={() => {
+              setIsCreateDeviceModalOpen(true);
+            }}
           />
         ) : null}
       </Box>
@@ -103,6 +107,11 @@ const HomeScreen = () => {
         isOpen={isOpen}
         onClose={onClose}
         paginatedData={paginatedData}
+      />
+
+      <CreateDeviceModal
+        isOpen={isCreateDeviceModalOpen}
+        onClose={() => setIsCreateDeviceModalOpen(false)}
       />
     </Box>
   );
