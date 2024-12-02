@@ -202,4 +202,18 @@ export const en = {
     addManual: 'Add Manual',
     scanAuto: 'Scan Auto',
   },
+
+  media: {
+    video: 'Video',
+    image: 'Image',
+    audio: 'Audio',
+    requestLibrary: 'Request library access',
+    requestLibraryToSaveImgMsg: 'To save images, please grant library access',
+    requestLibraryToSaveImgMsgSuccess: 'Library access granted',
+    requestLibraryToSaveImgMsgError: 'Cannot access library',
+    requestLibraryToSaveImgMsgErrorDesc:
+      'Please grant library access to save images',
+    goToSettings: 'Go to settings',
+    snapshot: 'Snapshot',
+  },
 };

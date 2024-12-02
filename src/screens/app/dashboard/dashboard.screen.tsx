@@ -1,4 +1,3 @@
-import { RTSPVideoComponent } from '@src/components/RTSPVideo';
 import MainLayout from '@src/components/main-layout';
 import { i18nKeys } from '@src/configs/i18n';
 import { Box } from 'native-base';
@@ -11,19 +10,7 @@ const DashboardScreen = () => {
 
   return (
     <MainLayout title={t(i18nKeys.bottomTab.dashboard)}>
-      <Box style={styles.container}>
-        <RTSPVideoComponent
-          style={{ width: '100%', height: 300 }}
-          source={{
-            uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-          }}
-          paused={false}
-          onError={(event) => {
-            console.log(event.nativeEvent.error);
-          }}
-          onLoad={() => console.log('Video loaded')}
-        />
-      </Box>
+      <Box style={styles.container} />
     </MainLayout>
   );
 };

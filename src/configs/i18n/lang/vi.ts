@@ -202,4 +202,19 @@ export const vi = {
     addManual: 'Thêm thủ công',
     scanAuto: 'Quét tự động',
   },
+
+  media: {
+    video: 'Video',
+    image: 'Ảnh',
+    audio: 'Âm thanh',
+    requestLibrary: 'Yêu cầu truy cập thư viện',
+    requestLibraryToSaveImgMsg:
+      'Để lưu ảnh, vui lòng cấp quyền truy cập thư viện',
+    requestLibraryToSaveImgMsgSuccess: 'Đã cấp quyền truy cập thư viện',
+    requestLibraryToSaveImgMsgError: 'Không thể truy cập thư viện',
+    requestLibraryToSaveImgMsgErrorDesc:
+      'Vui lòng cấp quyền truy cập thư viện để lưu ảnh',
+    goToSettings: 'Đi đến cài đặt',
+    snapshot: 'Chụp ảnh',
+  },
 };
