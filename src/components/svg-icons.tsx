@@ -1,4 +1,6 @@
 import UploadImgIcon from '@src/assets/icons/add-image-outlined.svg';
+import CameraIcon from '@src/assets/icons/camera.svg';
+import FaceRecognitionIcon from '@src/assets/icons/face-recognition.svg';
 import HouseHomeIcon from '@src/assets/icons/house.svg';
 import SecurityCameraIcon from '@src/assets/icons/security-camera.svg';
 import React from 'react';
@@ -8,6 +10,8 @@ export const iconsMap = {
   'upload-image': UploadImgIcon,
   house: HouseHomeIcon,
   'security-camera': SecurityCameraIcon,
+  'face-recognition': FaceRecognitionIcon,
+  camera: CameraIcon,
 };
 
 type TIconProps = {
