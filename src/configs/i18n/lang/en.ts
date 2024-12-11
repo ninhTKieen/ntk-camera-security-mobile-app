@@ -173,6 +173,9 @@ export const en = {
       joined: 'Joined',
       pending: 'Pending',
     },
+    settings: {
+      title: 'Home Settings',
+    },
   },
 
   devices: {
@@ -201,6 +204,9 @@ export const en = {
     createError: 'Create device failed!',
     addManual: 'Add Manual',
     scanAuto: 'Scan Auto',
+    addRecognition: 'Add Recognition',
+    addRecognitionSuccess: 'Add recognition successfully!',
+    addRecognitionError: 'Add recognition failed!',
   },
 
   media: {
@@ -215,5 +221,16 @@ export const en = {
       'Please grant library access to save images',
     goToSettings: 'Go to settings',
     snapshot: 'Snapshot',
+  },
+
+  recognition: {
+    add: 'Add Recognition',
+    addSuccess: 'Add recognition successfully!',
+    addError: 'Add recognition failed!',
+    name: 'Name',
+    namePlaceholder: 'Enter name',
+    description: 'Description',
+    descriptionPlaceholder: 'Enter description',
+    image: 'Select Image',
   },
 };

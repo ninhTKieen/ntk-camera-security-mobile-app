@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import IconGeneral from '@src/components/icon-general';
+import { SvgIcon } from '@src/components/svg-icons';
 import { i18nKeys } from '@src/configs/i18n';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
 import { Box, Divider, Pressable, Stack, Text, useTheme } from 'native-base';
@@ -31,10 +32,15 @@ const CreateDeviceModal = ({ isOpen, onClose }: TAddMemberModalProps) => {
     >
       <Box bg="white" p={2} width="5/6" alignSelf="center" borderRadius="2xl">
         <Text fontSize="16" fontWeight="bold" textAlign="center" py={2}>
-          {t(i18nKeys.devices.create)}
+          {t(i18nKeys.estates.settings.title)}
         </Text>
 
-        <Pressable alignSelf="center" onPress={() => {}}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate('AddRecognition');
+            onClose();
+          }}
+        >
           {({ isPressed }) => (
             <Stack
               style={{
@@ -46,50 +52,23 @@ const CreateDeviceModal = ({ isOpen, onClose }: TAddMemberModalProps) => {
               alignItems="center"
             >
               <Box bg="gray.200" borderRadius="full" p={2}>
-                <IconGeneral
-                  type="AntDesign"
-                  name="wifi"
-                  size={20}
+                <SvgIcon
+                  name="face-recognition"
                   color={theme.colors.primary[600]}
+                  width={20}
+                  height={20}
                 />
               </Box>
               <Text fontWeight="semibold" fontSize="lg" color="primary.600">
-                {t(i18nKeys.devices.scanAuto)}
+                {t(i18nKeys.devices.addRecognition)}
               </Text>
             </Stack>
           )}
         </Pressable>
 
-        <Stack space={2} alignItems="center" direction="row" m="2">
-          <Divider
-            alignSelf="center"
-            _light={{
-              bg: 'gray.200',
-            }}
-            _dark={{
-              bg: 'muted.50',
-            }}
-            flex={1}
-          />
-
-          <Text fontSize="16" fontWeight="400" textAlign="center">
-            {t(i18nKeys.common.or)}
-          </Text>
-
-          <Divider
-            alignSelf="center"
-            _light={{
-              bg: 'gray.200',
-            }}
-            _dark={{
-              bg: 'muted.50',
-            }}
-            flex={1}
-          />
-        </Stack>
+        <Divider />
 
         <Pressable
-          alignSelf="center"
           onPress={() => {
             navigation.navigate('AddDeviceManual');
             onClose();
@@ -114,7 +93,7 @@ const CreateDeviceModal = ({ isOpen, onClose }: TAddMemberModalProps) => {
                 />
               </Box>
               <Text fontWeight="semibold" fontSize="lg" color="primary.600">
-                {t(i18nKeys.devices.addManual)}
+                {t(i18nKeys.devices.create)}
               </Text>
             </Stack>
           )}

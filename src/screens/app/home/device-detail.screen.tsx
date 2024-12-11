@@ -4,10 +4,11 @@ import SubLayout from '@src/components/sub-layout';
 import { VLCPlayer } from '@src/components/vlc-player';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
 import deviceService from '@src/features/devices/device.service';
+import socketService from '@src/features/socket/socket.service';
 import { requestExternalStoragePermission } from '@src/utils/common.util';
 import { useQuery } from '@tanstack/react-query';
-import { Box, Button, Image, Spinner } from 'native-base';
-import React, { useRef, useState } from 'react';
+import { Box, Button, Spinner } from 'native-base';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, View } from 'react-native';
 import RNBUtil from 'react-native-blob-util';
@@ -28,13 +29,23 @@ const DeviceDetailScreen = () => {
     enabled: !!deviceId,
   });
 
-  const takeSnapshot = async () => {
+  const sendMessageToServer = (sendBase64: string) => {
+    socketService.send({
+      channel: 'device/send-base64',
+      data: sendBase64,
+    });
+  };
+
+  const takeSnapshot = useCallback(async () => {
     const snapshot = await makeImageFromView(ref);
 
     const encodedBase64 = snapshot?.encodeToBase64(ImageFormat.JPEG, 50);
 
+    encodedBase64 && sendMessageToServer(encodedBase64);
     setBase64(encodedBase64);
+  }, []);
 
+  const saveFileToLibrary = useCallback(async () => {
     const result = await requestExternalStoragePermission();
 
     if (result) {
@@ -45,19 +56,39 @@ const DeviceDetailScreen = () => {
 
       const fileName = `camera_snapshot_${new Date().getTime()}.png`;
 
-      try {
-        await RNBUtil.fs.writeFile(
-          `${pictureBasePath}/${fileName}`,
-          encodedBase64 as string,
-          'base64',
-        );
+      if (base64) {
+        try {
+          await RNBUtil.fs.writeFile(
+            `${pictureBasePath}/${fileName}`,
+            base64 as string,
+            'base64',
+          );
 
-        console.log('File written successfully');
-      } catch (error) {
-        console.error('Error writing file:', error);
+          console.log('File written successfully');
+        } catch (error) {
+          console.error('Error writing file:', error);
+        }
       }
     }
-  };
+  }, [base64]);
+
+  useEffect(() => {
+    socketService.received({
+      channel: 'device/alert',
+      callback: (data) => {
+        console.log('device/alert', data);
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    // set interval to take snapshot
+    const interval = setInterval(() => {
+      takeSnapshot();
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, [takeSnapshot]);
 
   return (
     <SubLayout title={deviceName}>
@@ -83,7 +114,6 @@ const DeviceDetailScreen = () => {
                   ],
                 }}
                 paused={false}
-                autoplay={true}
                 onVideoError={(event) => {
                   console.log('error', event);
                   setIsLoading(false);
@@ -95,22 +125,9 @@ const DeviceDetailScreen = () => {
               />
             </Box>
 
-            <Button mt={4} onPress={takeSnapshot}>
+            <Button mt={4} onPress={saveFileToLibrary}>
               {t('media.snapshot')}
             </Button>
-
-            {base64 && (
-              <Image
-                alt="snapshot"
-                source={{ uri: `data:image/png;base64,${base64}` }}
-                style={{
-                  marginTop: 20,
-                  width: '100%',
-                  aspectRatio: 16 / 9,
-                  alignSelf: 'center',
-                }}
-              />
-            )}
           </>
         )}
       </Box>

@@ -75,7 +75,7 @@ const HomeScreen = () => {
   const renderItem: ListRenderItem<TGetDetailEstateDevice> = ({ item }) => {
     return (
       <Pressable
-        flex={1}
+        style={{ flex: 1 }}
         onPress={() => {
           navigation.navigate('DeviceDetail', {
             deviceId: item.id,
@@ -143,12 +143,13 @@ const HomeScreen = () => {
       </Box>
 
       {homeDetailQuery.data && (
-        <Box p={4}>
+        <Box>
           <Box
             backgroundColor="white"
             shadow={2}
             borderRadius={15}
             overflow="hidden"
+            m={4}
           >
             <FastImage
               source={{
@@ -162,10 +163,14 @@ const HomeScreen = () => {
 
           <FlatList
             data={homeDetailQuery.data.devices}
-            paddingY={4}
+            p={4}
             renderItem={renderItem}
             numColumns={2}
-            columnWrapperStyle={{ gap: 20 }}
+            columnWrapperStyle={{
+              gap: 20,
+              justifyContent: 'space-between',
+            }}
+            ItemSeparatorComponent={() => <Box h={4} />}
           />
         </Box>
       )}

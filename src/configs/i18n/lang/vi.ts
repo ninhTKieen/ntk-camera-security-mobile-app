@@ -173,6 +173,9 @@ export const vi = {
       joined: 'Đã tham gia',
       pending: 'Đang chờ',
     },
+    settings: {
+      title: 'Cấu hình nhà',
+    },
   },
 
   devices: {
@@ -201,6 +204,9 @@ export const vi = {
     createError: 'Tạo thiết bị thất bại!',
     addManual: 'Thêm thủ công',
     scanAuto: 'Quét tự động',
+    addRecognition: 'Thêm nhận diện',
+    addRecognitionSuccess: 'Thêm nhận diện thành công!',
+    addRecognitionError: 'Thêm nhận diện thất bại!',
   },
 
   media: {
@@ -216,5 +222,16 @@ export const vi = {
       'Vui lòng cấp quyền truy cập thư viện để lưu ảnh',
     goToSettings: 'Đi đến cài đặt',
     snapshot: 'Chụp ảnh',
+  },
+
+  recognition: {
+    add: 'Thêm nhận diện',
+    addSuccess: 'Thêm nhận diện thành công!',
+    addError: 'Thêm nhận diện thất bại!',
+    name: 'Tên',
+    namePlaceholder: 'Nhập tên',
+    description: 'Mô tả',
+    descriptionPlaceholder: 'Nhập mô tả',
+    image: 'Chọn ảnh',
   },
 };

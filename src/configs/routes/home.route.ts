@@ -6,4 +6,5 @@ export type THomeStackParamList = {
     deviceId: number;
     deviceName: string;
   };
+  AddRecognition: undefined;
 };

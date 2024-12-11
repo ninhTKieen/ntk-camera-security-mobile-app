@@ -1,3 +1,4 @@
+import { API_ENDPOINT } from '@env';
 import { EEstateType } from '@src/features/estates/estate.model';
 
 export const ESTATE_MAP = new Map([
@@ -11,3 +12,4 @@ export const ESTATE_MAP = new Map([
 ]);
 
 export const HOME_ID_KEY = 'HOME_ID';
+export const APP_API_ENDPOINT = API_ENDPOINT;
