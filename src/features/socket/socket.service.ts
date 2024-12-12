@@ -1,4 +1,4 @@
-import { API_ENDPOINT } from '@env';
+import { APP_API_ENDPOINT } from '@src/configs/constant';
 import { getAccessToken } from '@src/utils/token.util';
 import { Socket, io } from 'socket.io-client';
 
@@ -7,7 +7,7 @@ class SocketService {
   private accessToken: string = getAccessToken() || '';
 
   constructor() {
-    this.socket = io(API_ENDPOINT, {
+    this.socket = io(APP_API_ENDPOINT, {
       extraHeaders: {
         access_token: this.accessToken,
       },
@@ -16,7 +16,7 @@ class SocketService {
 
   public start() {
     const token = getAccessToken();
-    this.socket = io(API_ENDPOINT, {
+    this.socket = io(APP_API_ENDPOINT, {
       extraHeaders: {
         access_token: token || '',
       },
