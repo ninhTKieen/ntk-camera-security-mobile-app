@@ -1,3 +1,5 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigation } from '@react-navigation/native';
 import { CommonOutlineInput } from '@src/components/common-outline-input';
 import PhotoModal from '@src/components/photo-modal';
 import SubLayout from '@src/components/sub-layout';
@@ -12,30 +14,58 @@ import { useApp } from '@src/hooks/use-app.hook';
 import { useMutation } from '@tanstack/react-query';
 import _ from 'lodash';
 import { Box, Button, Image, Pressable, useTheme } from 'native-base';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Dimensions, StyleSheet } from 'react-native';
+import * as yup from 'yup';
 
 const { width } = Dimensions.get('window');
+
+type TForm = TCreateRecognizedFace & {
+  localImg: TLocalImgProps;
+};
 
 const AddRecognitionScreen = () => {
   const { t } = useTranslation();
   const theme = useTheme();
   const [openPhotoModal, setOpenPhotoModal] = useState(false);
   const { toastMessage } = useApp();
+  const navigation = useNavigation();
 
   const homeId = Number(storage.getString(HOME_ID_KEY));
 
-  const { watch, setValue } = useForm<
-    TCreateRecognizedFace & {
-      imageUrl: TLocalImgProps;
-    }
-  >({
+  const schema = useMemo(
+    () =>
+      yup.object().shape({
+        name: yup.string().required(t(i18nKeys.validation.required)),
+        idCode: yup.string().required(t(i18nKeys.validation.required)),
+        localImg: yup
+          .object<TLocalImgProps>()
+          .shape({
+            uri: yup.string().required(t(i18nKeys.validation.required)),
+            name: yup.string().required(t(i18nKeys.validation.required)),
+            type: yup.string().required(t(i18nKeys.validation.required)),
+            size: yup.number().required(t(i18nKeys.validation.required)),
+            width: yup.number().required(t(i18nKeys.validation.required)),
+            height: yup.number().required(t(i18nKeys.validation.required)),
+          })
+          .required(t(i18nKeys.validation.required)),
+        estateId: yup.number().required(t(i18nKeys.validation.required)),
+      }),
+    [t],
+  );
+
+  const {
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TForm>({
     defaultValues: {
       estateId: homeId,
-      faceEncoding: 'Face Encoding',
     },
+    resolver: yupResolver(schema),
   });
 
   const setFormValue = (name: keyof TCreateRecognizedFace, value: string) => {
@@ -55,6 +85,7 @@ const AddRecognitionScreen = () => {
         title: t(i18nKeys.common.success),
         description: t(i18nKeys.recognition.addSuccess),
       });
+      navigation.goBack();
     },
     onError: () => {
       toastMessage({
@@ -66,18 +97,18 @@ const AddRecognitionScreen = () => {
   });
 
   const uploadImageMutation = useMutation({
-    mutationFn: (
-      data: TCreateRecognizedFace & {
-        imageUrl: TLocalImgProps;
-      },
-    ) => {
+    mutationFn: (data: TForm) => {
       return recognizedFaceService.uploadKnownFace(
-        data.imageUrl as any,
+        {
+          image: data.localImg as unknown as File,
+          idCode: data.idCode,
+        },
         data.estateId,
       );
     },
-    onSuccess: (_res, variables) => {
-      const rest = _.omit(variables, 'imageUrl');
+    onSuccess: (res, variables) => {
+      const rest = _.omit(variables, 'localImg');
+      rest.imageUrl = res.filePath;
       createFace.mutate(rest);
     },
     onError: () => {
@@ -89,11 +120,10 @@ const AddRecognitionScreen = () => {
     },
   });
 
-  const onSubmit = () => {
-    const data = watch();
-    if (data.imageUrl && data.name) {
-      const originalExtension = data.imageUrl.name.split('.').pop(); // Extract file extension
-      data.imageUrl.name = `${data.name}.${originalExtension}`; // Construct new name
+  const onSubmit = (data: TForm) => {
+    if (data.localImg && data.name) {
+      const originalExtension = data.localImg.name.split('.').pop();
+      data.localImg.name = `${data.idCode}.${originalExtension}`;
     }
 
     uploadImageMutation.mutate(data);
@@ -105,17 +135,19 @@ const AddRecognitionScreen = () => {
         <Pressable alignSelf="center" onPress={() => setOpenPhotoModal(true)}>
           {({ isPressed }) => (
             <>
-              {watch('imageUrl') ? (
-                <Image
-                  source={{ uri: watch('imageUrl').uri }}
-                  style={styles.faceRecognitionContainer}
-                  alt="face-recognition"
-                  borderRadius="full"
-                />
+              {watch('localImg') ? (
+                <Box style={styles.faceContainer} shadow={2}>
+                  <Image
+                    source={{ uri: watch('localImg').uri }}
+                    style={styles.faceContainer}
+                    alt="face-recognition"
+                    borderRadius="full"
+                  />
+                </Box>
               ) : (
                 <Box
                   borderWidth={1}
-                  borderColor="primary.700"
+                  borderColor={errors.localImg ? 'red.700' : 'gray.300'}
                   borderRadius="full"
                   borderStyle="dashed"
                   opacity={isPressed ? 0.5 : 1}
@@ -146,9 +178,19 @@ const AddRecognitionScreen = () => {
           label={t(i18nKeys.recognition.name)}
           value={watch('name')}
           onChangeText={(text) => setFormValue('name', text)}
+          isRequired
+          errMessage={errors.name?.message}
         />
 
-        <Button style={{ marginTop: 'auto' }} onPress={onSubmit}>
+        <CommonOutlineInput
+          label={t(i18nKeys.recognition.idCode)}
+          value={watch('idCode')}
+          onChangeText={(text) => setFormValue('idCode', text)}
+          isRequired
+          errMessage={errors.idCode?.message}
+        />
+
+        <Button style={{ marginTop: 'auto' }} onPress={handleSubmit(onSubmit)}>
           {t(i18nKeys.common.save)}
         </Button>
 
@@ -156,7 +198,7 @@ const AddRecognitionScreen = () => {
           isOpen={openPhotoModal}
           onClose={() => setOpenPhotoModal(false)}
           setValues={(values: TLocalImgProps) => {
-            setValue('imageUrl', values);
+            setValue('localImg', values);
           }}
           cropping
         />
@@ -169,6 +211,12 @@ const styles = StyleSheet.create({
   faceRecognitionContainer: {
     borderWidth: 1,
     borderStyle: 'dashed',
+    width: width * 0.5,
+    aspectRatio: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  faceContainer: {
     width: width * 0.5,
     aspectRatio: 1,
     alignItems: 'center',

@@ -233,5 +233,6 @@ export const vi = {
     description: 'Mô tả',
     descriptionPlaceholder: 'Nhập mô tả',
     image: 'Chọn ảnh',
+    idCode: 'Mã nhận diện',
   },
 };

@@ -1,7 +1,10 @@
 import httpUtil from '@src/utils/http.util';
 
 import { IBaseHttpResponse } from '../common/common.model';
-import { TCreateRecognizedFace } from './recognized-face.model';
+import {
+  TCreateRecognizedFace,
+  TUploadKnownFace,
+} from './recognized-face.model';
 
 class RecognizedFaceService {
   async createRecognizedFace(data: TCreateRecognizedFace, estateId: number) {
@@ -14,13 +17,22 @@ class RecognizedFaceService {
     return response.data;
   }
 
-  async uploadKnownFace(file: File, estateId: number) {
-    const response = await httpUtil.uploadImage({
-      file,
-      url: `/api/estates/${estateId}/upload-known-face`,
-    });
+  async uploadKnownFace(data: TUploadKnownFace, estateId: number) {
+    const response = await httpUtil.uploadKnownFace(
+      data,
+      `/api/estates/${estateId}/upload-known-face`,
+    );
 
     return response.data;
+  }
+
+  async getImageLocal(estateId: number) {
+    const response = await httpUtil.request<IBaseHttpResponse<any>>({
+      method: 'GET',
+      url: `/api/image/known-face/${estateId}`,
+    });
+
+    return response;
   }
 }
 

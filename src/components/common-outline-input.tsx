@@ -8,6 +8,7 @@ type TCreateHomeFieldInputProps = {
   onChangeText?: (text: string) => void;
   isRequired?: boolean;
   isDescription?: boolean;
+  errMessage?: string;
 };
 
 export const CommonOutlineInput = ({
@@ -17,6 +18,7 @@ export const CommonOutlineInput = ({
   onChangeText,
   isRequired,
   isDescription,
+  errMessage,
 }: TCreateHomeFieldInputProps) => {
   return (
     <Box p={1}>
@@ -46,6 +48,11 @@ export const CommonOutlineInput = ({
           mt={2}
           height={10}
         />
+      )}
+      {errMessage && (
+        <Text mt={1} color="red.700" fontSize="sm">
+          {errMessage}
+        </Text>
       )}
     </Box>
   );

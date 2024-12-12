@@ -232,5 +232,6 @@ export const en = {
     description: 'Description',
     descriptionPlaceholder: 'Enter description',
     image: 'Select Image',
+    idCode: 'Identification Code',
   },
 };
