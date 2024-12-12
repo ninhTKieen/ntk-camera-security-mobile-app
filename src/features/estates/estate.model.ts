@@ -33,6 +33,7 @@ export type TGetEstateListResponse = {
   lat?: string;
   address?: string;
   role: EEstateRole;
+  status: EEstateMemberStatus;
 } & TFullAudited;
 
 export type TEstateMember = {

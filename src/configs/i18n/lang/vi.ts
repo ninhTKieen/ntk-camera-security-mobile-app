@@ -46,6 +46,7 @@ export const vi = {
     noName: 'Chưa có tên',
     confirm: 'Xác nhận',
     cancel: 'Hủy',
+    decline: 'Từ chối',
     deleteWarning: 'Bạn có chắc chắn muốn xóa?',
     warning: 'Cảnh báo',
     addImage: 'Thêm ảnh',
@@ -176,6 +177,14 @@ export const vi = {
     settings: {
       title: 'Cấu hình nhà',
     },
+    waitingToJoin: 'Đang chờ tham gia',
+    confirmInvitation: 'Xác nhận lời mời',
+    confirmInvitationSuccess: 'Xác nhận lời mời thành công!',
+    confirmInvitationError: 'Xác nhận lời mời thất bại!',
+    confirmInviteText: 'Bạn có chắc chắn muốn tham gia nhà này?',
+    confirmToLeave: 'Bạn có chắc chắn muốn rời nhà này?',
+    confirmToDelete: 'Bạn có chắc chắn muốn xóa nhà này?',
+    joinHomeSuccess: 'Tham gia nhà thành công!',
   },
 
   devices: {

@@ -45,6 +45,7 @@ export const en = {
     noName: 'No Name',
     confirm: 'Confirm',
     cancel: 'Cancel',
+    decline: 'Decline',
     deleteWarning: 'Are you sure you want to delete?',
     warning: 'Warning',
     addImage: 'Add Image',
@@ -176,6 +177,14 @@ export const en = {
     settings: {
       title: 'Home Settings',
     },
+    waitingToJoin: 'Waiting to join',
+    confirmInvitation: 'Confirm Invitation',
+    confirmInvitationSuccess: 'Confirm invitation successfully!',
+    confirmInvitationError: 'Confirm invitation failed!',
+    confirmInviteText: 'Are you sure you want to join this home?',
+    confirmToLeave: 'Are you sure you want to leave this home?',
+    confirmToDelete: 'Are you sure you want to delete this home?',
+    joinHomeSuccess: 'Join home successfully!',
   },
 
   devices: {

@@ -7,6 +7,7 @@ import { i18nKeys } from '@src/configs/i18n';
 import { storage } from '@src/configs/mmkv.storage';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
 import {
+  EEstateMemberStatus,
   EEstateRole,
   TGetDetailEstateDevice,
   TGetEstateListResponse,
@@ -39,11 +40,17 @@ const HomeScreen = () => {
   const homeId = Number(storage.getString(HOME_ID_KEY));
 
   const estatesListQuery = useInfiniteQuery({
-    queryKey: ['estates/getEstates'],
+    queryKey: [
+      'estates/getEstates',
+      {
+        status: EEstateMemberStatus.JOINED,
+      },
+    ],
     queryFn: ({ pageParam }) =>
       estateService.getList({
         page: pageParam,
         limit: 10,
+        status: EEstateMemberStatus.JOINED,
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
