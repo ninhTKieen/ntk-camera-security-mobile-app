@@ -78,7 +78,7 @@ const HomeDevicesList = () => {
   };
 
   return (
-    <Box w="full" h="full">
+    <Box w="full" h="full" pt={4}>
       <FlatList
         refreshControl={
           <RefreshControl
@@ -92,7 +92,6 @@ const HomeDevicesList = () => {
         }
         showsVerticalScrollIndicator={false}
         data={query?.devices}
-        p={4}
         renderItem={renderItem}
         numColumns={2}
         columnWrapperStyle={{
