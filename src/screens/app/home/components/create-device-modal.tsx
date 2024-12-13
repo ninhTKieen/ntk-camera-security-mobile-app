@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import IconGeneral from '@src/components/icon-general';
 import { SvgIcon } from '@src/components/svg-icons';
 import { i18nKeys } from '@src/configs/i18n';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
@@ -34,6 +33,38 @@ const CreateDeviceModal = ({ isOpen, onClose }: TAddMemberModalProps) => {
         <Text fontSize="16" fontWeight="bold" textAlign="center" py={2}>
           {t(i18nKeys.estates.settings.title)}
         </Text>
+        <Pressable
+          onPress={() => {
+            navigation.navigate('RecognitionList');
+            onClose();
+          }}
+        >
+          {({ isPressed }) => (
+            <Stack
+              style={{
+                opacity: isPressed ? 0.5 : 1,
+              }}
+              space={4}
+              p={4}
+              direction="row"
+              alignItems="center"
+            >
+              <Box bg="gray.200" borderRadius="full" p={2}>
+                <SvgIcon
+                  name="face-recognition-list"
+                  color={theme.colors.primary[600]}
+                  width={25}
+                  height={25}
+                />
+              </Box>
+              <Text fontWeight="semibold" fontSize="lg" color="primary.600">
+                {t(i18nKeys.devices.recognitionList)}
+              </Text>
+            </Stack>
+          )}
+        </Pressable>
+
+        <Divider />
 
         <Pressable
           onPress={() => {
@@ -55,8 +86,8 @@ const CreateDeviceModal = ({ isOpen, onClose }: TAddMemberModalProps) => {
                 <SvgIcon
                   name="face-recognition"
                   color={theme.colors.primary[600]}
-                  width={20}
-                  height={20}
+                  width={25}
+                  height={25}
                 />
               </Box>
               <Text fontWeight="semibold" fontSize="lg" color="primary.600">
@@ -85,11 +116,11 @@ const CreateDeviceModal = ({ isOpen, onClose }: TAddMemberModalProps) => {
               alignItems="center"
             >
               <Box bg="gray.200" borderRadius="full" p={2}>
-                <IconGeneral
-                  type="MaterialCommunityIcons"
-                  name="progress-wrench"
-                  size={20}
+                <SvgIcon
+                  name="camera"
                   color={theme.colors.primary[600]}
+                  width={25}
+                  height={25}
                 />
               </Box>
               <Text fontWeight="semibold" fontSize="lg" color="primary.600">

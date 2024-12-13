@@ -63,6 +63,7 @@ export const en = {
     featureDeveloping: 'Feature is developing',
     add: 'Add',
     backToHome: 'Back to Home',
+    createdAt: 'Created At',
   },
 
   photo: {
@@ -216,6 +217,7 @@ export const en = {
     addRecognition: 'Add Recognition',
     addRecognitionSuccess: 'Add recognition successfully!',
     addRecognitionError: 'Add recognition failed!',
+    recognitionList: 'Recognition List',
   },
 
   media: {

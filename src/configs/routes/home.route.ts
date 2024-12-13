@@ -7,4 +7,8 @@ export type THomeStackParamList = {
     deviceName: string;
   };
   AddRecognition: undefined;
+  RecognitionDetail: {
+    faceId: number;
+  };
+  RecognitionList: undefined;
 };

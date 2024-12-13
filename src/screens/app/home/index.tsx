@@ -5,6 +5,7 @@ import React from 'react';
 import AddDeviceManualScreen from './add-device-manual.screen';
 import AddRecognitionScreen from './add-recognition.screen';
 import DeviceDetailScreen from './device-detail.screen';
+import FaceRecognitionListScreen from './face-recognition-list.screen';
 import HomeScreen from './home.screen';
 
 const Stack = createStackNavigator<THomeStackParamList>();
@@ -20,6 +21,10 @@ const HomeStack = () => {
       <Stack.Screen name="AddDeviceManual" component={AddDeviceManualScreen} />
       <Stack.Screen name="DeviceDetail" component={DeviceDetailScreen} />
       <Stack.Screen name="AddRecognition" component={AddRecognitionScreen} />
+      <Stack.Screen
+        name="RecognitionList"
+        component={FaceRecognitionListScreen}
+      />
     </Stack.Navigator>
   );
 };

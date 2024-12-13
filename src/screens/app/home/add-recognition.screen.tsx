@@ -11,7 +11,7 @@ import { TLocalImgProps } from '@src/features/common/common.model';
 import { TCreateRecognizedFace } from '@src/features/recognized-faces/recognized-face.model';
 import recognizedFaceService from '@src/features/recognized-faces/recognized-face.service';
 import { useApp } from '@src/hooks/use-app.hook';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import _ from 'lodash';
 import { Box, Button, Image, Pressable, useTheme } from 'native-base';
 import React, { useMemo, useState } from 'react';
@@ -27,6 +27,7 @@ type TForm = TCreateRecognizedFace & {
 };
 
 const AddRecognitionScreen = () => {
+  const queryClient = useQueryClient();
   const { t } = useTranslation();
   const theme = useTheme();
   const [openPhotoModal, setOpenPhotoModal] = useState(false);
@@ -77,7 +78,7 @@ const AddRecognitionScreen = () => {
 
   const createFace = useMutation({
     mutationFn: (data: TCreateRecognizedFace) => {
-      return recognizedFaceService.createRecognizedFace(data, homeId);
+      return recognizedFaceService.create(data, homeId);
     },
     onSuccess: () => {
       toastMessage({
@@ -86,6 +87,9 @@ const AddRecognitionScreen = () => {
         description: t(i18nKeys.recognition.addSuccess),
       });
       navigation.goBack();
+      queryClient.refetchQueries({
+        queryKey: ['devices/getFaceRecognitionList', { estateId: homeId }],
+      });
     },
     onError: () => {
       toastMessage({

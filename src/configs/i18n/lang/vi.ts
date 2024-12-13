@@ -64,6 +64,7 @@ export const vi = {
     featureDeveloping: 'Tính năng đang phát triển',
     add: 'Thêm',
     backToHome: 'Quay lại trang chủ',
+    createdAt: 'Ngày tạo',
   },
 
   photo: {
@@ -216,6 +217,7 @@ export const vi = {
     addRecognition: 'Thêm nhận diện',
     addRecognitionSuccess: 'Thêm nhận diện thành công!',
     addRecognitionError: 'Thêm nhận diện thất bại!',
+    recognitionList: 'Danh sách nhận diện',
   },
 
   media: {
