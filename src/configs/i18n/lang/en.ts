@@ -218,6 +218,8 @@ export const en = {
     addRecognitionSuccess: 'Add recognition successfully!',
     addRecognitionError: 'Add recognition failed!',
     recognitionList: 'Recognition List',
+    emptyList: 'No device yet',
+    emptyRecognitionList: 'No recognition yet',
   },
 
   media: {

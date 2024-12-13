@@ -218,6 +218,8 @@ export const vi = {
     addRecognitionSuccess: 'Thêm nhận diện thành công!',
     addRecognitionError: 'Thêm nhận diện thất bại!',
     recognitionList: 'Danh sách nhận diện',
+    emptyList: 'Chưa có thiết bị nào',
+    emptyRecognitionList: 'Chưa có nhận diện nào',
   },
 
   media: {

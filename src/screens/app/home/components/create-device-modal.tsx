@@ -33,38 +33,6 @@ const CreateDeviceModal = ({ isOpen, onClose }: TAddMemberModalProps) => {
         <Text fontSize="16" fontWeight="bold" textAlign="center" py={2}>
           {t(i18nKeys.estates.settings.title)}
         </Text>
-        <Pressable
-          onPress={() => {
-            navigation.navigate('RecognitionList');
-            onClose();
-          }}
-        >
-          {({ isPressed }) => (
-            <Stack
-              style={{
-                opacity: isPressed ? 0.5 : 1,
-              }}
-              space={4}
-              p={4}
-              direction="row"
-              alignItems="center"
-            >
-              <Box bg="gray.200" borderRadius="full" p={2}>
-                <SvgIcon
-                  name="face-recognition-list"
-                  color={theme.colors.primary[600]}
-                  width={25}
-                  height={25}
-                />
-              </Box>
-              <Text fontWeight="semibold" fontSize="lg" color="primary.600">
-                {t(i18nKeys.devices.recognitionList)}
-              </Text>
-            </Stack>
-          )}
-        </Pressable>
-
-        <Divider />
 
         <Pressable
           onPress={() => {
