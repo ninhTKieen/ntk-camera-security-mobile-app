@@ -80,6 +80,7 @@ const HomeDevicesList = () => {
   return (
     <Box w="full" h="full" pt={4}>
       <FlatList
+        px={4}
         refreshControl={
           <RefreshControl
             refreshing={isFetching > 0}

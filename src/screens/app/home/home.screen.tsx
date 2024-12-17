@@ -110,7 +110,7 @@ const HomeScreen = () => {
       </Box>
 
       {homeDetailQuery.data && (
-        <Box flex={1} p={4}>
+        <Box flex={1}>
           <HomeTabList />
         </Box>
       )}
