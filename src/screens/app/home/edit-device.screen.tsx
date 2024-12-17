@@ -9,10 +9,12 @@ import { storage } from '@src/configs/mmkv.storage';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
 import { TUpdateDevice } from '@src/features/devices/device.model';
 import deviceService from '@src/features/devices/device.service';
+import { EEstateRole } from '@src/features/estates/estate.model';
+import { useEstateStore } from '@src/features/estates/estate.store';
 import { useApp } from '@src/hooks/use-app.hook';
 import { isObjectDiff } from '@src/utils/common.util';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Box, Button } from 'native-base';
+import { Box, Button, Row } from 'native-base';
 import React, { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -26,6 +28,9 @@ const EditDeviceScreen = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { toastMessage } = useApp();
+
+  const { homeRole } = useEstateStore();
+
   const deviceId = route.params.deviceId;
 
   const homeId = Number(storage.getString(HOME_ID_KEY));
@@ -60,6 +65,32 @@ const EditDeviceScreen = () => {
         type: 'error',
         title: t(i18nKeys.common.error),
         description: t(i18nKeys.devices.updateError),
+      });
+    },
+  });
+
+  const deleteDeviceMutation = useMutation({
+    mutationFn: () => deviceService.delete(deviceId),
+    onSuccess: () => {
+      toastMessage({
+        type: 'success',
+        title: t(i18nKeys.common.success),
+        description: t(i18nKeys.devices.deleteSuccess),
+      });
+
+      navigation.navigate('Home');
+
+      queryClient.invalidateQueries({
+        queryKey: ['estates/getEstate', { estateId: homeId }],
+        type: 'all',
+      });
+      getDeviceQuery.refetch();
+    },
+    onError: () => {
+      toastMessage({
+        type: 'error',
+        title: t(i18nKeys.common.error),
+        description: t(i18nKeys.devices.deleteError),
       });
     },
   });
@@ -141,13 +172,26 @@ const EditDeviceScreen = () => {
           onChangeText={(text) => setFormValue('brand', text)}
         />
 
-        <Button
-          style={{ marginTop: 'auto' }}
-          onPress={handleSubmit(onSubmit, onError)}
-          disabled={!isDataChanged}
-        >
-          {t(i18nKeys.devices.editBtn)}
-        </Button>
+        <Row mt="auto" space={4}>
+          {homeRole === EEstateRole.OWNER && (
+            <Button
+              flex={1}
+              onPress={() => deleteDeviceMutation.mutate()}
+              colorScheme="error"
+              variant="outline"
+            >
+              {t(i18nKeys.devices.delBtn)}
+            </Button>
+          )}
+
+          <Button
+            flex={1}
+            onPress={handleSubmit(onSubmit, onError)}
+            disabled={!isDataChanged}
+          >
+            {t(i18nKeys.devices.editBtn)}
+          </Button>
+        </Row>
       </Box>
     </SubLayout>
   );

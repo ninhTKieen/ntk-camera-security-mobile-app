@@ -38,6 +38,15 @@ class DeviceService {
 
     return response.data;
   }
+
+  async delete(deviceId: number) {
+    const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
+      method: 'DELETE',
+      url: `/api/devices/${deviceId}`,
+    });
+
+    return response.data;
+  }
 }
 
 const deviceService = new DeviceService();

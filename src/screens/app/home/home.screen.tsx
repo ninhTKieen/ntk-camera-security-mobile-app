@@ -5,12 +5,14 @@ import { storage } from '@src/configs/mmkv.storage';
 import {
   EEstateMemberStatus,
   EEstateRole,
+  TGetDetailEstate,
   TGetEstateListResponse,
 } from '@src/features/estates/estate.model';
 import estateService from '@src/features/estates/estate.service';
+import { useEstateStore } from '@src/features/estates/estate.store';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { Box, Pressable, Text, useDisclose } from 'native-base';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ChooseHomeModal from './components/choose-home-modal';
@@ -21,8 +23,17 @@ const HomeScreen = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclose();
   const [isCreateDeviceModalOpen, setIsCreateDeviceModalOpen] = useState(false);
+  const { setHomeRole } = useEstateStore();
 
   const homeId = Number(storage.getString(HOME_ID_KEY));
+
+  const selectData = useCallback(
+    (data: TGetDetailEstate) => {
+      setHomeRole(data.role);
+      return data;
+    },
+    [setHomeRole],
+  );
 
   const estatesListQuery = useInfiniteQuery({
     queryKey: [
@@ -49,6 +60,7 @@ const HomeScreen = () => {
   const homeDetailQuery = useQuery({
     queryKey: ['estates/getEstate', { estateId: homeId }],
     queryFn: () => estateService.getDetail(homeId),
+    select: selectData,
     enabled: !!homeId,
   });
 

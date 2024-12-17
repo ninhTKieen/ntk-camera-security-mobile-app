@@ -224,6 +224,9 @@ export const vi = {
     updateSuccess: 'Cập nhật thiết bị thành công!',
     updateError: 'Cập nhật thiết bị thất bại!',
     editBtn: 'Chỉnh sửa',
+    delBtn: 'Xóa thiết bị',
+    deleteSuccess: 'Xóa thiết bị thành công!',
+    deleteError: 'Xóa thiết bị thất bại!',
   },
 
   media: {

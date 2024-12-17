@@ -224,6 +224,9 @@ export const en = {
     updateSuccess: 'Update device successfully!',
     updateError: 'Update device failed!',
     editBtn: 'Edit',
+    delBtn: 'Delete Device',
+    deleteSuccess: 'Delete device successfully!',
+    deleteError: 'Delete device failed!',
   },
 
   media: {
