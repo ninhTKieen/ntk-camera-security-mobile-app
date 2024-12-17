@@ -11,4 +11,7 @@ export type THomeStackParamList = {
     faceId: number;
   };
   RecognitionList: undefined;
+  EditDevice: {
+    deviceId: number;
+  };
 };

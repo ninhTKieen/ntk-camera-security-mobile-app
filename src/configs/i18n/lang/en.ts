@@ -220,6 +220,10 @@ export const en = {
     recognitionList: 'Recognition List',
     emptyList: 'No device yet',
     emptyRecognitionList: 'No recognition yet',
+    edit: 'Edit Device',
+    updateSuccess: 'Update device successfully!',
+    updateError: 'Update device failed!',
+    editBtn: 'Edit',
   },
 
   media: {

@@ -220,6 +220,10 @@ export const vi = {
     recognitionList: 'Danh sách nhận diện',
     emptyList: 'Chưa có thiết bị nào',
     emptyRecognitionList: 'Chưa có nhận diện nào',
+    edit: 'Chỉnh sửa thiết bị',
+    updateSuccess: 'Cập nhật thiết bị thành công!',
+    updateError: 'Cập nhật thiết bị thất bại!',
+    editBtn: 'Chỉnh sửa',
   },
 
   media: {

@@ -5,6 +5,7 @@ import React from 'react';
 import AddDeviceManualScreen from './add-device-manual.screen';
 import AddRecognitionScreen from './add-recognition.screen';
 import DeviceDetailScreen from './device-detail.screen';
+import EditDeviceScreen from './edit-device.screen';
 import FaceRecognitionListScreen from './face-recognition-list.screen';
 import HomeScreen from './home.screen';
 
@@ -25,6 +26,7 @@ const HomeStack = () => {
         name="RecognitionList"
         component={FaceRecognitionListScreen}
       />
+      <Stack.Screen name="EditDevice" component={EditDeviceScreen} />
     </Stack.Navigator>
   );
 };

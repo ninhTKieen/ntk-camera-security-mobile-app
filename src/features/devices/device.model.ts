@@ -43,3 +43,16 @@ export type TGetDetailEstateDevice = TFullAudited & {
   estate: TGetDetailEstateDeviceEstate;
   area: any;
 };
+
+export type TUpdateDevice = {
+  name?: string;
+  streamLink?: string;
+  areaId?: number | null;
+  description?: string | null;
+  rtsp?: string | null;
+  model?: string | null;
+  serial?: string | null;
+  brand?: string | null;
+  mac?: string | null;
+  faceRecognitionEnabled?: boolean | null;
+};
