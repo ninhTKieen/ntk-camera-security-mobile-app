@@ -254,5 +254,9 @@ export const vi = {
     descriptionPlaceholder: 'Nhập mô tả',
     image: 'Chọn ảnh',
     idCode: 'Mã nhận diện',
+    updateSuccess: 'Cập nhật nhận diện thành công!',
+    updateError: 'Cập nhật nhận diện thất bại!',
+    deleteSuccess: 'Xóa nhận diện thành công!',
+    deleteError: 'Xóa nhận diện thất bại!',
   },
 };

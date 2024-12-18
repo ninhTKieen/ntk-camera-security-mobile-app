@@ -14,4 +14,7 @@ export type THomeStackParamList = {
   EditDevice: {
     deviceId: number;
   };
+  EditRecognition: {
+    recognitionId: number;
+  };
 };

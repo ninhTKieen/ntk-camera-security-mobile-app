@@ -9,6 +9,8 @@ type TCreateHomeFieldInputProps = {
   isRequired?: boolean;
   isDescription?: boolean;
   errMessage?: string;
+  isDisabled?: boolean;
+  isEditable?: boolean;
 };
 
 export const CommonOutlineInput = ({
@@ -19,6 +21,8 @@ export const CommonOutlineInput = ({
   isRequired,
   isDescription,
   errMessage,
+  isDisabled,
+  isEditable,
 }: TCreateHomeFieldInputProps) => {
   return (
     <Box p={1}>
@@ -36,6 +40,8 @@ export const CommonOutlineInput = ({
           borderRadius={10}
           mt={2}
           h={24}
+          isDisabled={isDisabled}
+          editable={isEditable}
         />
       ) : (
         <Input
@@ -47,6 +53,8 @@ export const CommonOutlineInput = ({
           borderRadius={10}
           mt={2}
           height={10}
+          isDisabled={isDisabled}
+          editable={isEditable}
         />
       )}
       {errMessage && (

@@ -253,5 +253,9 @@ export const en = {
     descriptionPlaceholder: 'Enter description',
     image: 'Select Image',
     idCode: 'Identification Code',
+    updateSuccess: 'Update recognition successfully!',
+    updateError: 'Update recognition failed!',
+    deleteSuccess: 'Delete recognition successfully!',
+    deleteError: 'Delete recognition failed!',
   },
 };

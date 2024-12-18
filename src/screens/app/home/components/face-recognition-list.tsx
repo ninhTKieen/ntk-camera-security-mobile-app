@@ -1,6 +1,9 @@
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { APP_API_ENDPOINT, HOME_ID_KEY } from '@src/configs/constant';
 import { i18nKeys } from '@src/configs/i18n';
 import { storage } from '@src/configs/mmkv.storage';
+import { THomeStackParamList } from '@src/configs/routes/home.route';
 import { TGetListRecognizedFace } from '@src/features/recognized-faces/recognized-face.model';
 import recognizedFaceService from '@src/features/recognized-faces/recognized-face.service';
 import { formatDate } from '@src/utils/date.util';
@@ -13,6 +16,8 @@ import { ListRenderItem, RefreshControl } from 'react-native';
 const FaceRecognitionList = () => {
   const { t } = useTranslation();
   const homeId = Number(storage.getString(HOME_ID_KEY));
+  const navigation =
+    useNavigation<StackNavigationProp<THomeStackParamList, 'Home'>>();
 
   const query = useQuery({
     queryKey: ['devices/getFaceRecognitionList', { estateId: homeId }],
@@ -21,7 +26,13 @@ const FaceRecognitionList = () => {
 
   const renderItem: ListRenderItem<TGetListRecognizedFace> = ({ item }) => {
     return (
-      <Pressable>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('EditRecognition', {
+            recognitionId: item.id,
+          });
+        }}
+      >
         {({ isPressed }) => (
           <Stack
             direction="row"

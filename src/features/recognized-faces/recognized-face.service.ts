@@ -4,6 +4,7 @@ import { IBaseHttpResponse } from '../common/common.model';
 import {
   TCreateRecognizedFace,
   TGetListRecognizedFace,
+  TUpdateRecognizedFace,
   TUploadKnownFace,
 } from './recognized-face.model';
 
@@ -14,6 +15,27 @@ class RecognizedFaceService {
     >({
       method: 'GET',
       url: `/api/estates/${estateId}/recognized-faces`,
+    });
+
+    return response.data;
+  }
+
+  async getOne(id: number, estateId: number) {
+    const response = await httpUtil.request<
+      IBaseHttpResponse<TGetListRecognizedFace>
+    >({
+      method: 'GET',
+      url: `/api/estates/${estateId}/recognized-faces/${id}`,
+    });
+
+    return response.data;
+  }
+
+  async update(data: TUpdateRecognizedFace, id: number, estateId: number) {
+    const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
+      method: 'PATCH',
+      url: `/api/estates/${estateId}/recognized-faces/${id}`,
+      data,
     });
 
     return response.data;
@@ -45,6 +67,15 @@ class RecognizedFaceService {
     });
 
     return response;
+  }
+
+  async delete(id: number, estateId: number) {
+    const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
+      method: 'DELETE',
+      url: `/api/estates/${estateId}/recognized-faces/${id}`,
+    });
+
+    return response.data;
   }
 }
 
