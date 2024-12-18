@@ -8,6 +8,13 @@ export type TCreateRecognizedFace = {
   imageUrl?: string;
 };
 
+export type TUpdateRecognizedFace = {
+  name?: string | null;
+  description?: string | null;
+  imageUrl?: any;
+  isActive?: boolean | null;
+};
+
 export type TUploadKnownFace = {
   image: File;
   idCode: string;
@@ -27,7 +34,7 @@ export type TGetListRecognizedFace = {
   isActive: boolean;
 } & TFullAudited;
 
-export type TResponseRecognizedFace = {
+export type TResponseFace = {
   detection: {
     _imageDims: {
       _width: number;
@@ -93,5 +100,15 @@ export type TResponseRecognizedFace = {
   };
   descriptor: {
     [key: string]: number;
+  };
+};
+
+export type TResponseRecognizedFace = TResponseFace & {
+  bestMatch: {
+    personName: string;
+    descriptor: {
+      descriptor: any;
+    };
+    distance: number;
   };
 };

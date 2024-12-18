@@ -6,22 +6,36 @@ import {
   Group,
   ImageFormat,
   Rect,
+  Text,
   makeImageFromView,
+  matchFont,
 } from '@shopify/react-native-skia';
 import IconGeneral from '@src/components/icon-general';
 import SubLayout from '@src/components/sub-layout';
 import { VLCPlayer } from '@src/components/vlc-player';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
 import deviceService from '@src/features/devices/device.service';
-import { TResponseRecognizedFace } from '@src/features/recognized-faces/recognized-face.model';
+import {
+  TResponseFace,
+  TResponseRecognizedFace,
+} from '@src/features/recognized-faces/recognized-face.model';
 import socketService from '@src/features/socket/socket.service';
 import { requestExternalStoragePermission } from '@src/utils/common.util';
 import { useQuery } from '@tanstack/react-query';
-import { Box, Button, Spinner } from 'native-base';
+import { Box, Button, Spinner, useTheme } from 'native-base';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, StyleSheet, View } from 'react-native';
 import RNBUtil from 'react-native-blob-util';
+
+const fontFamily = Platform.select({ ios: 'Helvetica', default: 'serif' });
+const fontStyle = {
+  fontFamily,
+  fontSize: 14,
+  fontStyle: 'italic',
+  fontWeight: 'bold',
+};
+const font = matchFont(fontStyle as any);
 
 const DeviceDetailScreen = () => {
   const navigation =
@@ -32,13 +46,17 @@ const DeviceDetailScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [base64, setBase64] = useState<string | undefined>(undefined);
   const [lastProgressTime, setLastProgressTime] = useState<number>(0);
-  const [faces, setFaces] = useState<TResponseRecognizedFace[]>([]);
+  const [faces, setFaces] = useState<TResponseFace[]>([]);
+  const [recogFaces, setRecognizedFaces] = useState<TResponseRecognizedFace[]>(
+    [],
+  );
   const [ratio, setRatio] = useState({
     x: 1,
     y: 1,
   });
 
   const ref = useRef<View>(null);
+  const theme = useTheme();
 
   const { deviceId, deviceName } = route.params;
 
@@ -129,7 +147,7 @@ const DeviceDetailScreen = () => {
   useEffect(() => {
     socketService.received({
       channel: 'device/receive-faces',
-      callback: (data: TResponseRecognizedFace[]) => {
+      callback: (data: TResponseFace[]) => {
         const adjustedFaces = data?.map((face) => {
           const adjustedBox = {
             _x: face.detection._box._x / ratio.x + 16,
@@ -156,6 +174,15 @@ const DeviceDetailScreen = () => {
       },
     });
   }, [ratio.x, ratio.y]);
+
+  useEffect(() => {
+    socketService.received({
+      channel: 'device/receive-recognized-faces',
+      callback: (data: TResponseRecognizedFace[]) => {
+        data?.length && setRecognizedFaces(data);
+      },
+    });
+  }, []);
 
   return (
     <SubLayout
@@ -235,9 +262,24 @@ const DeviceDetailScreen = () => {
                     y={box._y}
                     width={box._width}
                     height={box._height}
-                    color="#00FF00"
+                    color={theme.colors.primary[400]}
                     style="stroke"
                     strokeWidth={2}
+                  />
+
+                  <Text
+                    x={box._x}
+                    y={box._y - 10}
+                    text={`${
+                      recogFaces?.[itemIndex]?.bestMatch?.personName ||
+                      'Unknown'
+                    } - ${
+                      recogFaces?.[itemIndex]?.bestMatch?.distance?.toFixed(
+                        2,
+                      ) || 1
+                    }`}
+                    color={theme.colors.primary[400]}
+                    font={font}
                   />
 
                   <Group>
@@ -247,7 +289,7 @@ const DeviceDetailScreen = () => {
                         cx={point._x}
                         cy={point._y}
                         r={1}
-                        color="#FF0000"
+                        color={theme.colors.muted[500]}
                       />
                     ))}
                   </Group>
