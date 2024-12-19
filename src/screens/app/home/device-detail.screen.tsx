@@ -1,4 +1,9 @@
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import {
+  RouteProp,
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import {
   Canvas,
@@ -13,12 +18,11 @@ import {
 import IconGeneral from '@src/components/icon-general';
 import SubLayout from '@src/components/sub-layout';
 import { VLCPlayer } from '@src/components/vlc-player';
+import { HOME_ID_KEY } from '@src/configs/constant';
+import { storage } from '@src/configs/mmkv.storage';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
 import deviceService from '@src/features/devices/device.service';
-import {
-  TResponseFace,
-  TResponseRecognizedFace,
-} from '@src/features/recognized-faces/recognized-face.model';
+import { TResponseRecognizedFace } from '@src/features/recognized-faces/recognized-face.model';
 import socketService from '@src/features/socket/socket.service';
 import { requestExternalStoragePermission } from '@src/utils/common.util';
 import { useQuery } from '@tanstack/react-query';
@@ -41,12 +45,12 @@ const DeviceDetailScreen = () => {
   const navigation =
     useNavigation<StackNavigationProp<THomeStackParamList, 'DeviceDetail'>>();
   const route = useRoute<RouteProp<THomeStackParamList, 'DeviceDetail'>>();
+  const isFocused = useIsFocused();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(true);
   const [base64, setBase64] = useState<string | undefined>(undefined);
   const [lastProgressTime, setLastProgressTime] = useState<number>(0);
-  const [faces, setFaces] = useState<TResponseFace[]>([]);
   const [recogFaces, setRecognizedFaces] = useState<TResponseRecognizedFace[]>(
     [],
   );
@@ -59,6 +63,7 @@ const DeviceDetailScreen = () => {
   const theme = useTheme();
 
   const { deviceId, deviceName } = route.params;
+  const homeId = Number(storage.getString(HOME_ID_KEY));
 
   const getDeviceQuery = useQuery({
     queryKey: ['device', deviceId],
@@ -69,7 +74,11 @@ const DeviceDetailScreen = () => {
   const sendMessageToServer = (sendBase64: string) => {
     socketService.send({
       channel: 'device/send-base64',
-      data: sendBase64,
+      data: {
+        base64: sendBase64,
+        estateId: homeId,
+        deviceId,
+      },
     });
   };
 
@@ -136,7 +145,6 @@ const DeviceDetailScreen = () => {
   const handleVideoProgress = () => {
     const now = Date.now();
     if (now - lastProgressTime > 1500) {
-      console.log('now', now);
       setLastProgressTime(now);
       takeSnapshot();
     } else {
@@ -146,43 +154,49 @@ const DeviceDetailScreen = () => {
 
   useEffect(() => {
     socketService.received({
-      channel: 'device/receive-faces',
-      callback: (data: TResponseFace[]) => {
-        const adjustedFaces = data?.map((face) => {
-          const adjustedBox = {
-            _x: face.detection._box._x / ratio.x + 16,
-            _y: face.detection._box._y / ratio.y + 16,
-            _width: face.detection._box._width / ratio.x + 16 * 2,
-            _height: face.detection._box._height / ratio.y + 16 * 2,
-          };
+      channel: 'device/receive-recognized-faces',
+      callback: (data: TResponseRecognizedFace[]) => {
+        // data?.length && setRecognizedFaces(data);
+        if (data?.length) {
+          const adjustedFaces = data?.map((face) => {
+            const adjustedBox = {
+              _x: face.detection._box._x / ratio.x + 16,
+              _y: face.detection._box._y / ratio.y + 16,
+              _width: face.detection._box._width / ratio.x + 16 * 2,
+              _height: face.detection._box._height / ratio.y + 16 * 2,
+            };
 
-          const adjustedLandmarks = face.landmarks._positions.map(
-            (point: any) => ({
-              _x: point._x / ratio.x + 16,
-              _y: point._y / ratio.y + 16,
-            }),
-          );
+            const adjustedLandmarks = face.landmarks._positions.map(
+              (point: any) => ({
+                _x: point._x / ratio.x + 16,
+                _y: point._y / ratio.y + 16,
+              }),
+            );
 
-          return {
-            ...face,
-            detection: { ...face.detection, _box: adjustedBox },
-            landmarks: { ...face.landmarks, _positions: adjustedLandmarks },
-          };
-        });
+            return {
+              ...face,
+              detection: { ...face.detection, _box: adjustedBox },
+              landmarks: { ...face.landmarks, _positions: adjustedLandmarks },
+            };
+          });
 
-        setFaces(adjustedFaces);
+          setRecognizedFaces(adjustedFaces);
+        }
       },
     });
   }, [ratio.x, ratio.y]);
 
   useEffect(() => {
-    socketService.received({
-      channel: 'device/receive-recognized-faces',
-      callback: (data: TResponseRecognizedFace[]) => {
-        data?.length && setRecognizedFaces(data);
-      },
+    navigation.addListener('beforeRemove', () => {
+      socketService.send({
+        channel: 'device/leave-room',
+        data: {
+          deviceId,
+          estateId: homeId,
+        },
+      });
     });
-  }, []);
+  }, [deviceId, homeId, navigation]);
 
   return (
     <SubLayout
@@ -209,6 +223,7 @@ const DeviceDetailScreen = () => {
               w="full"
               style={{
                 aspectRatio: 16 / 9,
+                display: isFocused ? 'flex' : 'none',
               }}
               onLayout={(event) => {
                 console.log('event', event.nativeEvent.layout);
@@ -236,8 +251,14 @@ const DeviceDetailScreen = () => {
                   setIsLoading(false);
                 }}
                 onVideoLoadStart={() => {
-                  console.log('load start');
                   setIsLoading(false);
+                  socketService.send({
+                    channel: 'device/join-room',
+                    data: {
+                      deviceId,
+                      estateId: homeId,
+                    },
+                  });
                 }}
                 onVideoProgress={handleVideoProgress}
               />
@@ -249,9 +270,9 @@ const DeviceDetailScreen = () => {
           {t('media.snapshot')}
         </Button>
 
-        {faces.length > 0 && (
+        {recogFaces.length > 0 && (
           <Box style={StyleSheet.absoluteFill}>
-            {faces?.map((face, itemIndex) => {
+            {recogFaces?.map((face, itemIndex) => {
               const box = face.detection._box;
               const landmarks = face.landmarks._positions;
 
@@ -270,13 +291,8 @@ const DeviceDetailScreen = () => {
                   <Text
                     x={box._x}
                     y={box._y - 10}
-                    text={`${
-                      recogFaces?.[itemIndex]?.bestMatch?.personName ||
-                      'Unknown'
-                    } - ${
-                      recogFaces?.[itemIndex]?.bestMatch?.distance?.toFixed(
-                        2,
-                      ) || 1
+                    text={`${face?.bestMatch?.personName || 'Unknown'} - ${
+                      face?.bestMatch?.distance?.toFixed(2) || 1
                     }`}
                     color={theme.colors.primary[400]}
                     font={font}
