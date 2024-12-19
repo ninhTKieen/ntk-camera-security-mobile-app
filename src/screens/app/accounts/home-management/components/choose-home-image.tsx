@@ -76,6 +76,7 @@ export const ChooseHomeImage = ({
         setValues={(values: TLocalImgProps) => {
           setValues(values);
         }}
+        cropping
       />
     </Pressable>
   );

@@ -1,16 +1,19 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import IconGeneral from '@src/components/icon-general';
+import { useModal } from '@src/components/modal-provider';
 import SubLayout from '@src/components/sub-layout';
 import { SvgIcon } from '@src/components/svg-icons';
 import { i18nKeys } from '@src/configs/i18n';
 import { THomeManagementStackParamList } from '@src/configs/routes/account.route';
 import {
+  EEstateMemberStatus,
   EEstateRole,
   TGetEstateListResponse,
 } from '@src/features/estates/estate.model';
 import estateService from '@src/features/estates/estate.service';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useApp } from '@src/hooks/use-app.hook';
+import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
 import { Box, Pressable, Text, useTheme } from 'native-base';
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -40,6 +43,8 @@ const HomeListScreen = () => {
     >();
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const { openConfirmationModal } = useModal();
+  const { toastMessage } = useApp();
 
   const estatesListQuery = useInfiniteQuery({
     queryKey: ['estates/getEstates'],
@@ -55,6 +60,39 @@ const HomeListScreen = () => {
       }
 
       return allPages.length * 10;
+    },
+  });
+
+  const acceptInvitationMutation = useMutation({
+    mutationFn: (estateId: number) => estateService.acceptInvitation(estateId),
+    onSuccess: () => {
+      estatesListQuery.refetch();
+      toastMessage({
+        type: 'success',
+        title: t(i18nKeys.common.success),
+        description: t(i18nKeys.estates.joinHomeSuccess),
+      });
+    },
+    onError: () => {
+      toastMessage({
+        type: 'error',
+        title: t(i18nKeys.common.error),
+        description: t(i18nKeys.estates.confirmInvitationError),
+      });
+    },
+  });
+
+  const rejectInvitationMutation = useMutation({
+    mutationFn: (estateId: number) => estateService.rejectInvitation(estateId),
+    onSuccess: () => {
+      estatesListQuery.refetch();
+    },
+    onError: () => {
+      toastMessage({
+        type: 'error',
+        title: t(i18nKeys.common.error),
+        description: t(i18nKeys.estates.confirmInvitationError),
+      });
     },
   });
 
@@ -88,10 +126,25 @@ const HomeListScreen = () => {
     return (
       <Pressable
         onPress={() => {
-          navigation.navigate('HomeDetail', {
-            homeId: item.id,
-            homeName: item.name,
-          });
+          if (item.status === EEstateMemberStatus.PENDING) {
+            openConfirmationModal({
+              onBtnConfirm: () => {
+                acceptInvitationMutation.mutate(item.id);
+              },
+              onBtnCancel: () => {
+                rejectInvitationMutation.mutate(item.id);
+              },
+              title: t(i18nKeys.estates.confirmInvitation),
+              description: t(i18nKeys.estates.confirmInviteText),
+              confirmText: t(i18nKeys.common.confirm),
+              cancelText: t(i18nKeys.common.decline),
+            });
+          } else {
+            navigation.navigate('HomeDetail', {
+              homeId: item.id,
+              homeName: item.name,
+            });
+          }
         }}
       >
         <Box
@@ -110,7 +163,18 @@ const HomeListScreen = () => {
             <Text fontWeight="semibold" fontSize="lg">
               {item.name}
             </Text>
-            <Text>{getMemberRole(item.role)}</Text>
+
+            <Text
+              color={
+                item.status === EEstateMemberStatus.PENDING
+                  ? 'orange.500'
+                  : 'gray.600'
+              }
+            >
+              {item.status === EEstateMemberStatus.PENDING
+                ? t(i18nKeys.estates.status.pending)
+                : getMemberRole(item.role)}
+            </Text>
           </Box>
 
           <IconGeneral

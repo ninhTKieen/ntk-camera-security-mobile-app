@@ -54,7 +54,9 @@ const SubLayout = (props: TSubLayoutProps) => {
           {props.title}
         </Text>
 
-        {props.right ? props.right : <Box />}
+        <Box position="absolute" right="4" pl={4}>
+          {props.right ? props.right : <Box />}
+        </Box>
       </Box>
 
       {props.children}

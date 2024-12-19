@@ -2,12 +2,13 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconGeneral from '@src/components/icon-general';
 import { i18nKeys } from '@src/configs/i18n';
 import { TAppStackParamList } from '@src/configs/routes/app.route';
+import socketService from '@src/features/socket/socket.service';
 import AccountNavigator from '@src/screens/app/accounts';
 import DashboardScreen from '@src/screens/app/dashboard/dashboard.screen';
 import EventScreen from '@src/screens/app/events/event.screen';
 import HomeStack from '@src/screens/app/home';
 import { useTheme } from 'native-base';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const Tab = createBottomTabNavigator<TAppStackParamList>();
@@ -16,6 +17,10 @@ const AppNavigator = (): JSX.Element => {
   const { t } = useTranslation();
   const theme = useTheme();
   const color = theme.colors.primary[500];
+
+  useEffect(() => {
+    socketService.start();
+  }, []);
 
   return (
     <Tab.Navigator

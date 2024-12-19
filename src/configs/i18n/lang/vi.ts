@@ -46,6 +46,7 @@ export const vi = {
     noName: 'Chưa có tên',
     confirm: 'Xác nhận',
     cancel: 'Hủy',
+    decline: 'Từ chối',
     deleteWarning: 'Bạn có chắc chắn muốn xóa?',
     warning: 'Cảnh báo',
     addImage: 'Thêm ảnh',
@@ -63,6 +64,7 @@ export const vi = {
     featureDeveloping: 'Tính năng đang phát triển',
     add: 'Thêm',
     backToHome: 'Quay lại trang chủ',
+    createdAt: 'Ngày tạo',
   },
 
   photo: {
@@ -173,6 +175,17 @@ export const vi = {
       joined: 'Đã tham gia',
       pending: 'Đang chờ',
     },
+    settings: {
+      title: 'Cấu hình nhà',
+    },
+    waitingToJoin: 'Đang chờ tham gia',
+    confirmInvitation: 'Xác nhận lời mời',
+    confirmInvitationSuccess: 'Xác nhận lời mời thành công!',
+    confirmInvitationError: 'Xác nhận lời mời thất bại!',
+    confirmInviteText: 'Bạn có chắc chắn muốn tham gia nhà này?',
+    confirmToLeave: 'Bạn có chắc chắn muốn rời nhà này?',
+    confirmToDelete: 'Bạn có chắc chắn muốn xóa nhà này?',
+    joinHomeSuccess: 'Tham gia nhà thành công!',
   },
 
   devices: {
@@ -201,5 +214,49 @@ export const vi = {
     createError: 'Tạo thiết bị thất bại!',
     addManual: 'Thêm thủ công',
     scanAuto: 'Quét tự động',
+    addRecognition: 'Thêm nhận diện',
+    addRecognitionSuccess: 'Thêm nhận diện thành công!',
+    addRecognitionError: 'Thêm nhận diện thất bại!',
+    recognitionList: 'Danh sách nhận diện',
+    emptyList: 'Chưa có thiết bị nào',
+    emptyRecognitionList: 'Chưa có nhận diện nào',
+    edit: 'Chỉnh sửa thiết bị',
+    updateSuccess: 'Cập nhật thiết bị thành công!',
+    updateError: 'Cập nhật thiết bị thất bại!',
+    editBtn: 'Chỉnh sửa',
+    delBtn: 'Xóa thiết bị',
+    deleteSuccess: 'Xóa thiết bị thành công!',
+    deleteError: 'Xóa thiết bị thất bại!',
+  },
+
+  media: {
+    video: 'Video',
+    image: 'Ảnh',
+    audio: 'Âm thanh',
+    requestLibrary: 'Yêu cầu truy cập thư viện',
+    requestLibraryToSaveImgMsg:
+      'Để lưu ảnh, vui lòng cấp quyền truy cập thư viện',
+    requestLibraryToSaveImgMsgSuccess: 'Đã cấp quyền truy cập thư viện',
+    requestLibraryToSaveImgMsgError: 'Không thể truy cập thư viện',
+    requestLibraryToSaveImgMsgErrorDesc:
+      'Vui lòng cấp quyền truy cập thư viện để lưu ảnh',
+    goToSettings: 'Đi đến cài đặt',
+    snapshot: 'Chụp ảnh',
+  },
+
+  recognition: {
+    add: 'Thêm nhận diện',
+    addSuccess: 'Thêm nhận diện thành công!',
+    addError: 'Thêm nhận diện thất bại!',
+    name: 'Tên',
+    namePlaceholder: 'Nhập tên',
+    description: 'Mô tả',
+    descriptionPlaceholder: 'Nhập mô tả',
+    image: 'Chọn ảnh',
+    idCode: 'Mã nhận diện',
+    updateSuccess: 'Cập nhật nhận diện thành công!',
+    updateError: 'Cập nhật nhận diện thất bại!',
+    deleteSuccess: 'Xóa nhận diện thành công!',
+    deleteError: 'Xóa nhận diện thất bại!',
   },
 };

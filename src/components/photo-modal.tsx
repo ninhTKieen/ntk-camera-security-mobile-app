@@ -14,6 +14,7 @@ type TPhotoModalProps = {
   onClose: () => void;
   setValues: (values: any) => void;
   chooseMultiple?: boolean;
+  cropping?: boolean;
 };
 
 const PhotoModal = ({
@@ -21,6 +22,7 @@ const PhotoModal = ({
   onClose,
   setValues,
   chooseMultiple,
+  cropping,
 }: TPhotoModalProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -103,6 +105,7 @@ const PhotoModal = ({
           onPress={() => {
             ImageCropPicker.openPicker({
               multiple: chooseMultiple,
+              cropping,
             })
               .then((images) => {
                 const files = convertToFileForm(images);

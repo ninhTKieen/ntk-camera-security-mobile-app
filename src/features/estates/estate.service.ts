@@ -6,6 +6,7 @@ import {
   TParamsGetList,
 } from '../common/common.model';
 import {
+  EEstateMemberStatus,
   TCreateEstate,
   TGetDetailEstate,
   TGetEstateListResponse,
@@ -13,7 +14,13 @@ import {
 } from './estate.model';
 
 class EstateService {
-  async getList({ page = 1, limit = 10, ...otherParams }: TParamsGetList) {
+  async getList({
+    page = 1,
+    limit = 10,
+    ...otherParams
+  }: TParamsGetList & {
+    status?: EEstateMemberStatus;
+  }) {
     const response = await httpUtil.request<
       IBaseHttpResponseList<TGetEstateListResponse>
     >({
@@ -66,6 +73,24 @@ class EstateService {
       method: 'POST',
       url: `/api/estates/${id}/invite-member`,
       data,
+    });
+
+    return response.data;
+  }
+
+  async acceptInvitation(id: number) {
+    const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
+      method: 'POST',
+      url: `/api/estates/${id}/accept-invitation`,
+    });
+
+    return response.data;
+  }
+
+  async rejectInvitation(id: number) {
+    const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
+      method: 'POST',
+      url: `/api/estates/${id}/reject-invitation`,
     });
 
     return response.data;

@@ -122,7 +122,8 @@ export const VLCPlayer: React.FC<VLCPlayerProps> = ({
 
   const uri = source.uri?.match(/^\//) ? `file://${source.uri}` : source.uri;
 
-  const isNetwork = uri?.match(/^https?:/) ? true : false;
+  const isNetwork =
+    uri?.match(/^https?:/) || uri?.match(/^rtsp:/) ? true : false;
   const isAsset = uri?.match(
     /^(assets-library|file|content|ms-appx|ms-appdata):/,
   )

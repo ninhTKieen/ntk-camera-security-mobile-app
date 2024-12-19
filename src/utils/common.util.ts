@@ -1,6 +1,7 @@
 import messaging from '@react-native-firebase/messaging';
+import _ from 'lodash';
 import { Platform } from 'react-native';
-import { PERMISSIONS, request } from 'react-native-permissions';
+import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 
 export const isAndroid = Platform.OS === 'android';
 
@@ -26,4 +27,29 @@ export const requestPermission = async (): Promise<boolean> => {
   }
 
   return enabled;
+};
+
+export const requestExternalStoragePermission = async () => {
+  try {
+    const permission = Platform.select({
+      android: PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+      ios: PERMISSIONS.IOS.PHOTO_LIBRARY,
+      default: null,
+    });
+
+    if (!permission) {
+      console.warn('Platform not supported');
+      return false;
+    }
+
+    const result = await request(permission);
+    return result === RESULTS.GRANTED;
+  } catch (error) {
+    console.error('Error requesting permission:', error);
+    return false;
+  }
+};
+
+export const isObjectDiff = (obj1: any, obj2: any) => {
+  return !_.isEqual(obj1, obj2);
 };

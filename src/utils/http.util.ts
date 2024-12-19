@@ -1,9 +1,13 @@
-import { API_ENDPOINT } from '@env';
+import { APP_API_ENDPOINT } from '@src/configs/constant';
 import authService from '@src/features/auth/auth.service';
 import {
   IBaseHttpResponse,
   TUploadImageResult,
 } from '@src/features/common/common.model';
+import {
+  TUploadKnownFace,
+  TUploadKnownFaceResult,
+} from '@src/features/recognized-faces/recognized-face.model';
 import axios, {
   AxiosError,
   AxiosInstance,
@@ -28,12 +32,12 @@ class HttpUtil {
 
   constructor() {
     this.http = axios.create({
-      baseURL: API_ENDPOINT,
+      baseURL: APP_API_ENDPOINT,
       timeout: 30000,
     });
 
     this.httpUploadImg = axios.create({
-      baseURL: API_ENDPOINT,
+      baseURL: APP_API_ENDPOINT,
       timeout: 30000,
     });
 
@@ -110,11 +114,33 @@ class HttpUtil {
       url: '/api/image/upload',
       method: 'POST',
       data: formData,
-      baseURL: API_ENDPOINT,
+      baseURL: APP_API_ENDPOINT,
     };
 
     const response = await this.http.request<
       IBaseHttpResponse<TUploadImageResult>
+    >(config);
+
+    return response.data;
+  }
+
+  async uploadKnownFace(data: TUploadKnownFace, url: string) {
+    const formData = new FormData();
+    formData.append('image', data.image);
+    formData.append('idCode', data.idCode);
+
+    const config: AxiosRequestConfig = {
+      url,
+      method: 'POST',
+      data: formData,
+      baseURL: APP_API_ENDPOINT,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+
+    const response = await this.http.request<
+      IBaseHttpResponse<TUploadKnownFaceResult>
     >(config);
 
     return response.data;
@@ -131,7 +157,7 @@ class HttpUtil {
       url: '/api/image/upload',
       method: 'POST',
       data: formData,
-      baseURL: API_ENDPOINT,
+      baseURL: APP_API_ENDPOINT,
     };
 
     const response = await this.http.request(config);
