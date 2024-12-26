@@ -99,8 +99,8 @@ const HomeScreen = () => {
 
         {canAddDevice ? (
           <IconGeneral
-            type="MaterialCommunityIcons"
-            name="camera-plus"
+            type="MaterialIcons"
+            name="add-home-work"
             size={24}
             onPress={() => {
               setIsCreateDeviceModalOpen(true);
