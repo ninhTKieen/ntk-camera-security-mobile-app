@@ -2,9 +2,28 @@
   "project_info": {
     "project_number": "798752059406",
     "project_id": "fir-notif-c1fc7",
-    "storage_bucket": "fir-notif-c1fc7.appspot.com"
+    "storage_bucket": "fir-notif-c1fc7.firebasestorage.app"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798752059406:android:bf8e51d68ea3077a008c5f",
+        "android_client_info": {
+          "package_name": "com.ntk.camerasecurity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB9pjYBtT6VAVfTNulzDjWXBCzrauv8As"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:798752059406:android:0373db4a2b794fd4008c5f",
