@@ -7,6 +7,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [WebRTCModuleOptions sharedInstance].enableMultitaskingCameraAccess = YES;
   [FIRApp configure];
   self.moduleName = @"RnNativeBaseApp";
   // You can add your custom initial props in the dictionary below.
