@@ -1,4 +1,4 @@
-package com.rnnativebase.reactVlcPlayer;
+package com.ntk.camerasecurity.reactVlcPlayer;
 
 import androidx.annotation.NonNull;
 import com.facebook.react.ReactPackage;

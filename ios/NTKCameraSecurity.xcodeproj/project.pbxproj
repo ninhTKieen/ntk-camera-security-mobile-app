@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* RnNativeBaseAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RnNativeBaseAppTests.m */; };
+		00E356F31AD99517003FC87E /* NTKCameraSecurityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NTKCameraSecurityTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		253A76B9B5E9E00D88DE09EF /* libPods-RnNativeBaseApp-RnNativeBaseAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 455F0A9A7926DD4F13763962 /* libPods-RnNativeBaseApp-RnNativeBaseAppTests.a */; };
-		2BDCABA32B3D2DCB358F865B /* libPods-RnNativeBaseApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 128276EC06E7DB9A2D0E98AB /* libPods-RnNativeBaseApp.a */; };
+		253A76B9B5E9E00D88DE09EF /* libPods-NTKCameraSecurity-NTKCameraSecurityTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 455F0A9A7926DD4F13763962 /* libPods-NTKCameraSecurity-NTKCameraSecurityTests.a */; };
+		2BDCABA32B3D2DCB358F865B /* libPods-NTKCameraSecurity.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 128276EC06E7DB9A2D0E98AB /* libPods-NTKCameraSecurity.a */; };
 		2D461F66FD8245E7E3D4314D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F97303229B3BB843F7786DDA /* PrivacyInfo.xcprivacy */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		9A70FB4A2C4508B600155729 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A70FB492C4508B600155729 /* GoogleService-Info.plist */; };
@@ -46,29 +46,29 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = RnNativeBaseApp;
+			remoteInfo = "NTKCameraSecurity";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* RnNativeBaseAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RnNativeBaseAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* NTKCameraSecurityTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NTKCameraSecurityTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* RnNativeBaseAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RnNativeBaseAppTests.m; sourceTree = "<group>"; };
-		113A4CBB90B1F3C21B825BE3 /* Pods-RnNativeBaseApp-RnNativeBaseAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnNativeBaseApp-RnNativeBaseAppTests.release.xcconfig"; path = "Target Support Files/Pods-RnNativeBaseApp-RnNativeBaseAppTests/Pods-RnNativeBaseApp-RnNativeBaseAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		128276EC06E7DB9A2D0E98AB /* libPods-RnNativeBaseApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnNativeBaseApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07F961A680F5B00A75B9A /* RnNativeBaseApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RnNativeBaseApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = RnNativeBaseApp/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = RnNativeBaseApp/AppDelegate.mm; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RnNativeBaseApp/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RnNativeBaseApp/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RnNativeBaseApp/main.m; sourceTree = "<group>"; };
-		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = RnNativeBaseApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		15F056A2AE26AD5154264D23 /* Pods-RnNativeBaseApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnNativeBaseApp.debug.xcconfig"; path = "Target Support Files/Pods-RnNativeBaseApp/Pods-RnNativeBaseApp.debug.xcconfig"; sourceTree = "<group>"; };
-		455F0A9A7926DD4F13763962 /* libPods-RnNativeBaseApp-RnNativeBaseAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RnNativeBaseApp-RnNativeBaseAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7677E7972337D9A1783BCF49 /* Pods-RnNativeBaseApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnNativeBaseApp.release.xcconfig"; path = "Target Support Files/Pods-RnNativeBaseApp/Pods-RnNativeBaseApp.release.xcconfig"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RnNativeBaseApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* NTKCameraSecurityTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NTKCameraSecurityTests.m"; sourceTree = "<group>"; };
+		113A4CBB90B1F3C21B825BE3 /* Pods-NTKCameraSecurity-NTKCameraSecurityTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTKCameraSecurity-NTKCameraSecurityTests.release.xcconfig"; path = "Target Support Files/Pods-NTKCameraSecurity-NTKCameraSecurityTests/Pods-NTKCameraSecurity-NTKCameraSecurityTests.release.xcconfig"; sourceTree = "<group>"; };
+		128276EC06E7DB9A2D0E98AB /* libPods-NTKCameraSecurity.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NTKCameraSecurity.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* NTKCameraSecurity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NTKCameraSecurity.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "NTKCameraSecurity/AppDelegate.h"; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "NTKCameraSecurity/AppDelegate.mm"; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "NTKCameraSecurity/Images.xcassets"; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "NTKCameraSecurity/Info.plist"; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "NTKCameraSecurity/main.m"; sourceTree = "<group>"; };
+		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = NTKCameraSecurity/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		15F056A2AE26AD5154264D23 /* Pods-NTKCameraSecurity.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTKCameraSecurity.debug.xcconfig"; path = "Target Support Files/Pods-NTKCameraSecurity/Pods-NTKCameraSecurity.debug.xcconfig"; sourceTree = "<group>"; };
+		455F0A9A7926DD4F13763962 /* libPods-NTKCameraSecurity-NTKCameraSecurityTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NTKCameraSecurity-NTKCameraSecurityTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7677E7972337D9A1783BCF49 /* Pods-NTKCameraSecurity.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTKCameraSecurity.release.xcconfig"; path = "Target Support Files/Pods-NTKCameraSecurity/Pods-NTKCameraSecurity.release.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "NTKCameraSecurity/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		9A70FB492C4508B600155729 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		9A70FB4B2C45173700155729 /* RnNativeBaseApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RnNativeBaseApp.entitlements; path = RnNativeBaseApp/RnNativeBaseApp.entitlements; sourceTree = "<group>"; };
+		9A70FB4B2C45173700155729 /* NTKCameraSecurity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = NTKCameraSecurity.entitlements; path = NTKCameraSecurity/NTKCameraSecurity.entitlements; sourceTree = "<group>"; };
 		9A9A0B762CE84BCC00D440D8 /* RCTVLCPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTVLCPlayer.h; sourceTree = "<group>"; };
 		9A9A0B772CE84C6F00D440D8 /* RCTVLCPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTVLCPlayer.m; sourceTree = "<group>"; };
 		9A9A0B792CE8599100D440D8 /* RCTVLCPlayerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTVLCPlayerManager.h; sourceTree = "<group>"; };
@@ -94,9 +94,9 @@
 		9AF07EB22C3E7DB400FD40B1 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
 		9AF649C72CE71AFC00680806 /* RTSPVideoModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTSPVideoModule.h; sourceTree = "<group>"; };
 		9AF649CA2CE7204200680806 /* RTSPVideoModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTSPVideoModule.m; sourceTree = "<group>"; };
-		E579C98FBB633DC2D4A1DEED /* Pods-RnNativeBaseApp-RnNativeBaseAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RnNativeBaseApp-RnNativeBaseAppTests.debug.xcconfig"; path = "Target Support Files/Pods-RnNativeBaseApp-RnNativeBaseAppTests/Pods-RnNativeBaseApp-RnNativeBaseAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E579C98FBB633DC2D4A1DEED /* Pods-NTKCameraSecurity-NTKCameraSecurityTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTKCameraSecurity-NTKCameraSecurityTests.debug.xcconfig"; path = "Target Support Files/Pods-NTKCameraSecurity-NTKCameraSecurityTests/Pods-NTKCameraSecurity-NTKCameraSecurityTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F97303229B3BB843F7786DDA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = RnNativeBaseApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		F97303229B3BB843F7786DDA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = NTKCameraSecurity/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				253A76B9B5E9E00D88DE09EF /* libPods-RnNativeBaseApp-RnNativeBaseAppTests.a in Frameworks */,
+				253A76B9B5E9E00D88DE09EF /* libPods-NTKCameraSecurity-NTKCameraSecurityTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,20 +112,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BDCABA32B3D2DCB358F865B /* libPods-RnNativeBaseApp.a in Frameworks */,
+				2BDCABA32B3D2DCB358F865B /* libPods-NTKCameraSecurity.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* RnNativeBaseAppTests */ = {
+		00E356EF1AD99517003FC87E /* NTKCameraSecurityTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* RnNativeBaseAppTests.m */,
+				00E356F21AD99517003FC87E /* NTKCameraSecurityTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = RnNativeBaseAppTests;
+			path = "NTKCameraSecurityTests";
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -136,10 +136,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* RnNativeBaseApp */ = {
+		13B07FAE1A68108700A75B9A /* NTKCameraSecurity */ = {
 			isa = PBXGroup;
 			children = (
-				9A70FB4B2C45173700155729 /* RnNativeBaseApp.entitlements */,
+				9A70FB4B2C45173700155729 /* NTKCameraSecurity.entitlements */,
 				9A70FB492C4508B600155729 /* GoogleService-Info.plist */,
 				9AF07EB32C3E7DB400FD40B1 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -157,15 +157,15 @@
 				9A9A0B792CE8599100D440D8 /* RCTVLCPlayerManager.h */,
 				9A9A0B7A2CE859B300D440D8 /* RCTVLCPlayerManager.m */,
 			);
-			name = RnNativeBaseApp;
+			name = "NTKCameraSecurity";
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				128276EC06E7DB9A2D0E98AB /* libPods-RnNativeBaseApp.a */,
-				455F0A9A7926DD4F13763962 /* libPods-RnNativeBaseApp-RnNativeBaseAppTests.a */,
+				128276EC06E7DB9A2D0E98AB /* libPods-NTKCameraSecurity.a */,
+				455F0A9A7926DD4F13763962 /* libPods-NTKCameraSecurity-NTKCameraSecurityTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -180,9 +180,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* RnNativeBaseApp */,
+				13B07FAE1A68108700A75B9A /* NTKCameraSecurity */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* RnNativeBaseAppTests */,
+				00E356EF1AD99517003FC87E /* NTKCameraSecurityTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -195,8 +195,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* RnNativeBaseApp.app */,
-				00E356EE1AD99517003FC87E /* RnNativeBaseAppTests.xctest */,
+				13B07F961A680F5B00A75B9A /* NTKCameraSecurity.app */,
+				00E356EE1AD99517003FC87E /* NTKCameraSecurityTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,10 +231,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				15F056A2AE26AD5154264D23 /* Pods-RnNativeBaseApp.debug.xcconfig */,
-				7677E7972337D9A1783BCF49 /* Pods-RnNativeBaseApp.release.xcconfig */,
-				E579C98FBB633DC2D4A1DEED /* Pods-RnNativeBaseApp-RnNativeBaseAppTests.debug.xcconfig */,
-				113A4CBB90B1F3C21B825BE3 /* Pods-RnNativeBaseApp-RnNativeBaseAppTests.release.xcconfig */,
+				15F056A2AE26AD5154264D23 /* Pods-NTKCameraSecurity.debug.xcconfig */,
+				7677E7972337D9A1783BCF49 /* Pods-NTKCameraSecurity.release.xcconfig */,
+				E579C98FBB633DC2D4A1DEED /* Pods-NTKCameraSecurity-NTKCameraSecurityTests.debug.xcconfig */,
+				113A4CBB90B1F3C21B825BE3 /* Pods-NTKCameraSecurity-NTKCameraSecurityTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -242,9 +242,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* RnNativeBaseAppTests */ = {
+		00E356ED1AD99517003FC87E /* NTKCameraSecurityTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "RnNativeBaseAppTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "NTKCameraSecurityTests" */;
 			buildPhases = (
 				7B6A7B1E3AF15CD3330769D4 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -258,14 +258,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = RnNativeBaseAppTests;
-			productName = RnNativeBaseAppTests;
-			productReference = 00E356EE1AD99517003FC87E /* RnNativeBaseAppTests.xctest */;
+			name = NTKCameraSecurityTests;
+			productName = NTKCameraSecurityTests;
+			productReference = 00E356EE1AD99517003FC87E /* NTKCameraSecurityTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* RnNativeBaseApp */ = {
+		13B07F861A680F5B00A75B9A /* NTKCameraSecurity */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RnNativeBaseApp" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "NTKCameraSecurity" */;
 			buildPhases = (
 				76E7E3122681FD73BAB881DE /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -280,9 +280,9 @@
 			);
 			dependencies = (
 			);
-			name = RnNativeBaseApp;
-			productName = RnNativeBaseApp;
-			productReference = 13B07F961A680F5B00A75B9A /* RnNativeBaseApp.app */;
+			name = "NTKCameraSecurity";
+			productName = "NTKCameraSecurity";
+			productReference = 13B07F961A680F5B00A75B9A /* NTKCameraSecurity.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -302,7 +302,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "RnNativeBaseApp" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "NTKCameraSecurity" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -315,8 +315,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* RnNativeBaseApp */,
-				00E356ED1AD99517003FC87E /* RnNativeBaseAppTests */,
+				13B07F861A680F5B00A75B9A /* NTKCameraSecurity */,
+				00E356ED1AD99517003FC87E /* NTKCameraSecurityTests */,
 			);
 		};
 /* End PBXProject section */
@@ -384,15 +384,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp-RnNativeBaseAppTests/Pods-RnNativeBaseApp-RnNativeBaseAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity-NTKCameraSecurityTests/Pods-NTKCameraSecurity-NTKCameraSecurityTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp-RnNativeBaseAppTests/Pods-RnNativeBaseApp-RnNativeBaseAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity-NTKCameraSecurityTests/Pods-NTKCameraSecurity-NTKCameraSecurityTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp-RnNativeBaseAppTests/Pods-RnNativeBaseApp-RnNativeBaseAppTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity-NTKCameraSecurityTests/Pods-NTKCameraSecurity-NTKCameraSecurityTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		44BFE09868D8BA25D2AC86BC /* [CP] Copy Pods Resources */ = {
@@ -401,15 +401,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp/Pods-RnNativeBaseApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity/Pods-NTKCameraSecurity-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp/Pods-RnNativeBaseApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity/Pods-NTKCameraSecurity-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp/Pods-RnNativeBaseApp-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity/Pods-NTKCameraSecurity-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4CF9953DFF24D35445AF22E0 /* [CP] Embed Pods Frameworks */ = {
@@ -418,15 +418,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp/Pods-RnNativeBaseApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity/Pods-NTKCameraSecurity-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp/Pods-RnNativeBaseApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity/Pods-NTKCameraSecurity-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp/Pods-RnNativeBaseApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity/Pods-NTKCameraSecurity-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7518ED323BE758855F4A2B10 /* [CP] Copy Pods Resources */ = {
@@ -435,15 +435,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp-RnNativeBaseAppTests/Pods-RnNativeBaseApp-RnNativeBaseAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity-NTKCameraSecurityTests/Pods-NTKCameraSecurity-NTKCameraSecurityTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp-RnNativeBaseAppTests/Pods-RnNativeBaseApp-RnNativeBaseAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity-NTKCameraSecurityTests/Pods-NTKCameraSecurity-NTKCameraSecurityTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RnNativeBaseApp-RnNativeBaseAppTests/Pods-RnNativeBaseApp-RnNativeBaseAppTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NTKCameraSecurity-NTKCameraSecurityTests/Pods-NTKCameraSecurity-NTKCameraSecurityTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		76E7E3122681FD73BAB881DE /* [CP] Check Pods Manifest.lock */ = {
@@ -461,7 +461,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RnNativeBaseApp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-NTKCameraSecurity-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -483,7 +483,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RnNativeBaseApp-RnNativeBaseAppTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-NTKCameraSecurity-NTKCameraSecurityTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -510,7 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* RnNativeBaseAppTests.m in Sources */,
+				00E356F31AD99517003FC87E /* NTKCameraSecurityTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,7 +531,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* RnNativeBaseApp */;
+			target = 13B07F861A680F5B00A75B9A /* NTKCameraSecurity */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -539,14 +539,14 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E579C98FBB633DC2D4A1DEED /* Pods-RnNativeBaseApp-RnNativeBaseAppTests.debug.xcconfig */;
+			baseConfigurationReference = E579C98FBB633DC2D4A1DEED /* Pods-NTKCameraSecurity-NTKCameraSecurityTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = RnNativeBaseAppTests/Info.plist;
+				INFOPLIST_FILE = "NTKCameraSecurityTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -558,19 +558,19 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rnnativebase;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ntk.camerasecurity";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RnNativeBaseApp.app/RnNativeBaseApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NTKCameraSecurity.app/NTKCameraSecurity";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 113A4CBB90B1F3C21B825BE3 /* Pods-RnNativeBaseApp-RnNativeBaseAppTests.release.xcconfig */;
+			baseConfigurationReference = 113A4CBB90B1F3C21B825BE3 /* Pods-NTKCameraSecurity-NTKCameraSecurityTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = RnNativeBaseAppTests/Info.plist;
+				INFOPLIST_FILE = "NTKCameraSecurityTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -582,24 +582,25 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rnnativebase;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ntk.camerasecurity";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RnNativeBaseApp.app/RnNativeBaseApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NTKCameraSecurity.app/NTKCameraSecurity";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15F056A2AE26AD5154264D23 /* Pods-RnNativeBaseApp.debug.xcconfig */;
+			baseConfigurationReference = 15F056A2AE26AD5154264D23 /* Pods-NTKCameraSecurity.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = RnNativeBaseApp/RnNativeBaseApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = NTKCameraSecurity/NTKCameraSecurity.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X4K5K8T375;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = RnNativeBaseApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RnNativeBaseApp;
+				INFOPLIST_FILE = "NTKCameraSecurity/Info.plist";
+             INFOPLIST_KEY_CFBundleDisplayName = "NTK Camera Security";
+				INFOPLIST_KEY_CFBundleDisplayName = NTKCameraSecurity;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -610,9 +611,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rnnativebase;
-				PRODUCT_NAME = RnNativeBaseApp;
-				SWIFT_OBJC_BRIDGING_HEADER = "RnNativeBaseApp-Bridging-Header.h";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ntk.camerasecurity";
+				PRODUCT_NAME = "NTKCameraSecurity";
+				SWIFT_OBJC_BRIDGING_HEADER = "NTKCameraSecurity-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -621,15 +622,16 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7677E7972337D9A1783BCF49 /* Pods-RnNativeBaseApp.release.xcconfig */;
+			baseConfigurationReference = 7677E7972337D9A1783BCF49 /* Pods-NTKCameraSecurity.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = RnNativeBaseApp/RnNativeBaseApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = NTKCameraSecurity/NTKCameraSecurity.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X4K5K8T375;
-				INFOPLIST_FILE = RnNativeBaseApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = RnNativeBaseApp;
+				INFOPLIST_FILE = "NTKCameraSecurity/Info.plist";
+             INFOPLIST_KEY_CFBundleDisplayName = "NTK Camera Security";
+				INFOPLIST_KEY_CFBundleDisplayName = NTKCameraSecurity;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -640,9 +642,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rnnativebase;
-				PRODUCT_NAME = RnNativeBaseApp;
-				SWIFT_OBJC_BRIDGING_HEADER = "RnNativeBaseApp-Bridging-Header.h";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ntk.camerasecurity";
+				PRODUCT_NAME = "NTKCameraSecurity";
+				SWIFT_OBJC_BRIDGING_HEADER = "NTKCameraSecurity-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -810,7 +812,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "RnNativeBaseAppTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "NTKCameraSecurityTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -819,7 +821,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RnNativeBaseApp" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "NTKCameraSecurity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -828,7 +830,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "RnNativeBaseApp" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "NTKCameraSecurity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

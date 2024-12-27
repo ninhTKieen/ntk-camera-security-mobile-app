@@ -1,4 +1,4 @@
-package com.rnnativebase.reactVlcPlayer;
+package com.ntk.camerasecurity.reactVlcPlayer;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

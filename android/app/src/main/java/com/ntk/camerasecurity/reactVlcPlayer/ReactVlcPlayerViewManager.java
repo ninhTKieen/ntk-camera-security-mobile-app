@@ -1,4 +1,4 @@
-package com.rnnativebase.reactVlcPlayer;
+package com.ntk.camerasecurity.reactVlcPlayer;
 
 import android.content.Context;
 import android.text.TextUtils;

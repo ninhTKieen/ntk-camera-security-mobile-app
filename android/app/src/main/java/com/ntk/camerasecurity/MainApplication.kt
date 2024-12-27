@@ -1,4 +1,4 @@
-package com.rnnativebase
+package com.ntk.camerasecurity
 
 import android.app.Application
 import com.facebook.react.PackageList
@@ -10,7 +10,7 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
-import com.rnnativebase.reactVlcPlayer.ReactVlcPlayerPackage;
+import com.ntk.camerasecurity.reactVlcPlayer.ReactVlcPlayerPackage;
 
 class MainApplication : Application(), ReactApplication {
 
