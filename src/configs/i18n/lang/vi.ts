@@ -227,6 +227,7 @@ export const vi = {
     delBtn: 'Xóa thiết bị',
     deleteSuccess: 'Xóa thiết bị thành công!',
     deleteError: 'Xóa thiết bị thất bại!',
+    addImage: 'Thêm ảnh',
   },
 
   media: {

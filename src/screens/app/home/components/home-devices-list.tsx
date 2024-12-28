@@ -10,10 +10,22 @@ import {
   TGetDetailEstateDevice,
 } from '@src/features/estates/estate.model';
 import { useIsFetching, useQueryClient } from '@tanstack/react-query';
-import { Box, FlatList, Pressable, Stack, Text } from 'native-base';
+import {
+  Box,
+  FlatList,
+  Image,
+  Pressable,
+  Stack,
+  Text,
+  useTheme,
+} from 'native-base';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ListRenderItem, RefreshControl } from 'react-native';
+import { Dimensions, ListRenderItem, RefreshControl } from 'react-native';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const GAP = 5;
+const ITEM_WIDTH = (SCREEN_WIDTH - 16 * 2 - 2 * GAP) / 2;
 
 const ListEmptyComponent = () => {
   const { t } = useTranslation();
@@ -29,6 +41,7 @@ const HomeDevicesList = () => {
   const queryClient = useQueryClient();
   const navigation =
     useNavigation<StackNavigationProp<THomeStackParamList, 'Home'>>();
+  const theme = useTheme();
 
   const homeId = Number(storage.getString(HOME_ID_KEY));
 
@@ -43,7 +56,7 @@ const HomeDevicesList = () => {
   const renderItem: ListRenderItem<TGetDetailEstateDevice> = ({ item }) => {
     return (
       <Pressable
-        style={{ flex: 1 }}
+        style={{ width: ITEM_WIDTH }}
         onPress={() => {
           navigation.navigate('DeviceDetail', {
             deviceId: item.id,
@@ -65,8 +78,27 @@ const HomeDevicesList = () => {
               justifyContent="space-between"
               flex={1}
             >
-              <SvgIcon name="security-camera" width={50} height={50} />
-              <Text maxW="1/2" numberOfLines={1}>
+              {item.imageUrl ? (
+                <Image
+                  source={{ uri: item.imageUrl }}
+                  alt={item.name}
+                  size={50}
+                  borderRadius={25}
+                />
+              ) : (
+                <SvgIcon
+                  name="camera"
+                  width={50}
+                  height={50}
+                  color={theme.colors.primary[600]}
+                />
+              )}
+              <Text
+                fontWeight="bold"
+                color={theme.colors.primary[600]}
+                maxW="1/2"
+                numberOfLines={1}
+              >
                 {item.model ?? '---'}
               </Text>
             </Stack>
@@ -96,7 +128,6 @@ const HomeDevicesList = () => {
         renderItem={renderItem}
         numColumns={2}
         columnWrapperStyle={{
-          gap: 20,
           justifyContent: 'space-between',
         }}
         ItemSeparatorComponent={() => <Box h={4} />}

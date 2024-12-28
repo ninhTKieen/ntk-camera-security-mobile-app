@@ -52,7 +52,7 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = React.memo(
           segmentedControlWidth.value = event.nativeEvent.layout.width;
         }}
         shadow={1}
-        bgColor="muted.200"
+        bgColor="white"
         style={[
           styles.container,
           {
@@ -63,7 +63,7 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = React.memo(
         ]}
       >
         <AnimatedBox
-          bgColor="warmGray.100"
+          bgColor="muted.200"
           style={[itemWidthStyle, rStyle, styles.activeBox]}
         />
         {options.map((option, index) => {

@@ -12,6 +12,8 @@ export type TCreateDevice = {
   serial?: string;
   brand?: string;
   mac?: string;
+  imageUrl?: any;
+  imageUrlId?: string;
 };
 
 export type TGetDetailEstateDeviceMember = {
@@ -55,4 +57,6 @@ export type TUpdateDevice = {
   brand?: string | null;
   mac?: string | null;
   faceRecognitionEnabled?: boolean | null;
+  imageUrl?: any;
+  imageUrlId?: string;
 };

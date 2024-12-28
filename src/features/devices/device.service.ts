@@ -9,6 +9,19 @@ import {
 
 class DeviceService {
   async create(data: TCreateDevice) {
+    if (data?.imageUrl) {
+      if (typeof data.imageUrl === 'object') {
+        const response = await httpUtil.uploadImage({
+          file: data.imageUrl,
+        });
+
+        data = {
+          ...data,
+          imageUrl: response.data.imagePublicUrl,
+          imageUrlId: response.data.imagePublicId,
+        };
+      }
+    }
     const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
       method: 'POST',
       url: '/api/devices/create',
@@ -30,6 +43,19 @@ class DeviceService {
   }
 
   async update(deviceId: number, data: TUpdateDevice) {
+    if (data?.imageUrl) {
+      if (typeof data.imageUrl === 'object') {
+        const response = await httpUtil.uploadImage({
+          file: data.imageUrl,
+        });
+
+        data = {
+          ...data,
+          imageUrl: response.data.imagePublicUrl,
+          imageUrlId: response.data.imagePublicId,
+        };
+      }
+    }
     const response = await httpUtil.request<IBaseHttpResponse<boolean>>({
       method: 'PATCH',
       url: `/api/devices/${deviceId}`,

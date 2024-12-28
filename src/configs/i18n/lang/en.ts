@@ -227,6 +227,7 @@ export const en = {
     delBtn: 'Delete Device',
     deleteSuccess: 'Delete device successfully!',
     deleteError: 'Delete device failed!',
+    addImage: 'Add Image',
   },
 
   media: {

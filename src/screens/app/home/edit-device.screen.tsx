@@ -2,11 +2,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { CommonOutlineInput } from '@src/components/common-outline-input';
+import PhotoModal from '@src/components/photo-modal';
 import SubLayout from '@src/components/sub-layout';
+import { SvgIcon } from '@src/components/svg-icons';
 import { HOME_ID_KEY } from '@src/configs/constant';
 import { i18nKeys } from '@src/configs/i18n';
 import { storage } from '@src/configs/mmkv.storage';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
+import { TLocalImgProps } from '@src/features/common/common.model';
 import { TUpdateDevice } from '@src/features/devices/device.model';
 import deviceService from '@src/features/devices/device.service';
 import { EEstateRole } from '@src/features/estates/estate.model';
@@ -14,11 +17,22 @@ import { useEstateStore } from '@src/features/estates/estate.store';
 import { useApp } from '@src/hooks/use-app.hook';
 import { isObjectDiff } from '@src/utils/common.util';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Box, Button, Row } from 'native-base';
-import React, { useCallback, useMemo } from 'react';
+import {
+  Box,
+  Button,
+  Image,
+  Pressable,
+  Row,
+  ScrollView,
+  useTheme,
+} from 'native-base';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { Dimensions, StyleSheet } from 'react-native';
 import * as yup from 'yup';
+
+const { width } = Dimensions.get('window');
 
 const EditDeviceScreen = () => {
   const navigation =
@@ -28,8 +42,11 @@ const EditDeviceScreen = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { toastMessage } = useApp();
+  const theme = useTheme();
 
   const { homeRole } = useEstateStore();
+
+  const [openPhotoModal, setOpenPhotoModal] = useState(false);
 
   const deviceId = route.params.deviceId;
 
@@ -107,7 +124,12 @@ const EditDeviceScreen = () => {
     mac: yup.string().nullable(),
   });
 
-  const { watch, handleSubmit, setValue } = useForm<TUpdateDevice>({
+  const {
+    watch,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<TUpdateDevice>({
     resolver: yupResolver(schema),
     defaultValues: {},
     values: getDeviceQuery.data as TUpdateDevice,
@@ -134,67 +156,141 @@ const EditDeviceScreen = () => {
     updateDeviceMutation.mutate(data);
   };
 
-  const onError = (errors: any) => {
+  const onError = (_errors: any) => {
     console.log(errors);
   };
 
   return (
     <SubLayout title={t(i18nKeys.devices.edit)}>
       <Box bg="white" flex={1} p={2}>
-        <CommonOutlineInput
-          label={t(i18nKeys.devices.name)}
-          value={watch('name')}
-          onChangeText={(text) => setFormValue('name', text)}
-        />
+        <ScrollView
+          flex={1}
+          contentContainerStyle={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}
+        >
+          <Pressable alignSelf="center" onPress={() => setOpenPhotoModal(true)}>
+            {({ isPressed }) => (
+              <>
+                {watch('imageUrl') ? (
+                  <Box style={styles.imageLocalContainer} shadow={2}>
+                    <Image
+                      source={{ uri: watch('imageUrl').uri }}
+                      style={styles.imageLocalContainer}
+                      alt="face-recognition"
+                      borderRadius="full"
+                    />
+                  </Box>
+                ) : (
+                  <Box
+                    borderWidth={1}
+                    borderColor={errors.imageUrl ? 'red.700' : 'gray.300'}
+                    borderRadius="full"
+                    borderStyle="dashed"
+                    opacity={isPressed ? 0.5 : 1}
+                    style={styles.imageUrlContainer}
+                  >
+                    <SvgIcon
+                      name="camera"
+                      width={60}
+                      height={60}
+                      color={theme.colors.primary[700]}
+                    />
 
-        <CommonOutlineInput
-          label={t(i18nKeys.devices.networkStream)}
-          value={watch('streamLink')}
-          onChangeText={(text) => setFormValue('streamLink', text)}
-        />
+                    <Button
+                      m={2}
+                      onPress={() => {
+                        setOpenPhotoModal(true);
+                      }}
+                    >
+                      {t(i18nKeys.devices.addImage)}
+                    </Button>
+                  </Box>
+                )}
+              </>
+            )}
+          </Pressable>
 
-        <CommonOutlineInput
-          label={t(i18nKeys.devices.description)}
-          value={watch('description') as string}
-          onChangeText={(text) => setFormValue('description', text)}
-          isDescription
-        />
+          <CommonOutlineInput
+            label={t(i18nKeys.devices.name)}
+            value={watch('name')}
+            onChangeText={(text) => setFormValue('name', text)}
+          />
 
-        <CommonOutlineInput
-          label={t(i18nKeys.devices.model)}
-          value={watch('model') as string}
-          onChangeText={(text) => setFormValue('model', text)}
-        />
+          <CommonOutlineInput
+            label={t(i18nKeys.devices.networkStream)}
+            value={watch('streamLink')}
+            onChangeText={(text) => setFormValue('streamLink', text)}
+          />
 
-        <CommonOutlineInput
-          label={t(i18nKeys.devices.brand)}
-          value={watch('brand') as string}
-          onChangeText={(text) => setFormValue('brand', text)}
-        />
+          <CommonOutlineInput
+            label={t(i18nKeys.devices.description)}
+            value={watch('description') as string}
+            onChangeText={(text) => setFormValue('description', text)}
+            isDescription
+          />
 
-        <Row mt="auto" space={4}>
-          {homeRole === EEstateRole.OWNER && (
+          <CommonOutlineInput
+            label={t(i18nKeys.devices.model)}
+            value={watch('model') as string}
+            onChangeText={(text) => setFormValue('model', text)}
+          />
+
+          <CommonOutlineInput
+            label={t(i18nKeys.devices.brand)}
+            value={watch('brand') as string}
+            onChangeText={(text) => setFormValue('brand', text)}
+          />
+
+          <Row mt="auto" space={4}>
+            {homeRole === EEstateRole.OWNER && (
+              <Button
+                flex={1}
+                onPress={() => deleteDeviceMutation.mutate()}
+                colorScheme="error"
+                variant="outline"
+              >
+                {t(i18nKeys.devices.delBtn)}
+              </Button>
+            )}
+
             <Button
               flex={1}
-              onPress={() => deleteDeviceMutation.mutate()}
-              colorScheme="error"
-              variant="outline"
+              onPress={handleSubmit(onSubmit, onError)}
+              disabled={!isDataChanged}
             >
-              {t(i18nKeys.devices.delBtn)}
+              {t(i18nKeys.devices.editBtn)}
             </Button>
-          )}
+          </Row>
 
-          <Button
-            flex={1}
-            onPress={handleSubmit(onSubmit, onError)}
-            disabled={!isDataChanged}
-          >
-            {t(i18nKeys.devices.editBtn)}
-          </Button>
-        </Row>
+          <PhotoModal
+            isOpen={openPhotoModal}
+            onClose={() => setOpenPhotoModal(false)}
+            setValues={(values: TLocalImgProps) => {
+              setValue('imageUrl', values);
+            }}
+            cropping
+          />
+        </ScrollView>
       </Box>
     </SubLayout>
   );
 };
+
+const styles = StyleSheet.create({
+  imageUrlContainer: {
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    width: width * 0.5,
+    aspectRatio: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageLocalContainer: {
+    width: width * 0.5,
+    aspectRatio: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
 export default EditDeviceScreen;
