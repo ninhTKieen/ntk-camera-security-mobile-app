@@ -17,20 +17,21 @@ import {
 } from '@shopify/react-native-skia';
 import IconGeneral from '@src/components/icon-general';
 import SubLayout from '@src/components/sub-layout';
-import { VLCPlayer } from '@src/components/vlc-player';
 import { HOME_ID_KEY } from '@src/configs/constant';
 import { storage } from '@src/configs/mmkv.storage';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
+import { useAppStore } from '@src/features/common/app.store';
 import deviceService from '@src/features/devices/device.service';
 import { TResponseRecognizedFace } from '@src/features/recognized-faces/recognized-face.model';
 import socketService from '@src/features/socket/socket.service';
 import { requestExternalStoragePermission } from '@src/utils/common.util';
 import { useQuery } from '@tanstack/react-query';
-import { Box, Button, Spinner, useTheme } from 'native-base';
+import { Box, useTheme } from 'native-base';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Platform, StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import RNBUtil from 'react-native-blob-util';
+
+import { RTSPView, RtspViewRef } from './components/rtsp-view';
 
 const fontFamily = Platform.select({ ios: 'Helvetica', default: 'serif' });
 const fontStyle = {
@@ -46,11 +47,7 @@ const DeviceDetailScreen = () => {
     useNavigation<StackNavigationProp<THomeStackParamList, 'DeviceDetail'>>();
   const route = useRoute<RouteProp<THomeStackParamList, 'DeviceDetail'>>();
   const isFocused = useIsFocused();
-  const { t } = useTranslation();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [base64, setBase64] = useState<string | undefined>(undefined);
-  const [lastProgressTime, setLastProgressTime] = useState<number>(0);
   const [recogFaces, setRecognizedFaces] = useState<TResponseRecognizedFace[]>(
     [],
   );
@@ -58,8 +55,11 @@ const DeviceDetailScreen = () => {
     x: 1,
     y: 1,
   });
+  const { setHideBottomTabBar } = useAppStore();
 
-  const ref = useRef<View>(null);
+  const ref = useRef<RtspViewRef>(null);
+  const lastSnapshotTime = useRef<number>(0);
+
   const theme = useTheme();
 
   const { deviceId, deviceName } = route.params;
@@ -71,19 +71,28 @@ const DeviceDetailScreen = () => {
     enabled: !!deviceId,
   });
 
-  const sendMessageToServer = (sendBase64: string) => {
-    socketService.send({
-      channel: 'device/send-base64',
-      data: {
-        base64: sendBase64,
-        estateId: homeId,
-        deviceId,
-      },
-    });
-  };
+  const sendMessageToServer = useCallback(
+    (sendBase64: string) => {
+      socketService.send({
+        channel: 'device/send-base64',
+        data: {
+          base64: sendBase64,
+          estateId: homeId,
+          deviceId,
+        },
+      });
+    },
+    [deviceId, homeId],
+  );
 
   const saveFileToLibrary = useCallback(async () => {
     const result = await requestExternalStoragePermission();
+
+    console.log('Request external storage permission:', result);
+
+    const snapshot = await makeImageFromView(ref.current?.rctView as any);
+
+    const base64String = snapshot?.encodeToBase64(ImageFormat.PNG, 50);
 
     if (result) {
       const pictureBasePath = Platform.select({
@@ -93,24 +102,27 @@ const DeviceDetailScreen = () => {
 
       const fileName = `camera_snapshot_${new Date().getTime()}.png`;
 
-      if (base64) {
+      if (base64String) {
         try {
           await RNBUtil.fs.writeFile(
             `${pictureBasePath}/${fileName}`,
-            base64 as string,
+            base64String as string,
             'base64',
           );
 
-          console.log('File written successfully');
+          console.log(
+            'File written successfully',
+            `${pictureBasePath}/${fileName}`,
+          );
         } catch (error) {
           console.error('Error writing file:', error);
         }
       }
     }
-  }, [base64]);
+  }, []);
 
-  const takeSnapshot = async () => {
-    const snapshot = await makeImageFromView(ref);
+  const takeSnapshot = useCallback(async () => {
+    const snapshot = await makeImageFromView(ref.current?.rctView as any);
 
     const snapshotWidth = snapshot?.width();
     const snapshotHeight = snapshot?.height();
@@ -119,7 +131,7 @@ const DeviceDetailScreen = () => {
       return;
     }
 
-    ref.current?.measureInWindow((x, y, width, height) => {
+    ref.current?.rctView?.current?.measureInWindow((x, y, width, height) => {
       if (!width || !height) {
         return;
       }
@@ -136,21 +148,32 @@ const DeviceDetailScreen = () => {
       const base64String = snapshot?.encodeToBase64(ImageFormat.PNG, 50);
 
       if (base64String) {
-        setBase64(base64String);
         sendMessageToServer(base64String);
       }
     });
-  };
+  }, [sendMessageToServer]);
 
-  const handleVideoProgress = () => {
+  const handleVideoProgress = useCallback(() => {
     const now = Date.now();
-    if (now - lastProgressTime > 1500) {
-      setLastProgressTime(now);
+    if (now - lastSnapshotTime.current >= 1500) {
+      lastSnapshotTime.current = now;
       takeSnapshot();
-    } else {
-      // console.log('Skipping snapshot');
     }
-  };
+    if (ref.current && ref.current.requestRef) {
+      ref.current.requestRef.current =
+        requestAnimationFrame(handleVideoProgress);
+    }
+  }, [takeSnapshot]);
+
+  const handleJoinRoom = useCallback(() => {
+    socketService.send({
+      channel: 'device/join-room',
+      data: {
+        deviceId,
+        estateId: homeId,
+      },
+    });
+  }, [deviceId, homeId]);
 
   useEffect(() => {
     socketService.received({
@@ -198,6 +221,18 @@ const DeviceDetailScreen = () => {
     });
   }, [deviceId, homeId, navigation]);
 
+  useEffect(() => {
+    if (isFocused) {
+      setHideBottomTabBar(true);
+      handleJoinRoom();
+    }
+
+    return () => {
+      setHideBottomTabBar(false);
+      socketService.off('device/join-room');
+    };
+  }, [handleJoinRoom, isFocused, setHideBottomTabBar]);
+
   return (
     <SubLayout
       title={deviceName}
@@ -214,61 +249,22 @@ const DeviceDetailScreen = () => {
         />
       }
     >
-      <Box flex={1} bg="gray.100" p={4}>
+      <Box flex={1} bg="white" position="relative" h="full" p={4}>
         {getDeviceQuery.data && (
           <>
-            {isLoading && <Spinner size="lg" />}
-            <Box
-              ref={ref}
-              w="full"
-              style={{
-                aspectRatio: 16 / 9,
-                display: isFocused ? 'flex' : 'none',
-              }}
-              onLayout={(event) => {
-                console.log('event', event.nativeEvent.layout);
-              }}
-            >
-              <VLCPlayer
-                style={{ width: '100%', height: '100%' }}
-                source={{
-                  uri: encodeURI(getDeviceQuery.data.streamLink),
-                  initType: 2,
-                  hwDecoderEnabled: 1,
-                  hwDecoderForced: 1,
-                  initOptions: [
-                    '--rtsp-tcp',
-                    '--network-caching=500',
-                    '--rtsp-caching=500',
-                    '--no-stats',
-                    '--tcp-caching=500',
-                    '--realrtsp-caching=500',
-                  ],
-                }}
-                paused={false}
-                onVideoError={(event) => {
-                  console.log('error', event);
-                  setIsLoading(false);
-                }}
-                onVideoLoadStart={() => {
-                  setIsLoading(false);
-                  socketService.send({
-                    channel: 'device/join-room',
-                    data: {
-                      deviceId,
-                      estateId: homeId,
-                    },
-                  });
-                }}
-                onVideoProgress={handleVideoProgress}
-              />
+            <Box>
+              {getDeviceQuery.data.streamLink && (
+                <RTSPView
+                  relayId="fe:fb:86:4d:fe:92"
+                  rtsp={getDeviceQuery.data.streamLink}
+                  ref={ref}
+                  saveFileToLibrary={saveFileToLibrary}
+                  handleVideoProgress={handleVideoProgress}
+                />
+              )}
             </Box>
           </>
         )}
-
-        <Button mt={4} onPress={saveFileToLibrary} zIndex={100}>
-          {t('media.snapshot')}
-        </Button>
 
         {recogFaces.length > 0 && (
           <Box style={StyleSheet.absoluteFill}>

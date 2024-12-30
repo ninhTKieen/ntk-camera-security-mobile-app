@@ -3,6 +3,8 @@ import CameraIcon from '@src/assets/icons/camera.svg';
 import FaceRecognitionList from '@src/assets/icons/face-recognition-list.svg';
 import FaceRecognitionIcon from '@src/assets/icons/face-recognition.svg';
 import HouseHomeIcon from '@src/assets/icons/house.svg';
+import PauseCircleOutlineIcon from '@src/assets/icons/pause-circle-outlined.svg';
+import PlayCircleOutlineIcon from '@src/assets/icons/play-circle-outlined.svg';
 import SecurityCameraIcon from '@src/assets/icons/security-camera.svg';
 import React from 'react';
 import { SvgProps } from 'react-native-svg';
@@ -14,6 +16,8 @@ export const iconsMap = {
   'face-recognition': FaceRecognitionIcon,
   camera: CameraIcon,
   'face-recognition-list': FaceRecognitionList,
+  'pause-circle-outlined': PauseCircleOutlineIcon,
+  'play-circle-outlined': PlayCircleOutlineIcon,
 };
 
 type TIconProps = {

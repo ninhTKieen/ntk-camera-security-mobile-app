@@ -53,3 +53,18 @@ export type TParamsGetList = {
   sort?: string;
   order?: 'ASC' | 'DESC';
 };
+
+export type RTCIceServer = {
+  credential?: string;
+  url?: string;
+  urls?: string | string[];
+  username?: string;
+};
+
+export type RTCConfiguration = {
+  bundlePolicy?: 'balanced' | 'max-compat' | 'max-bundle';
+  iceCandidatePoolSize?: number;
+  iceServers?: RTCIceServer[];
+  iceTransportPolicy?: 'all' | 'relay';
+  rtcpMuxPolicy?: 'negotiate' | 'require';
+};
