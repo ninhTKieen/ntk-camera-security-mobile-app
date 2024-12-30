@@ -33,6 +33,7 @@
     "axios": "^1.7.2",
     "buffer": "^6.0.3",
     "crypto-js": "^4.2.0",
+    "event-target-shim": "6.0.2",
     "fast-xml-parser": "^4.5.0",
     "i18n-keys": "^1.0.8",
     "i18next": "^23.11.5",
@@ -62,6 +63,7 @@
     "react-native-udp": "^4.1.7",
     "react-native-vector-icons": "^10.1.0",
     "react-native-view-shot": "^4.0.2",
+    "react-native-webrtc": "^124.0.4",
     "socket.io-client": "^4.8.1",
     "yup": "^1.4.0",
     "zustand": "^4.5.4"
