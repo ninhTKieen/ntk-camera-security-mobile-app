@@ -17,11 +17,14 @@ import {
   Pressable,
   Stack,
   Text,
+  useDisclose,
   useTheme,
 } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Dimensions, ListRenderItem, RefreshControl } from 'react-native';
+
+import { ChooseRelayModal } from './choose-relay-modal';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const GAP = 5;
@@ -41,7 +44,13 @@ const HomeDevicesList = () => {
   const queryClient = useQueryClient();
   const navigation =
     useNavigation<StackNavigationProp<THomeStackParamList, 'Home'>>();
+  const { isOpen, onClose, onOpen } = useDisclose();
   const theme = useTheme();
+
+  const [device, setDevice] = useState<{
+    deviceId: number;
+    deviceName: string;
+  } | null>(null);
 
   const homeId = Number(storage.getString(HOME_ID_KEY));
 
@@ -58,10 +67,15 @@ const HomeDevicesList = () => {
       <Pressable
         style={{ width: ITEM_WIDTH }}
         onPress={() => {
-          navigation.navigate('DeviceDetail', {
+          // navigation.navigate('DeviceDetail', {
+          //   deviceId: item.id,
+          //   deviceName: item.name,
+          // });
+          setDevice({
             deviceId: item.id,
             deviceName: item.name,
           });
+          onOpen();
         }}
       >
         {({ isPressed }) => (
@@ -132,6 +146,19 @@ const HomeDevicesList = () => {
         }}
         ItemSeparatorComponent={() => <Box h={4} />}
         ListEmptyComponent={ListEmptyComponent}
+      />
+
+      <ChooseRelayModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onChooseRelay={(relayId) => {
+          device &&
+            navigation.navigate('DeviceDetail', {
+              deviceId: device.deviceId as number,
+              relayId,
+              deviceName: device.deviceName,
+            });
+        }}
       />
     </Box>
   );

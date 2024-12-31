@@ -5,6 +5,7 @@ export type THomeStackParamList = {
   DeviceDetail: {
     deviceId: number;
     deviceName: string;
+    relayId: string;
   };
   AddRecognition: undefined;
   RecognitionDetail: {

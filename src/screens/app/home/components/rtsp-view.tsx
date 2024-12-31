@@ -1,6 +1,6 @@
 import { useIsFocused } from '@react-navigation/native';
 import { SvgIcon } from '@src/components/svg-icons';
-import { APP_API_ENDPOINT } from '@src/configs/constant';
+import { APP_API_ENDPOINT, RCT_CONFIGS } from '@src/configs/constant';
 import { Box, IconButton, Row, Spinner, Text, useTheme } from 'native-base';
 import React, {
   forwardRef,
@@ -19,6 +19,7 @@ import {
   RTCSessionDescription,
   RTCView,
 } from 'react-native-webrtc';
+import { useEffectOnce } from 'react-use';
 import { Socket, io } from 'socket.io-client';
 
 interface IProps {
@@ -57,13 +58,7 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
 
     const createPeerConnection = () => {
       try {
-        pc.current = new RTCPeerConnection({
-          iceServers: [
-            {
-              urls: 'stun:stun.l.google.com:19302',
-            },
-          ],
-        });
+        pc.current = new RTCPeerConnection(RCT_CONFIGS);
 
         pc.current.addEventListener('icecandidate', (e) => {
           if (e.candidate) {
@@ -83,14 +78,13 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
             setRemoteStream(e.streams[0]);
           }
         });
-
-        console.log('ok');
       } catch (error) {
         console.log('Error creating peer connection:', error);
       }
     };
 
     const handleHangUp = useCallback(() => {
+      console.log('hang up');
       socket.current?.emit('disconnectStream');
 
       if (pc.current) {
@@ -143,7 +137,6 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
 
     const handleStartBtn = useCallback(() => {
       if (pc.current) {
-        console.log('Peer connection already exists.');
         return;
       }
       setStartBtnDisabled(true);
@@ -157,8 +150,7 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
 
       socket.current.on('connect', () => {
         setStatus('Connected to signaling server');
-        handleStartBtn();
-        // setStartBtnDisabled(false);
+        // handleStartBtn();
       });
 
       socket.current.on('disconnect', () => {
@@ -187,6 +179,7 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
       });
       try {
         setStartBtnDisabled(true);
+        console.log('Requesting stream...');
         setStatus('Requesting stream...');
         createPeerConnection();
         socket.current?.emit('requestStream', {
@@ -207,10 +200,14 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
     }, [handleHangUp, isFocused]);
 
     // call handleStartBtn at the first time (only once)
-    useEffect(() => {
+    // useEffect(() => {
+    //   handleStartBtn();
+    //   // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, []);
+
+    useEffectOnce(() => {
       handleStartBtn();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    });
 
     useEffect(() => {
       if (remoteStream) {

@@ -48,6 +48,8 @@ const DeviceDetailScreen = () => {
   const route = useRoute<RouteProp<THomeStackParamList, 'DeviceDetail'>>();
   const isFocused = useIsFocused();
 
+  const relayId = route.params.relayId;
+
   const [recogFaces, setRecognizedFaces] = useState<TResponseRecognizedFace[]>(
     [],
   );
@@ -253,9 +255,9 @@ const DeviceDetailScreen = () => {
         {getDeviceQuery.data && (
           <>
             <Box>
-              {getDeviceQuery.data.streamLink && (
+              {getDeviceQuery.data.streamLink && relayId && (
                 <RTSPView
-                  relayId="fe:fb:86:4d:fe:92"
+                  relayId={relayId}
                   rtsp={getDeviceQuery.data.streamLink}
                   ref={ref}
                   saveFileToLibrary={saveFileToLibrary}
