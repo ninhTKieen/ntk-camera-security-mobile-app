@@ -157,7 +157,7 @@ const DeviceDetailScreen = () => {
 
   const handleVideoProgress = useCallback(() => {
     const now = Date.now();
-    if (now - lastSnapshotTime.current >= 1500) {
+    if (now - lastSnapshotTime.current >= 60000) {
       lastSnapshotTime.current = now;
       takeSnapshot();
     }

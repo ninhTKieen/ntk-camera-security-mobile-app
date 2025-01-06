@@ -22,8 +22,8 @@ export const CURRENT_DATE_FORMAT = 'dddd, DD/MMM/YYYY';
 
 export const ICE_SERVERS = [
   {
-    // urls: 'stun:stun.l.google.com:19302',
-    urls: 'stun:stun.relay.metered.ca:80',
+    urls: 'stun:stun.l.google.com:19302',
+    // urls: 'stun:stun.relay.metered.ca:80',
   },
   {
     urls: 'turn:ntkieen.site:34780',
@@ -46,22 +46,6 @@ export const ICE_SERVERS = [
     credential: 'test',
   },
 ];
-
-// export const ICE_SERVERS = [
-//   {
-//     urls: 'stun:stun.relay.metered.ca:80',
-//   },
-//   {
-//     urls: 'turn:36.50.135.31:34780',
-//     username: 'test',
-//     credential: 'test',
-//   },
-//   {
-//     urls: 'turn:36.50.135.31:30443?transport=tcp',
-//     username: 'test',
-//     credential: 'test',
-//   },
-// ];
 
 export const RCT_CONFIGS: RTCConfiguration = {
   iceServers: ICE_SERVERS,

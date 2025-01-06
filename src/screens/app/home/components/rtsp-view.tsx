@@ -22,6 +22,8 @@ import {
 import { useEffectOnce } from 'react-use';
 import { Socket, io } from 'socket.io-client';
 
+import { DirectionsControl, TDirection } from './directions-control';
+
 interface IProps {
   relayId: string;
   rtsp: string;
@@ -53,7 +55,7 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
     const [startBtnDisabled, setStartBtnDisabled] = useState(false);
     const [spinning, setSpinning] = useState(false);
     const [status, setStatus] = useState<string | null>(null);
-
+    const [isPlaying, setIsPlaying] = useState(false);
     const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
 
     const createPeerConnection = () => {
@@ -193,6 +195,18 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
       }
     }, [handleCandidate, handleHangUp, handleOffer, relayId, rtsp]);
 
+    const handlePtzCommand = useCallback(
+      (direction: TDirection) => {
+        socket.current?.emit('ptzCommand', {
+          relayId,
+          command: direction,
+          speed: 0.5,
+          rtsp,
+        });
+      },
+      [relayId, rtsp],
+    );
+
     useEffect(() => {
       if (!isFocused) {
         handleHangUp();
@@ -282,6 +296,14 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
             disabled={!startBtnDisabled}
           />
         </Row>
+
+        <DirectionsControl
+          handleControl={handlePtzCommand}
+          handleControlStream={() => {}}
+          disabled={!startBtnDisabled}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+        />
 
         <Text
           style={{
