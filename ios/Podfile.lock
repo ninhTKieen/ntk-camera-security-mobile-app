@@ -144,7 +144,6 @@ PODS:
   - MMKV (2.0.0):
     - MMKVCore (~> 2.0.0)
   - MMKVCore (2.0.0)
-  - MobileVLCKit (3.6.0)
   - nanopb (2.30910.0):
     - nanopb/decode (= 2.30910.0)
     - nanopb/encode (= 2.30910.0)
@@ -1548,7 +1547,6 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - GoogleUtilities
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
-  - MobileVLCKit
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
@@ -1636,7 +1634,6 @@ SPEC REPOS:
     - libwebp
     - MMKV
     - MMKVCore
-    - MobileVLCKit
     - nanopb
     - PromisesObjC
     - SDWebImage
@@ -1818,7 +1815,6 @@ SPEC CHECKSUMS:
   libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
   MMKV: f7d1d5945c8765f97f39c3d121f353d46735d801
   MMKVCore: c04b296010fcb1d1638f2c69405096aac12f6390
-  MobileVLCKit: 8fe98ae53b7464f32e4bdf527cc7d53053e4d3a5
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
@@ -1893,6 +1889,6 @@ SPEC CHECKSUMS:
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: 88480008ccacea6301ff7bf58726e27a72931c8d
 
-PODFILE CHECKSUM: be961f5f5a3a8b13de64145835341d66270fbaab
+PODFILE CHECKSUM: a27b1234d66cbf3f014131377bb13f5f34ee87af
 
 COCOAPODS: 1.14.3
