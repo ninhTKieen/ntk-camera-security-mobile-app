@@ -5,7 +5,6 @@ import { TAppStackParamList } from '@src/configs/routes/app.route';
 import { useAppStore } from '@src/features/common/app.store';
 import socketService from '@src/features/socket/socket.service';
 import AccountNavigator from '@src/screens/app/accounts';
-import DashboardScreen from '@src/screens/app/dashboard/dashboard.screen';
 import EventScreen from '@src/screens/app/events/event.screen';
 import HomeStack from '@src/screens/app/home';
 import { useTheme } from 'native-base';
@@ -54,22 +53,6 @@ const AppNavigator = (): JSX.Element => {
           tabBarLabel: t(i18nKeys.bottomTab.home),
         }}
         component={HomeStack}
-      />
-      <Tab.Screen
-        name="Dashboard"
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <IconGeneral
-              color={color}
-              type="MaterialCommunityIcons"
-              size={28}
-              name={focused ? 'view-dashboard' : 'view-dashboard-outline'}
-            />
-          ),
-          tabBarActiveTintColor: color,
-          tabBarLabel: t(i18nKeys.bottomTab.dashboard),
-        }}
-        component={DashboardScreen}
       />
       <Tab.Screen
         name="EventNavigator"
