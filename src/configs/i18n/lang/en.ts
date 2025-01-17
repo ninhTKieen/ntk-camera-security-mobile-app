@@ -220,6 +220,16 @@ export const en = {
     recognitionList: 'Recognition List',
     emptyList: 'No device yet',
     emptyRecognitionList: 'No recognition yet',
+    edit: 'Edit Device',
+    updateSuccess: 'Update device successfully!',
+    updateError: 'Update device failed!',
+    editBtn: 'Edit',
+    delBtn: 'Delete Device',
+    deleteSuccess: 'Delete device successfully!',
+    deleteError: 'Delete device failed!',
+    addImage: 'Add Image',
+    humanDetection: 'Human Detections',
+    noImages: 'No images yet',
   },
 
   media: {
@@ -246,5 +256,9 @@ export const en = {
     descriptionPlaceholder: 'Enter description',
     image: 'Select Image',
     idCode: 'Identification Code',
+    updateSuccess: 'Update recognition successfully!',
+    updateError: 'Update recognition failed!',
+    deleteSuccess: 'Delete recognition successfully!',
+    deleteError: 'Delete recognition failed!',
   },
 };

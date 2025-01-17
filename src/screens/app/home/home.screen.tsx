@@ -5,24 +5,53 @@ import { storage } from '@src/configs/mmkv.storage';
 import {
   EEstateMemberStatus,
   EEstateRole,
+  TGetDetailEstate,
   TGetEstateListResponse,
 } from '@src/features/estates/estate.model';
 import estateService from '@src/features/estates/estate.service';
+import { useEstateStore } from '@src/features/estates/estate.store';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { Box, Pressable, Text, useDisclose } from 'native-base';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
 
 import ChooseHomeModal from './components/choose-home-modal';
 import CreateDeviceModal from './components/create-device-modal';
 import HomeTabList from './components/home-tab-list';
 
+const AnimatedBox = Animated.createAnimatedComponent(Box);
+
 const HomeScreen = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclose();
   const [isCreateDeviceModalOpen, setIsCreateDeviceModalOpen] = useState(false);
+  const { setHomeRole } = useEstateStore();
 
   const homeId = Number(storage.getString(HOME_ID_KEY));
+
+  const anim = useSharedValue(0);
+
+  const onModalWillShow = useCallback(() => {
+    anim.value = withTiming(1);
+  }, [anim]);
+
+  const onModalWillClose = useCallback(() => {
+    anim.value = withTiming(0);
+  }, [anim]);
+
+  const selectData = useCallback(
+    (data: TGetDetailEstate) => {
+      setHomeRole(data.role);
+      return data;
+    },
+    [setHomeRole],
+  );
 
   const estatesListQuery = useInfiniteQuery({
     queryKey: [
@@ -49,6 +78,7 @@ const HomeScreen = () => {
   const homeDetailQuery = useQuery({
     queryKey: ['estates/getEstate', { estateId: homeId }],
     queryFn: () => estateService.getDetail(homeId),
+    select: selectData,
     enabled: !!homeId,
   });
 
@@ -64,6 +94,14 @@ const HomeScreen = () => {
     return homeId && homeDetailQuery.data?.role !== EEstateRole.NORMAL_USER;
   }, [homeId, homeDetailQuery.data]);
 
+  const transformStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { rotate: `${interpolate(anim.value, [0, 1], [0, 180])}deg` },
+      ],
+    };
+  }, []);
+
   return (
     <Box flex={1} bgColor="muted.100">
       <Box
@@ -74,21 +112,35 @@ const HomeScreen = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Pressable flexDir="row" alignItems="center" onPress={onOpen}>
-          <Text fontSize="2xl" fontWeight="bold" mr={2}>
+        <Pressable
+          w="1/2"
+          flexDir="row"
+          alignItems="center"
+          onPress={() => {
+            onOpen();
+            onModalWillShow();
+          }}
+        >
+          <Text
+            fontSize="xl"
+            fontWeight="bold"
+            mr={8}
+            color="primary.700"
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            flex={1}
+          >
             {homeDetailQuery.data?.name || t(i18nKeys.bottomTab.home)}
           </Text>
-          <IconGeneral
-            type="MaterialCommunityIcons"
-            name="chevron-down"
-            size={24}
-          />
+          <AnimatedBox style={transformStyle}>
+            <IconGeneral type="Ionicons" name="chevron-down" size={24} />
+          </AnimatedBox>
         </Pressable>
 
         {canAddDevice ? (
           <IconGeneral
-            type="MaterialCommunityIcons"
-            name="camera-plus"
+            type="MaterialIcons"
+            name="add-home-work"
             size={24}
             onPress={() => {
               setIsCreateDeviceModalOpen(true);
@@ -98,14 +150,17 @@ const HomeScreen = () => {
       </Box>
 
       {homeDetailQuery.data && (
-        <Box flex={1} p={4}>
+        <Box flex={1}>
           <HomeTabList />
         </Box>
       )}
 
       <ChooseHomeModal
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={() => {
+          onClose();
+          onModalWillClose();
+        }}
         paginatedData={paginatedData}
       />
 

@@ -220,6 +220,16 @@ export const vi = {
     recognitionList: 'Danh sách nhận diện',
     emptyList: 'Chưa có thiết bị nào',
     emptyRecognitionList: 'Chưa có nhận diện nào',
+    edit: 'Chỉnh sửa thiết bị',
+    updateSuccess: 'Cập nhật thiết bị thành công!',
+    updateError: 'Cập nhật thiết bị thất bại!',
+    editBtn: 'Chỉnh sửa',
+    delBtn: 'Xóa thiết bị',
+    deleteSuccess: 'Xóa thiết bị thành công!',
+    deleteError: 'Xóa thiết bị thất bại!',
+    addImage: 'Thêm ảnh',
+    humanDetection: 'Phát hiện người',
+    noImages: 'Chưa có ảnh nào',
   },
 
   media: {
@@ -247,5 +257,9 @@ export const vi = {
     descriptionPlaceholder: 'Nhập mô tả',
     image: 'Chọn ảnh',
     idCode: 'Mã nhận diện',
+    updateSuccess: 'Cập nhật nhận diện thành công!',
+    updateError: 'Cập nhật nhận diện thất bại!',
+    deleteSuccess: 'Xóa nhận diện thành công!',
+    deleteError: 'Xóa nhận diện thất bại!',
   },
 };

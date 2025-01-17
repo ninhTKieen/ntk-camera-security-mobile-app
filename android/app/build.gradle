@@ -75,15 +75,23 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.rnnativebase"
+    namespace "com.ntk.camerasecurity"
     defaultConfig {
-        applicationId "com.rnnativebase"
+        applicationId "com.ntk.camerasecurity"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
     signingConfigs {
+        release {
+            if (project.hasProperty('NTKAPP_UPLOAD_STORE_FILE')) {
+                storeFile file(NTKAPP_UPLOAD_STORE_FILE)
+                storePassword NTKAPP_UPLOAD_STORE_PASSWORD
+                keyAlias NTKAPP_UPLOAD_KEY_ALIAS
+                keyPassword NTKAPP_UPLOAD_KEY_PASSWORD
+            }
+        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
@@ -98,7 +106,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -108,7 +116,6 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-    implementation "org.videolan.android:libvlc-all:3.1.12"
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

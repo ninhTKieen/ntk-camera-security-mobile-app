@@ -11,29 +11,31 @@ const HomeTabList = () => {
 
   return (
     <Box flex={1} w="full">
-      <SegmentedControl
-        options={[
-          {
-            value: 'Devices',
-            icons: (
-              <SvgIcon name="camera" color="#000" width={30} height={30} />
-            ),
-          },
-          {
-            value: 'Recognitions',
-            icons: (
-              <SvgIcon
-                name="face-recognition-list"
-                color="#000"
-                width={50}
-                height={50}
-              />
-            ),
-          },
-        ]}
-        selectedOption={selectedOption}
-        onOptionPress={setSelectedOption}
-      />
+      <Box p={4}>
+        <SegmentedControl
+          options={[
+            {
+              value: 'Devices',
+              icons: (
+                <SvgIcon name="camera" color="#000" width={30} height={30} />
+              ),
+            },
+            {
+              value: 'Recognitions',
+              icons: (
+                <SvgIcon
+                  name="face-recognition-list"
+                  color="#000"
+                  width={50}
+                  height={50}
+                />
+              ),
+            },
+          ]}
+          selectedOption={selectedOption}
+          onOptionPress={setSelectedOption}
+        />
+      </Box>
 
       {selectedOption === 'Devices' ? (
         <HomeDevicesList />

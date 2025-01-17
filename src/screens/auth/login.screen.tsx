@@ -135,15 +135,12 @@ const LoginScreen = () => {
             fontWeight: '600',
           }}
         >
-          {t(i18nKeys.auth.welcomeBack)}
-        </Text>
-        <Text style={{ fontSize: 16, marginTop: 5 }}>
           {t(i18nKeys.auth.login)}
         </Text>
       </Box>
 
       <Image
-        source={require('@src/assets/logo.jpeg')}
+        source={require('@src/assets/images/ntk_cam_logo.webp')}
         alt="Logo"
         width={90}
         height={90}

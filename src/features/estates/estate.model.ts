@@ -61,6 +61,8 @@ export type TGetDetailEstateDevice = {
   serial?: string;
   brand?: string;
   mac?: string;
+  imageUrl?: string;
+  imageUrlId?: string;
 } & TFullAudited;
 
 export type TGetDetailEstate = TGetEstateListResponse & {

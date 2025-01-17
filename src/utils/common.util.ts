@@ -1,4 +1,5 @@
 import messaging from '@react-native-firebase/messaging';
+import _ from 'lodash';
 import { Platform } from 'react-native';
 import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 
@@ -47,4 +48,8 @@ export const requestExternalStoragePermission = async () => {
     console.error('Error requesting permission:', error);
     return false;
   }
+};
+
+export const isObjectDiff = (obj1: any, obj2: any) => {
+  return !_.isEqual(obj1, obj2);
 };

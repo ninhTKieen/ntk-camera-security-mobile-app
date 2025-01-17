@@ -44,14 +44,13 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'RnNativeBaseApp' do
+target 'NTKCameraSecurity' do
   config = use_native_modules!
 
   pod 'Firebase', :modular_headers => true
   pod 'FirebaseCoreInternal', :modular_headers => true
   pod 'GoogleUtilities', :modular_headers => true
   pod 'FirebaseCore', :modular_headers => true
-  pod 'MobileVLCKit'
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -59,7 +58,7 @@ target 'RnNativeBaseApp' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'RnNativeBaseAppTests' do
+  target 'NTKCameraSecurityTests' do
     inherit! :complete
     # Pods for testing
   end

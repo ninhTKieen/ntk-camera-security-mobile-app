@@ -10,10 +10,25 @@ import {
   TGetDetailEstateDevice,
 } from '@src/features/estates/estate.model';
 import { useIsFetching, useQueryClient } from '@tanstack/react-query';
-import { Box, FlatList, Pressable, Stack, Text } from 'native-base';
-import React from 'react';
+import {
+  Box,
+  FlatList,
+  Image,
+  Pressable,
+  Stack,
+  Text,
+  useDisclose,
+  useTheme,
+} from 'native-base';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ListRenderItem, RefreshControl } from 'react-native';
+import { Dimensions, ListRenderItem, RefreshControl } from 'react-native';
+
+import { ChooseRelayModal } from './choose-relay-modal';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const GAP = 5;
+const ITEM_WIDTH = (SCREEN_WIDTH - 16 * 2 - 2 * GAP) / 2;
 
 const ListEmptyComponent = () => {
   const { t } = useTranslation();
@@ -29,6 +44,13 @@ const HomeDevicesList = () => {
   const queryClient = useQueryClient();
   const navigation =
     useNavigation<StackNavigationProp<THomeStackParamList, 'Home'>>();
+  const { isOpen, onClose, onOpen } = useDisclose();
+  const theme = useTheme();
+
+  const [device, setDevice] = useState<{
+    deviceId: number;
+    deviceName: string;
+  } | null>(null);
 
   const homeId = Number(storage.getString(HOME_ID_KEY));
 
@@ -43,12 +65,17 @@ const HomeDevicesList = () => {
   const renderItem: ListRenderItem<TGetDetailEstateDevice> = ({ item }) => {
     return (
       <Pressable
-        style={{ flex: 1 }}
+        style={{ width: ITEM_WIDTH }}
         onPress={() => {
-          navigation.navigate('DeviceDetail', {
+          // navigation.navigate('DeviceDetail', {
+          //   deviceId: item.id,
+          //   deviceName: item.name,
+          // });
+          setDevice({
             deviceId: item.id,
             deviceName: item.name,
           });
+          onOpen();
         }}
       >
         {({ isPressed }) => (
@@ -65,8 +92,27 @@ const HomeDevicesList = () => {
               justifyContent="space-between"
               flex={1}
             >
-              <SvgIcon name="security-camera" width={50} height={50} />
-              <Text maxW="1/2" numberOfLines={1}>
+              {item.imageUrl ? (
+                <Image
+                  source={{ uri: item.imageUrl }}
+                  alt={item.name}
+                  size={50}
+                  borderRadius={25}
+                />
+              ) : (
+                <SvgIcon
+                  name="camera"
+                  width={50}
+                  height={50}
+                  color={theme.colors.primary[600]}
+                />
+              )}
+              <Text
+                fontWeight="bold"
+                color={theme.colors.primary[600]}
+                maxW="1/2"
+                numberOfLines={1}
+              >
                 {item.model ?? '---'}
               </Text>
             </Stack>
@@ -80,6 +126,7 @@ const HomeDevicesList = () => {
   return (
     <Box w="full" h="full" pt={4}>
       <FlatList
+        px={4}
         refreshControl={
           <RefreshControl
             refreshing={isFetching > 0}
@@ -95,11 +142,23 @@ const HomeDevicesList = () => {
         renderItem={renderItem}
         numColumns={2}
         columnWrapperStyle={{
-          gap: 20,
           justifyContent: 'space-between',
         }}
         ItemSeparatorComponent={() => <Box h={4} />}
         ListEmptyComponent={ListEmptyComponent}
+      />
+
+      <ChooseRelayModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onChooseRelay={(relayId) => {
+          device &&
+            navigation.navigate('DeviceDetail', {
+              deviceId: device.deviceId as number,
+              relayId,
+              deviceName: device.deviceName,
+            });
+        }}
       />
     </Box>
   );
