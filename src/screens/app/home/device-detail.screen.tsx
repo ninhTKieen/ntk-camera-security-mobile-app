@@ -5,16 +5,7 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import {
-  Canvas,
-  Circle,
-  Group,
-  ImageFormat,
-  Rect,
-  Text,
-  makeImageFromView,
-  matchFont,
-} from '@shopify/react-native-skia';
+import { ImageFormat, makeImageFromView } from '@shopify/react-native-skia';
 import IconGeneral from '@src/components/icon-general';
 import SubLayout from '@src/components/sub-layout';
 import { HOME_ID_KEY } from '@src/configs/constant';
@@ -22,25 +13,15 @@ import { storage } from '@src/configs/mmkv.storage';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
 import { useAppStore } from '@src/features/common/app.store';
 import deviceService from '@src/features/devices/device.service';
-import { TResponseRecognizedFace } from '@src/features/recognized-faces/recognized-face.model';
 import socketService from '@src/features/socket/socket.service';
 import { requestExternalStoragePermission } from '@src/utils/common.util';
 import { useQuery } from '@tanstack/react-query';
-import { Box, useTheme } from 'native-base';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { Box } from 'native-base';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { Platform } from 'react-native';
 import RNBUtil from 'react-native-blob-util';
 
 import { RTSPView, RtspViewRef } from './components/rtsp-view';
-
-const fontFamily = Platform.select({ ios: 'Helvetica', default: 'serif' });
-const fontStyle = {
-  fontFamily,
-  fontSize: 14,
-  fontStyle: 'italic',
-  fontWeight: 'bold',
-};
-const font = matchFont(fontStyle as any);
 
 const DeviceDetailScreen = () => {
   const navigation =
@@ -50,19 +31,10 @@ const DeviceDetailScreen = () => {
 
   const relayId = route.params.relayId;
 
-  const [recogFaces, setRecognizedFaces] = useState<TResponseRecognizedFace[]>(
-    [],
-  );
-  const [ratio, setRatio] = useState({
-    x: 1,
-    y: 1,
-  });
   const { setHideBottomTabBar } = useAppStore();
 
   const ref = useRef<RtspViewRef>(null);
   const lastSnapshotTime = useRef<number>(0);
-
-  const theme = useTheme();
 
   const { deviceId, deviceName } = route.params;
   const homeId = Number(storage.getString(HOME_ID_KEY));
@@ -138,15 +110,6 @@ const DeviceDetailScreen = () => {
         return;
       }
 
-      // Calculate scaling ratios
-      const xRatio = snapshotWidth / width;
-      const yRatio = snapshotHeight / height;
-
-      setRatio({
-        x: xRatio,
-        y: yRatio,
-      });
-
       const base64String = snapshot?.encodeToBase64(ImageFormat.PNG, 50);
 
       if (base64String) {
@@ -157,7 +120,7 @@ const DeviceDetailScreen = () => {
 
   const handleVideoProgress = useCallback(() => {
     const now = Date.now();
-    if (now - lastSnapshotTime.current >= 60000) {
+    if (now - lastSnapshotTime.current >= 90000) {
       lastSnapshotTime.current = now;
       takeSnapshot();
     }
@@ -178,41 +141,7 @@ const DeviceDetailScreen = () => {
   }, [deviceId, homeId]);
 
   useEffect(() => {
-    socketService.received({
-      channel: 'device/receive-recognized-faces',
-      callback: (data: TResponseRecognizedFace[]) => {
-        // data?.length && setRecognizedFaces(data);
-        if (data?.length) {
-          const adjustedFaces = data?.map((face) => {
-            const adjustedBox = {
-              _x: face.detection._box._x / ratio.x + 16,
-              _y: face.detection._box._y / ratio.y + 16,
-              _width: face.detection._box._width / ratio.x + 16 * 2,
-              _height: face.detection._box._height / ratio.y + 16 * 2,
-            };
-
-            const adjustedLandmarks = face.landmarks._positions.map(
-              (point: any) => ({
-                _x: point._x / ratio.x + 16,
-                _y: point._y / ratio.y + 16,
-              }),
-            );
-
-            return {
-              ...face,
-              detection: { ...face.detection, _box: adjustedBox },
-              landmarks: { ...face.landmarks, _positions: adjustedLandmarks },
-            };
-          });
-
-          setRecognizedFaces(adjustedFaces);
-        }
-      },
-    });
-  }, [ratio.x, ratio.y]);
-
-  useEffect(() => {
-    navigation.addListener('beforeRemove', () => {
+    navigation.addListener('blur', () => {
       socketService.send({
         channel: 'device/leave-room',
         data: {
@@ -257,6 +186,7 @@ const DeviceDetailScreen = () => {
             <Box>
               {getDeviceQuery.data.streamLink && relayId && (
                 <RTSPView
+                  deviceId={deviceId}
                   relayId={relayId}
                   rtsp={getDeviceQuery.data.streamLink}
                   ref={ref}
@@ -266,51 +196,6 @@ const DeviceDetailScreen = () => {
               )}
             </Box>
           </>
-        )}
-
-        {recogFaces.length > 0 && (
-          <Box style={StyleSheet.absoluteFill}>
-            {recogFaces?.map((face, itemIndex) => {
-              const box = face.detection._box;
-              const landmarks = face.landmarks._positions;
-
-              return (
-                <Canvas style={StyleSheet.absoluteFill} key={itemIndex}>
-                  <Rect
-                    x={box._x}
-                    y={box._y}
-                    width={box._width}
-                    height={box._height}
-                    color={theme.colors.primary[400]}
-                    style="stroke"
-                    strokeWidth={2}
-                  />
-
-                  <Text
-                    x={box._x}
-                    y={box._y - 10}
-                    text={`${face?.bestMatch?.personName || 'Unknown'} - ${
-                      face?.bestMatch?.distance?.toFixed(2) || 1
-                    }`}
-                    color={theme.colors.primary[400]}
-                    font={font}
-                  />
-
-                  <Group>
-                    {landmarks.map((point, index) => (
-                      <Circle
-                        key={index}
-                        cx={point._x}
-                        cy={point._y}
-                        r={1}
-                        color={theme.colors.muted[500]}
-                      />
-                    ))}
-                  </Group>
-                </Canvas>
-              );
-            })}
-          </Box>
         )}
       </Box>
     </SubLayout>

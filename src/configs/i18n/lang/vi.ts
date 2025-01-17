@@ -228,6 +228,8 @@ export const vi = {
     deleteSuccess: 'Xóa thiết bị thành công!',
     deleteError: 'Xóa thiết bị thất bại!',
     addImage: 'Thêm ảnh',
+    humanDetection: 'Phát hiện người',
+    noImages: 'Chưa có ảnh nào',
   },
 
   media: {

@@ -1,6 +1,8 @@
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { SvgIcon } from '@src/components/svg-icons';
 import { APP_API_ENDPOINT, RCT_CONFIGS } from '@src/configs/constant';
+import { THomeStackParamList } from '@src/configs/routes/home.route';
 import { Box, IconButton, Row, Spinner, Text, useTheme } from 'native-base';
 import React, {
   forwardRef,
@@ -25,6 +27,7 @@ import { Socket, io } from 'socket.io-client';
 import { DirectionsControl, TDirection } from './directions-control';
 
 interface IProps {
+  deviceId: number;
   relayId: string;
   rtsp: string;
   saveFileToLibrary?: () => void;
@@ -37,7 +40,12 @@ export type RtspViewRef = {
 };
 
 export const RTSPView = forwardRef<RtspViewRef, IProps>(
-  ({ relayId, rtsp, saveFileToLibrary, handleVideoProgress }, ref) => {
+  (
+    { deviceId, relayId, rtsp, saveFileToLibrary, handleVideoProgress },
+    ref,
+  ) => {
+    const navigation =
+      useNavigation<StackNavigationProp<THomeStackParamList, 'DeviceDetail'>>();
     const isFocused = useIsFocused();
     const theme = useTheme();
 
@@ -55,7 +63,6 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
     const [startBtnDisabled, setStartBtnDisabled] = useState(false);
     const [spinning, setSpinning] = useState(false);
     const [status, setStatus] = useState<string | null>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
     const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
 
     const createPeerConnection = () => {
@@ -129,7 +136,9 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
         return;
       }
       try {
+        console.log('Added ICE candidate:', candidate);
         await pc.current?.addIceCandidate(new RTCIceCandidate(candidate));
+        console.log('Added ICE candidate successfully');
         setStatus('Added ICE candidate');
       } catch (error) {
         setStatus('Error adding ICE candidate');
@@ -213,12 +222,6 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
       }
     }, [handleHangUp, isFocused]);
 
-    // call handleStartBtn at the first time (only once)
-    // useEffect(() => {
-    //   handleStartBtn();
-    //   // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, []);
-
     useEffectOnce(() => {
       handleStartBtn();
     });
@@ -295,20 +298,45 @@ export const RTSPView = forwardRef<RtspViewRef, IProps>(
             }}
             disabled={!startBtnDisabled}
           />
+
+          <IconButton
+            size="lg"
+            _icon={{
+              as: () => (
+                <SvgIcon
+                  name={'multiple-image'}
+                  color={theme.colors.primary[700]}
+                />
+              ),
+            }}
+            onPress={() => {
+              navigation.navigate('HumanDetectionImages', {
+                deviceId,
+              });
+            }}
+          />
         </Row>
 
-        <DirectionsControl
-          handleControl={handlePtzCommand}
-          handleControlStream={() => {}}
-          disabled={!startBtnDisabled}
-          isPlaying={isPlaying}
-          setIsPlaying={setIsPlaying}
-        />
+        <Box alignSelf="center" mt={4}>
+          <DirectionsControl
+            handleControl={handlePtzCommand}
+            handleControlStream={() => {
+              if (startBtnDisabled) {
+                handleHangUp();
+              } else {
+                handleStartBtn();
+              }
+            }}
+            disabled={!startBtnDisabled}
+            isPlaying={startBtnDisabled}
+            setIsPlaying={setStartBtnDisabled}
+          />
+        </Box>
 
         <Text
           style={{
             position: 'absolute',
-            bottom: 0,
+            bottom: -30,
             right: 0,
           }}
           fontSize="xs"

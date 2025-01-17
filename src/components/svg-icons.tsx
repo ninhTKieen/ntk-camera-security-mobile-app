@@ -4,6 +4,7 @@ import CameraIcon from '@src/assets/icons/camera.svg';
 import FaceRecognitionList from '@src/assets/icons/face-recognition-list.svg';
 import FaceRecognitionIcon from '@src/assets/icons/face-recognition.svg';
 import HouseHomeIcon from '@src/assets/icons/house.svg';
+import MultipleImageIcon from '@src/assets/icons/multiple-image.svg';
 import PauseCircleOutlineIcon from '@src/assets/icons/pause-circle-outlined.svg';
 import PauseIcon from '@src/assets/icons/pause.svg';
 import PlayCircleOutlineIcon from '@src/assets/icons/play-circle-outlined.svg';
@@ -24,6 +25,7 @@ export const iconsMap = {
   'arrow-up-filled': ArrowUpFilledIcon,
   play: PlayIcon,
   pause: PauseIcon,
+  'multiple-image': MultipleImageIcon,
 };
 
 type TIconProps = {

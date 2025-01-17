@@ -228,6 +228,8 @@ export const en = {
     deleteSuccess: 'Delete device successfully!',
     deleteError: 'Delete device failed!',
     addImage: 'Add Image',
+    humanDetection: 'Human Detections',
+    noImages: 'No images yet',
   },
 
   media: {

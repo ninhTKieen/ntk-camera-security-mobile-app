@@ -18,4 +18,7 @@ export type THomeStackParamList = {
   EditRecognition: {
     recognitionId: number;
   };
+  HumanDetectionImages: {
+    deviceId: number;
+  };
 };

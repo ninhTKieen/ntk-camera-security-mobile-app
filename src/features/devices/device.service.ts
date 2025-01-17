@@ -73,6 +73,22 @@ class DeviceService {
 
     return response.data;
   }
+
+  async getRecognizedFaces(deviceId: number) {
+    const response = await httpUtil.request<
+      IBaseHttpResponse<
+        {
+          uri: string;
+          time: string;
+        }[]
+      >
+    >({
+      method: 'GET',
+      url: `/api/devices/${deviceId}/recognized-faces`,
+    });
+
+    return response.data;
+  }
 }
 
 const deviceService = new DeviceService();
