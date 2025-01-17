@@ -5,6 +5,7 @@ export type THomeStackParamList = {
   DeviceDetail: {
     deviceId: number;
     deviceName: string;
+    relayId: string;
   };
   AddRecognition: undefined;
   RecognitionDetail: {
@@ -16,5 +17,8 @@ export type THomeStackParamList = {
   };
   EditRecognition: {
     recognitionId: number;
+  };
+  HumanDetectionImages: {
+    deviceId: number;
   };
 };

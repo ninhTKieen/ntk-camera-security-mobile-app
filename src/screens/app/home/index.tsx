@@ -9,6 +9,7 @@ import EditDeviceScreen from './edit-device.screen';
 import EditRecognitionScreen from './edit-recognition.screen';
 import FaceRecognitionListScreen from './face-recognition-list.screen';
 import HomeScreen from './home.screen';
+import HumanDetectionImagesScreen from './human-detetion-images.screen';
 
 const Stack = createStackNavigator<THomeStackParamList>();
 
@@ -29,6 +30,10 @@ const HomeStack = () => {
       />
       <Stack.Screen name="EditRecognition" component={EditRecognitionScreen} />
       <Stack.Screen name="EditDevice" component={EditDeviceScreen} />
+      <Stack.Screen
+        name="HumanDetectionImages"
+        component={HumanDetectionImagesScreen}
+      />
     </Stack.Navigator>
   );
 };

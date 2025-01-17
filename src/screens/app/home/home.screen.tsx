@@ -113,7 +113,7 @@ const HomeScreen = () => {
         justifyContent="space-between"
       >
         <Pressable
-          w="2/5"
+          w="1/2"
           flexDir="row"
           alignItems="center"
           onPress={() => {

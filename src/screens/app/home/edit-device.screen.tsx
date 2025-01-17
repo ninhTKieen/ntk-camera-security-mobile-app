@@ -1,14 +1,19 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import {
+  RouteProp,
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { CommonOutlineInput } from '@src/components/common-outline-input';
 import PhotoModal from '@src/components/photo-modal';
 import SubLayout from '@src/components/sub-layout';
-import { SvgIcon } from '@src/components/svg-icons';
 import { HOME_ID_KEY } from '@src/configs/constant';
 import { i18nKeys } from '@src/configs/i18n';
 import { storage } from '@src/configs/mmkv.storage';
 import { THomeStackParamList } from '@src/configs/routes/home.route';
+import { useAppStore } from '@src/features/common/app.store';
 import { TLocalImgProps } from '@src/features/common/common.model';
 import { TUpdateDevice } from '@src/features/devices/device.model';
 import deviceService from '@src/features/devices/device.service';
@@ -17,16 +22,8 @@ import { useEstateStore } from '@src/features/estates/estate.store';
 import { useApp } from '@src/hooks/use-app.hook';
 import { isObjectDiff } from '@src/utils/common.util';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import {
-  Box,
-  Button,
-  Image,
-  Pressable,
-  Row,
-  ScrollView,
-  useTheme,
-} from 'native-base';
-import React, { useCallback, useMemo, useState } from 'react';
+import { Box, Button, Image, Pressable, Row, ScrollView } from 'native-base';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Dimensions, StyleSheet } from 'react-native';
@@ -42,9 +39,10 @@ const EditDeviceScreen = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { toastMessage } = useApp();
-  const theme = useTheme();
 
+  const { setHideBottomTabBar } = useAppStore();
   const { homeRole } = useEstateStore();
+  const isFocused = useIsFocused();
 
   const [openPhotoModal, setOpenPhotoModal] = useState(false);
 
@@ -160,6 +158,16 @@ const EditDeviceScreen = () => {
     console.log(errors);
   };
 
+  useEffect(() => {
+    if (isFocused) {
+      setHideBottomTabBar(true);
+    }
+
+    return () => {
+      setHideBottomTabBar(false);
+    };
+  }, [isFocused, setHideBottomTabBar]);
+
   return (
     <SubLayout title={t(i18nKeys.devices.edit)}>
       <Box bg="white" flex={1} p={2}>
@@ -168,47 +176,33 @@ const EditDeviceScreen = () => {
           contentContainerStyle={{ flexGrow: 1 }}
           showsVerticalScrollIndicator={false}
         >
-          <Pressable alignSelf="center" onPress={() => setOpenPhotoModal(true)}>
-            {({ isPressed }) => (
-              <>
-                {watch('imageUrl') ? (
-                  <Box style={styles.imageLocalContainer} shadow={2}>
+          {watch('imageUrl') && (
+            <Pressable
+              alignSelf="center"
+              onPress={() => setOpenPhotoModal(true)}
+            >
+              {({ isPressed }) => (
+                <>
+                  <Box
+                    opacity={isPressed ? 0.5 : 1}
+                    style={styles.imageLocalContainer}
+                    shadow={2}
+                  >
                     <Image
-                      source={{ uri: watch('imageUrl').uri }}
+                      source={{
+                        uri: watch('imageUrl')?.uri
+                          ? watch('imageUrl')?.uri
+                          : watch('imageUrl'),
+                      }}
                       style={styles.imageLocalContainer}
                       alt="face-recognition"
                       borderRadius="full"
                     />
                   </Box>
-                ) : (
-                  <Box
-                    borderWidth={1}
-                    borderColor={errors.imageUrl ? 'red.700' : 'gray.300'}
-                    borderRadius="full"
-                    borderStyle="dashed"
-                    opacity={isPressed ? 0.5 : 1}
-                    style={styles.imageUrlContainer}
-                  >
-                    <SvgIcon
-                      name="camera"
-                      width={60}
-                      height={60}
-                      color={theme.colors.primary[700]}
-                    />
-
-                    <Button
-                      m={2}
-                      onPress={() => {
-                        setOpenPhotoModal(true);
-                      }}
-                    >
-                      {t(i18nKeys.devices.addImage)}
-                    </Button>
-                  </Box>
-                )}
-              </>
-            )}
-          </Pressable>
+                </>
+              )}
+            </Pressable>
+          )}
 
           <CommonOutlineInput
             label={t(i18nKeys.devices.name)}

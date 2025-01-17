@@ -2,9 +2,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconGeneral from '@src/components/icon-general';
 import { i18nKeys } from '@src/configs/i18n';
 import { TAppStackParamList } from '@src/configs/routes/app.route';
+import { useAppStore } from '@src/features/common/app.store';
 import socketService from '@src/features/socket/socket.service';
 import AccountNavigator from '@src/screens/app/accounts';
-import DashboardScreen from '@src/screens/app/dashboard/dashboard.screen';
 import EventScreen from '@src/screens/app/events/event.screen';
 import HomeStack from '@src/screens/app/home';
 import { useTheme } from 'native-base';
@@ -17,6 +17,8 @@ const AppNavigator = (): JSX.Element => {
   const { t } = useTranslation();
   const theme = useTheme();
   const color = theme.colors.primary[500];
+
+  const { isHideBottomTabBar } = useAppStore();
 
   useEffect(() => {
     socketService.start();
@@ -32,6 +34,7 @@ const AppNavigator = (): JSX.Element => {
           paddingBottom: 10,
           paddingTop: 10,
           height: 70,
+          display: isHideBottomTabBar ? 'none' : 'flex',
         },
       }}
     >
@@ -50,22 +53,6 @@ const AppNavigator = (): JSX.Element => {
           tabBarLabel: t(i18nKeys.bottomTab.home),
         }}
         component={HomeStack}
-      />
-      <Tab.Screen
-        name="Dashboard"
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <IconGeneral
-              color={color}
-              type="MaterialCommunityIcons"
-              size={28}
-              name={focused ? 'view-dashboard' : 'view-dashboard-outline'}
-            />
-          ),
-          tabBarActiveTintColor: color,
-          tabBarLabel: t(i18nKeys.bottomTab.dashboard),
-        }}
-        component={DashboardScreen}
       />
       <Tab.Screen
         name="EventNavigator"
