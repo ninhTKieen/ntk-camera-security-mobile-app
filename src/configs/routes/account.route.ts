@@ -2,7 +2,7 @@ export type TAccountStackParamList = {
   Accounts: undefined;
   EditProfile: undefined;
   HomeManagementNavigator: undefined;
-  Settings: undefined;
+  SettingsStack: undefined;
   FaQAndSupport: undefined;
 };
 
@@ -14,4 +14,9 @@ export type THomeManagementStackParamList = {
     homeId: number;
     homeName: string;
   };
+};
+
+export type TSettingsStackParamList = {
+  MainSettings: undefined;
+  ChangePassword: undefined;
 };

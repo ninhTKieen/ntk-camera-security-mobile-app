@@ -105,7 +105,7 @@ export const vi = {
     settings: {
       title: 'Cài đặt',
       changeLanguage: 'Thay đổi ngôn ngữ',
-      changeTheme: 'Thay đổi chủ đề',
+      changeTheme: 'Thay đổi giao diện',
       changePassword: 'Thay đổi mật khẩu',
     },
     faqAndSupport: {

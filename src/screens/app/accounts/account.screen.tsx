@@ -62,7 +62,7 @@ const AccountScreen = () => {
         id: 2,
         name: t(i18nKeys.account.settings.title),
         onPress: () => {
-          navigation.navigate('Settings');
+          navigation.navigate('SettingsStack');
         },
       },
       {

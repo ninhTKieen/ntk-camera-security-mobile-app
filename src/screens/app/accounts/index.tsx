@@ -11,6 +11,7 @@ import React, { useEffect } from 'react';
 import AccountScreen from './account.screen';
 import EditProfileScreen from './edit-profile.screen';
 import HomeManagementNavigator from './home-management';
+import SettingStack from './settings';
 
 const Stack = createStackNavigator<TAccountStackParamList>();
 
@@ -33,6 +34,7 @@ const AccountNavigator = (): JSX.Element => {
         name="HomeManagementNavigator"
         component={HomeManagementNavigator}
       />
+      <Stack.Screen name="SettingsStack" component={SettingStack} />
     </Stack.Navigator>
   );
 };
